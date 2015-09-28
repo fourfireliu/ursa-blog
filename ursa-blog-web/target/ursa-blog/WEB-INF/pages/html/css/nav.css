@@ -1,0 +1,33 @@
+.Navn {
+	background: url("Navn.jpg") repeat-x; width: 100%; height: 46px;
+}
+.Navn ul {
+	margin: 0px auto; width: 960px;
+	list-style:none;
+	padding:0;
+	margin:0px;
+}
+.Navn ul li.mainlevel {
+	margin: 0px 19px 0px 0px; float: left; position: relative;
+}
+.Navn ul li.mainlevel a {
+	width: 87px; height: 36px; text-align: center; color: rgb(0, 0, 0); line-height: 30px; letter-spacing: 2px; font-family: Microsoft Yahei,ËÎÌו; font-size: 15px; float: left;
+}
+.Navn ul li.mainlevel a:hover {
+	background: url("Navnh.jpg") no-repeat; width: 87px; height: 36px; color: rgb(240, 240, 240); float: left; cursor: pointer;
+}
+.Navn ul li.on a {
+	background: url("Navnh.jpg") no-repeat; color: rgb(240, 240, 240);
+}
+.Navn ul li.mainlevel ul {
+	left: 0px; top: 29px; width: 87px; display: none; position: absolute; z-index: 10001;
+}
+.Navn ul li.mainlevel li {
+	background: rgb(85, 85, 85); width: 87px; height: 30px; border-top-color: rgb(102, 102, 102); border-top-width: 1px; border-top-style: solid; float: left;
+}
+.Navn ul li.mainlevel li a {
+	height: 30px; text-align: center; color: rgb(221, 221, 221); font-size: 14px; float: none; display: block;
+}
+.Navn ul li.mainlevel li a:hover {
+	background: rgb(0, 0, 0); width: 87px; height: 30px; text-align: center; line-height: 30px; float: none; display: block;
+}

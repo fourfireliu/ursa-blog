@@ -1,0 +1,57 @@
+.comment_title{
+height:35px;
+line-height:35px;
+padding:0px 5px 0px 5px;
+background:#fff;
+color:#222;
+border-bottom:3px solid #222;
+}
+.comment_list_list
+{
+background:#fff;
+padding:5px;
+}
+.comment_list_list a{
+color:#364BC6;
+}
+.comment_list_list ul li{
+line-height:30px;
+border-bottom:1px dashed #ccc;
+color:#333;
+}
+.comment_list_list b{
+color:#CE7000;
+}
+.reply{
+float:right;
+padding-right:5xp;
+}
+.num{
+height:25px;
+line-height:25px;
+}
+.commonpost{
+background:#fff;
+padding:5px;
+}
+.comment_title a:hover{
+color:#fff;
+}
+.recommend_btn {
+background:#333;
+padding:3px 7px 3px 7px;
+color:#fff;
+}
+.commonpost input[type=text]{
+border:1px solid #ccc;
+height:25px;
+width:270px;
+}
+.commonpost textarea{
+border:1px solid #ccc;
+}
+.commonpost input[type=button]{
+border:1px solid #ccc;
+height:25px;
+width:100px;
+}

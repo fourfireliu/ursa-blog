@@ -1,0 +1,337 @@
+/*全局*/
+body{
+margin:0px;
+padding:0px;
+background:#f3f2f3;
+color:#838383;
+}
+ul,li{
+list-style:none;
+margin:0px;
+padding:0px;
+}
+a:hover{
+color:#DB6212;
+}
+.body{
+font-size:12px;
+color:#666;
+font-family:"\5fae\8f6f\96c5\9ed1";
+}
+img{
+border:none;
+}
+a{
+text-decoration:none;
+color:#838383;
+}
+/*顶部*/
+.top{
+width:980px;
+margin:0px auto;
+height:95px;
+overflow:hidden;
+}
+.top_top{
+height:25px;
+text-align:right;
+overflow:hidden;
+line-height:30px;
+padding-right:5px;
+}
+.top_content{
+overflow:hidden;
+height:75px;
+}
+.top_bottom{
+height:70px;
+overflow:hidden;
+padding-left:5px;
+}
+.top_bottom div{
+float:left;
+}
+.myheart{
+width:200px;
+height:70px;
+color:#838383;
+}
+.search{
+margin-left:20px;
+padding-top:7px;
+clear:both;
+padding-right:5px;
+}
+.search_key{
+width:230px;
+height:25px;
+border:1px solid #333;
+}
+.search_btn{
+width:80px;
+height:28px;
+background:#333;
+color:#fff;
+border:none;
+}
+.hot_tag{
+clear:both;
+text-align:right;
+}
+.hot_tag a{
+margin-right:5px;
+line-height:30px;
+color:#333;
+}
+.nav{
+height:40px;
+}
+.nav ul
+{
+list-style:none;
+padding:0px;
+margin:0px;
+width:100%;
+background:#333;
+float:left;
+}
+.nav ul li
+{
+list-style:none;
+padding:0px;
+margin:0px;
+position:relative;
+float:left;
+}
+/*鼠标放上去的样式*/
+.ona{
+background-color:#f3f3f3;
+margin-top:7px;
+height:33px;
+line-height:33px;
+}
+.nav ul li a
+{
+text-align:center;
+display:block;
+height:40px;
+line-height:40px;
+color:#fff;
+width:130px;
+}
+
+.nav ul li ul{
+padding:0px;
+margin:0px;
+display:none;
+position:absolute;
+z-index:1001;
+}
+.nav ul li ul li
+{
+list-style:none;
+padding:0px;
+margin:0px;
+height:30px;
+}
+.nav ul li ul li a
+{
+height:30px;
+line-height:30px;
+background:#f3f3f3;
+}
+.main{
+clear:both;
+width:980px;
+margin:0px auto;
+padding:0px;
+}
+.middle{
+clear:both;
+border:1px #eee solid;
+}
+.mright{
+float:right;
+width:330px;
+}
+.mleft{
+float:left;
+width:640px;
+}
+.bottom{
+clear:both;
+}
+.showlogo{
+height:320px;
+width:100%;
+}
+
+.act{
+height:110px;
+border-bottom:2px #0072AE solid;
+margin-top:5px;
+background:#fff;
+clear:both;
+}
+.act_left{
+float:left;
+height:100%;
+margin-left:15px;
+width:510px;
+}
+.act_left div{
+margin-top:15px;
+}
+.act_right{
+float:right;
+height:100%;
+margin-top:15px;
+width:100px;
+}
+.act_right div{
+text-align:center;
+padding-right:10px;
+}
+.act_title a{
+font-size:14px;
+display:block;
+font-weight:500;
+color:#444;
+}
+.act_right span{
+float:left;
+display:block;
+line-height:30px;
+height:30px;
+text-align:right;
+}
+.act_info{
+
+}
+.act_tag span{
+padding:3px 5px 3px 5px;
+background:#eee;
+margin-left:10px;
+}
+.act_tag a{
+
+}
+.act_read{
+font-size:18px;
+color:#333;
+font-weight:bold;
+color:#DB6212;
+padding-right:5px;
+width:65px;
+display:block;
+}
+/*分页*/
+.cut_page{
+border-bottom:3px solid #0072AE;
+overflow:hidden;
+margin-top:30px;
+}
+.cut_page a{
+display:block;
+float:left;
+margin-left:5px;
+line-height:22px;
+color:#4C7AB7;
+padding-left:5px;
+border:1px 1px 1px 1px;
+border-right:1px solid #0072AE;
+border-left:1px solid #0072AE;
+border-top:1px solid #0072AE;
+padding-right:5px;
+background:#fff;
+}
+.cut_page a:hover{
+background:#0072AE;
+color:#fff;
+}
+/*右边列表*/
+.act_top{
+background:#fff;
+}
+.act_top_list_m{
+padding-left:10px;
+margin-bottom:15px;
+}
+.act_top_tab{
+height:27px;
+border-bottom:3px solid #ccc;
+background-position:bottom;
+}
+.act_top_tab_on{
+height:27px;
+border-bottom:3px solid #333;
+background-position:bottom;
+}
+.act_top_tab a{
+line-height:30px;
+}
+.act_top_tab ul li{
+float:left;
+width:90px;
+line-height:30px;
+font-size:14px;
+color:#222;
+text-align:center;
+}
+.act_top_list{
+}
+.act_top_list ul li{
+height:30px;
+line-height:30px;
+padding-left:5px;
+border-bottom:1px solid #ccc;
+}
+.act_top_list ul li a{
+float:left;
+width:100%;
+}
+.act_top_list ul li span{
+line-height:30px;
+float:right;
+padding-right:5px;
+}
+.act_top_list ul li a{
+overflow:hidden;
+max-width:260px;
+white-space:nowrap;
+text-overflow:ellipsis;
+color:#333;
+}
+/*标签*/
+.tags_list{
+margin-top:5px;
+background:#fff;
+overflow:hidden;
+}
+.tags_list a{
+text-align:center;
+background:#f1f1f1;
+color:#333;
+display:block;
+float:left;
+margin:3px 3px 3px 3px;
+padding:1px 5px 1px 5px;
+text-align:center;
+line-height:20px;
+}
+
+/*底部*/
+.bottom{
+height:100px;
+background:#888;
+}
+.bottom_content{
+width:980px;
+line-height:30px;
+margin:0px auto;
+color:#fff;
+}
+
+.bottom_content a{
+color:#fff;
+}
