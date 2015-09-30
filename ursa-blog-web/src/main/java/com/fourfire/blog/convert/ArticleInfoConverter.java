@@ -1,6 +1,8 @@
 package com.fourfire.blog.convert;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.fourfire.blog.po.ArticleInfoPO;
 import com.fourfire.blog.vo.ArticleInfoVO;
@@ -28,6 +30,22 @@ public class ArticleInfoConverter {
 		articleInfoPO.setModifyGmtDate(new Date());
 		
 		return articleInfoPO;
+	}
+	
+	public static List<ArticleInfoVO> convertListFromPOToVO(List<ArticleInfoPO> articleInfoPOList) {
+		List<ArticleInfoVO> articleInfoVOList = new ArrayList<ArticleInfoVO>();
+		if (articleInfoPOList == null) {
+			return articleInfoVOList;
+		}
+		
+		for (ArticleInfoPO articleInfoPO:articleInfoPOList) {
+			ArticleInfoVO articleInfoVO = convertPOToVO(articleInfoPO);
+			if (articleInfoVO != null) {
+				articleInfoVOList.add(articleInfoVO);
+			}
+		}
+		
+		return articleInfoVOList;
 	}
 	
 	/**

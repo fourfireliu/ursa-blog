@@ -1,5 +1,7 @@
 package com.fourfire.blog.manager;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.logging.log4j.LogManager;
@@ -7,6 +9,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.fourfire.blog.convert.ArticleInfoConverter;
 import com.fourfire.blog.mapper.ArticleInfoMapper;
+import com.fourfire.blog.page.BasePageQuery;
+import com.fourfire.blog.page.PageResult;
 import com.fourfire.blog.po.ArticleInfoPO;
 import com.fourfire.blog.vo.ArticleInfoVO;
 
@@ -61,5 +65,48 @@ public class ArticleInfoManager {
 		
 		ArticleInfoPO articleInfoPO = articleInfoMapper.getArticleInfoById(id);
 		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
+	}
+	
+	/**
+	 * 构建分页查询对象
+	 */
+	private BasePageQuery fillPageQuery(int pageNo, int pageSize) {
+		BasePageQuery pageQuery = new BasePageQuery();
+		pageQuery.setCheckNextPage(true);
+		pageQuery.setPageNo(pageNo);
+		pageQuery.setPageSize(pageSize);
+		
+		return pageQuery;
+	}
+	
+	/**
+	 * 分页获取文章列表
+	 */
+	public PageResult<ArticleInfoVO> pageQueryArticles(int pageNo, int pageSize) {
+		BasePageQuery pageQuery = fillPageQuery(pageNo, pageSize);
+		PageResult<ArticleInfoVO> pageResult = new PageResult<ArticleInfoVO>();
+		if (pageQuery == null) {
+			logger.error("pageQueryArticles==>pageQuery: " + pageQuery);
+			return pageResult;
+		}
+		pageResult.setPageNo(pageQuery.getPageNo());
+		pageResult.setPageSize(pageQuery.getOldPageSize());
+		
+		List<ArticleInfoPO> articleInfoPOList = articleInfoMapper.pageQuery(pageQuery);
+		if (pageQuery.isCheckNextPage()) {
+			if (articleInfoPOList != null && articleInfoPOList.size() > pageQuery.getOldPageSize()) {
+				pageResult.setHasNext(true);
+				articleInfoPOList.remove(articleInfoPOList.size() - 1);
+			}
+		}
+		List<ArticleInfoVO> articleInfoVOList = ArticleInfoConverter.convertListFromPOToVO(articleInfoPOList);
+		pageResult.setPageResult(articleInfoVOList);
+		if (articleInfoVOList == null) {
+			logger.error("pageQueryArticles==>articleInfoVOList: " + articleInfoVOList);
+		} else {
+			pageResult.setSuccess(true);
+		}
+		
+		return pageResult;
 	}
 }

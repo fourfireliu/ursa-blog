@@ -21,6 +21,13 @@ public class PageResult<T> implements Serializable {
 	private List<T> pageResult;
 	private boolean hasNext;
 	private int totalCount;
+	private boolean isSuccess;
+	public boolean isSuccess() {
+		return isSuccess;
+	}
+	public void setSuccess(boolean isSuccess) {
+		this.isSuccess = isSuccess;
+	}
 	public int getPageNo() {
 		return pageNo;
 	}
@@ -28,7 +35,8 @@ public class PageResult<T> implements Serializable {
 	public String toString() {
 		return "PageResult [pageNo=" + pageNo + ", pageSize=" + pageSize
 				+ ", pageResult=" + pageResult + ", hasNext=" + hasNext
-				+ ", totalCount=" + totalCount + "]";
+				+ ", totalCount=" + totalCount + ", isSuccess=" + isSuccess
+				+ "]";
 	}
 	public void setPageNo(int pageNo) {
 		if (pageNo <= 0) {

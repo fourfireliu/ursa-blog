@@ -9,7 +9,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fourfire.blog.dao.ArticleInfoDao;
@@ -18,12 +21,17 @@ import com.fourfire.blog.dao.LinkInfoDao;
 import com.fourfire.blog.dao.MsgInfoDao;
 import com.fourfire.blog.dao.TagInfoDao;
 import com.fourfire.blog.dao.TypeInfoDao;
+import com.fourfire.blog.manager.ArticleInfoManager;
+import com.fourfire.blog.manager.CommentManager;
 import com.fourfire.blog.util.HtmlThread;
 import com.fourfire.blog.util.Tools;
+import com.fourfire.blog.vo.ArticleInfoVO;
 
 @Controller
 @RequestMapping(value = "/article")
-public class ArticleAction {
+public class ArticleController {
+	Logger logger = LogManager.getLogger(ArticleController.class);
+	
 	@Resource(name = "articleDaoImpl")
 	private ArticleInfoDao adao;
 
@@ -42,25 +50,19 @@ public class ArticleAction {
 	@Resource(name = "linkInfoDaoImpl")
 	private LinkInfoDao linkdao;
 
+	@Resource
+	private ArticleInfoManager articleInfoManager;
+	@Resource
+	private CommentManager commentManager;
+	
 	@RequestMapping(value = "/index")
 	public String indexView(HttpServletRequest request,
 			HttpServletResponse response) {
-		int id = 0;
-		try {
-			id = Integer.parseInt(request.getParameter("id"));
-		} catch (Exception e) {
-
-		}
-
-
-		Map<String, Object> article = adao.getAticleInfoById(id);
-		request.setAttribute("article", article);
-		
+		long id = ServletRequestUtils.getLongParameter(request, "id", 0L);
+		ArticleInfoVO articleInfoVO = articleInfoManager.getArticleInfoById(id);
+		request.setAttribute("article", articleInfoVO);
 		//查询日志评论
-		request.setAttribute("articleCommentList", comdao.getArticleCommentByArticleId(id));
-		
-		
-		
+		request.setAttribute("articleCommentList", commentManager.getCommentsByArticleId(id));
 		// 上一篇
 		request.setAttribute("upArticle", adao.getUpArticleInfo(id));
 
