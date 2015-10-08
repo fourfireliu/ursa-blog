@@ -1,6 +1,7 @@
 package com.fourfire.blog.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import com.fourfire.blog.dao.TagInfoDao;
 import com.fourfire.blog.dao.TypeInfoDao;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.CommentManager;
+import com.fourfire.blog.page.PageResult;
 import com.fourfire.blog.util.HtmlThread;
 import com.fourfire.blog.util.Tools;
 import com.fourfire.blog.vo.ArticleInfoVO;
@@ -64,56 +66,23 @@ public class ArticleController {
 		//查询日志评论
 		request.setAttribute("articleCommentList", commentManager.getCommentsByArticleId(id));
 		// 上一篇
-		request.setAttribute("upArticle", adao.getUpArticleInfo(id));
-
+		request.setAttribute("upArticle", articleInfoManager.getUpArticleInfo(id));
 		// 下一篇
-		request.setAttribute("downArticle", adao.getDownArticleInfo(id));
-		
+		request.setAttribute("downArticle", articleInfoManager.getDownArticleInfo(id));
 		//评论列表
-		request.setAttribute("commentList", comdao.getArticleCommentByArticleId(id));
-		
+		request.setAttribute("commentList", commentManager.getCommentsByArticleId(id));
 
-		// 最近心情
-		request.setAttribute("mood", adao.getNearMood());
-
-		// 导航
-		List<Map<String, Object>> typeList = tdao.getAllTypeInfo();
-		request.setAttribute("typeList", typeList);
-
-		// 热门标签
-		List<Map<String, Object>> hotTag = tagdao.getHotTagInfo();
-		request.setAttribute("hotTag", hotTag);
-
-		List<Map<String, Object>> commendArticle = adao.getCommendAricle();// 首页右边推荐日志
-		List<Map<String, Object>> hotArticle = adao.getHotAricle();// 热门
-		List<Map<String, Object>> hotCommentArticle = adao.getHotCommentAricle();// 首页右边评论日志
-
-		request.setAttribute("commendArticle", commendArticle);
-		request.setAttribute("hotArticle", hotArticle);
-		request.setAttribute("hotCommentArticle", hotCommentArticle);
-
-		// 最近心情
-		request.setAttribute("mood", adao.getNearMood());
-
-		List<Map<String, Object>> msgList = mdao.getNew10MsgInfo();
-		request.setAttribute("msgList", msgList);
-
-		List<Map<String, Object>> commentList = comdao.getNewTop10CommentInfo();
-		request.setAttribute("commentList", commentList);
-
-		List<Map<String, Object>> tagList = tagdao.getAlltagInfo();
-		request.setAttribute("tagList", tagList);
-
-		List<Map<String, Object>> linkList = linkdao.getAllLinkInfo();
-		request.setAttribute("linkList", linkList);
-
-		HashMap<String, Object> data = new HashMap<String, Object>();
-
+		PageResult<ArticleInfoVO> result = articleInfoManager.getHotArticles();
+		List<ArticleInfoVO> hotArticles = new ArrayList<ArticleInfoVO>();
+		if (result != null && result.isSuccess() && result.getPageResult() != null) {
+			hotArticles = result.getPageResult();
+		}
+		request.setAttribute("hotArticles", hotArticles);
 		// 浏览次数加1
 		if (id > 0) {
-
-			adao.addReadCountByArticleId(id);
+			articleInfoManager.addReadCountByArticleId(id);
 		}
+		
 		HtmlThread ht = new HtmlThread(request.getRealPath("/"),request);
 		ht.start();
 

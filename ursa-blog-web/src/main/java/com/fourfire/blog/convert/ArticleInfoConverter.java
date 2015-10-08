@@ -22,6 +22,7 @@ public class ArticleInfoConverter {
 		articleInfoPO.setContent(articleInfoVO.getContent());
 		articleInfoPO.setIp(articleInfoVO.getIp());
 		articleInfoPO.setReadCount(articleInfoVO.getReadCount());
+		articleInfoPO.setCommentCount(articleInfoVO.getCommentCount());
 		articleInfoPO.setTitle(articleInfoVO.getTitle());
 		articleInfoPO.setType(articleInfoVO.getType());
 		if (!articleInfoVO.isExist()) {
@@ -65,6 +66,7 @@ public class ArticleInfoConverter {
 		articleInfoVO.setId(articleInfoPO.getId());
 		articleInfoVO.setIp(articleInfoPO.getIp());
 		articleInfoVO.setReadCount(articleInfoPO.getReadCount());
+		articleInfoVO.setCommentCount(articleInfoPO.getCommentCount());
 		articleInfoVO.setTitle(articleInfoPO.getTitle());
 		articleInfoVO.setType(articleInfoPO.getType());
 		

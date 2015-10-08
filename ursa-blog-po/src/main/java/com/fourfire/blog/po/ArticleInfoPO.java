@@ -27,9 +27,9 @@ public class ArticleInfoPO implements Serializable {
 	public String toString() {
 		return "ArticleInfoPO [id=" + id + ", type=" + type + ", title="
 				+ title + ", content=" + content + ", author=" + author
-				+ ", readCount=" + readCount + ", ip=" + ip
-				+ ", createGmtDate=" + createGmtDate + ", modifyGmtDate="
-				+ modifyGmtDate + "]";
+				+ ", readCount=" + readCount + ", commentCount=" + commentCount
+				+ ", ip=" + ip + ", createGmtDate=" + createGmtDate
+				+ ", modifyGmtDate=" + modifyGmtDate + "]";
 	}
 	public int getType() {
 		return type;
@@ -89,6 +89,14 @@ public class ArticleInfoPO implements Serializable {
 	private String author;
 	//浏览次数
 	private int readCount;
+	//评论数
+	private int commentCount;
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
 	//ip地址
 	private String ip;
 	//创建日期

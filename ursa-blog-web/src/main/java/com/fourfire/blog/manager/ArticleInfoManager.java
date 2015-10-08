@@ -12,6 +12,7 @@ import com.fourfire.blog.mapper.ArticleInfoMapper;
 import com.fourfire.blog.page.BasePageQuery;
 import com.fourfire.blog.page.PageResult;
 import com.fourfire.blog.po.ArticleInfoPO;
+import com.fourfire.blog.util.Constants;
 import com.fourfire.blog.vo.ArticleInfoVO;
 
 /**
@@ -68,6 +69,57 @@ public class ArticleInfoManager {
 	}
 	
 	/**
+	 * 获取当前ID文章的上一篇
+	 */
+	public ArticleInfoVO getUpArticleInfo(long id) {
+		if (id <= 0) {
+			return null;
+		}
+		
+		ArticleInfoPO articleInfoPO = articleInfoMapper.getUpArticleInfo(id);
+		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
+	}
+	
+	/**
+	 * 获取当前ID文章的下一篇
+	 */
+	public ArticleInfoVO getDownArticleInfo(long id) {
+		if (id <= 0) {
+			return null;
+		}
+		
+		ArticleInfoPO articleInfoPO = articleInfoMapper.getDownArticleInfo(id);
+		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
+	}
+	
+	/**
+	 * 获取热门文章(点击率高的)
+	 */
+	public PageResult<ArticleInfoVO> getHotArticles() {
+		BasePageQuery pageQuery = fillPageQuery(Constants.DEFAULT_PAGE_NUM, Constants.DEFAULT_PAGE_SIZE);
+		PageResult<ArticleInfoVO> pageResult = new PageResult<ArticleInfoVO>();
+		pageResult.setPageNo(pageQuery.getPageNo());
+		pageResult.setPageSize(pageQuery.getOldPageSize());
+		
+		List<ArticleInfoPO> articleInfoPOList = articleInfoMapper.pageQueryOrderByReadCount(pageQuery);
+		if (pageQuery.isCheckNextPage()) {
+			if (articleInfoPOList != null && articleInfoPOList.size() > pageQuery.getOldPageSize()) {
+				pageResult.setHasNext(true);
+				articleInfoPOList.remove(articleInfoPOList.size() - 1);
+			}
+		}
+		List<ArticleInfoVO> articleInfoVOList = ArticleInfoConverter.convertListFromPOToVO(articleInfoPOList);
+		pageResult.setPageResult(articleInfoVOList);
+		if (articleInfoVOList == null) {
+			logger.error("getHotArticles==>articleInfoVOList: " + articleInfoVOList);
+		} else {
+			pageResult.setSuccess(true);
+		}
+		
+		return pageResult;
+	}
+	
+	/**
 	 * 构建分页查询对象
 	 */
 	private BasePageQuery fillPageQuery(int pageNo, int pageSize) {
@@ -108,5 +160,18 @@ public class ArticleInfoManager {
 		}
 		
 		return pageResult;
+	}
+	
+	public boolean addReadCountByArticleId(long id) {
+		if (id <= 0) {
+			return false;
+		}
+		
+		int result = articleInfoMapper.addReadCountByArticleId(id);
+		if (result == 1) {
+			return true;
+		}
+		
+		return false;
 	}
 }
