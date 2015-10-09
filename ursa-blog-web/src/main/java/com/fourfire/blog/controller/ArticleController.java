@@ -1,15 +1,14 @@
 package com.fourfire.blog.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -23,39 +22,24 @@ import com.fourfire.blog.dao.MsgInfoDao;
 import com.fourfire.blog.dao.TagInfoDao;
 import com.fourfire.blog.dao.TypeInfoDao;
 import com.fourfire.blog.manager.ArticleInfoManager;
+import com.fourfire.blog.manager.BlackIpManager;
 import com.fourfire.blog.manager.CommentManager;
 import com.fourfire.blog.page.PageResult;
-import com.fourfire.blog.util.HtmlThread;
 import com.fourfire.blog.util.Tools;
 import com.fourfire.blog.vo.ArticleInfoVO;
+import com.fourfire.blog.vo.CommentVO;
 
 @Controller
 @RequestMapping(value = "/article")
 public class ArticleController {
 	Logger logger = LogManager.getLogger(ArticleController.class);
 	
-	@Resource(name = "articleDaoImpl")
-	private ArticleInfoDao adao;
-
-	@Resource(name = "typeInfoDaoImpl")
-	private TypeInfoDao tdao;
-
-	@Resource(name = "msgInfoDaoImpl")
-	private MsgInfoDao mdao;
-
-	@Resource(name = "commentInfoDaoImpl")
-	private CommentInfoDao comdao;
-
-	@Resource(name = "tagInfoDaoImpl")
-	private TagInfoDao tagdao;
-
-	@Resource(name = "linkInfoDaoImpl")
-	private LinkInfoDao linkdao;
-
 	@Resource
 	private ArticleInfoManager articleInfoManager;
 	@Resource
 	private CommentManager commentManager;
+	@Resource
+	private BlackIpManager blackIpManager;
 	
 	@RequestMapping(value = "/index")
 	public String indexView(HttpServletRequest request,
@@ -82,54 +66,24 @@ public class ArticleController {
 		if (id > 0) {
 			articleInfoManager.addReadCountByArticleId(id);
 		}
-		
-		HtmlThread ht = new HtmlThread(request.getRealPath("/"),request);
-		ht.start();
 
 		return "article/index";
 	}
 
-	@RequestMapping(value = "/commendAritcle")
-	public void commandTheArticle(HttpServletRequest request,
-			HttpServletResponse response) {
-
-		int id = 0;
-		try {
-			id = Integer.parseInt(request.getParameter("id"));
-		} catch (Exception e) {
-
-		}
-
-		if (id > 0) {
-
-			int result = adao.commendAricle(id);
-			if (result > 0) {
-				try {
-					response.getWriter().print("ok");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-
-		}
-	}
-
-	@RequestMapping(value = "/savaComment")
-	public String savaComment(HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping(value = "/submitComment")
+	public String submitComment(HttpServletRequest request,HttpServletResponse response) {
 		String yes = request.getParameter("yes");
 		if (!"yes".equals(yes)) {
 			request.setAttribute("error", "请等待网页加载完毕，有js防虫功能...");
 			return "/error/index";
 		}
 		String ip = request.getRemoteAddr();
-		if (Tools.checkBlackIp(ip)) {
+		if (blackIpManager.checkIsBlack(ip)) {
 			request.setAttribute("error", "抱歉，您的Ip已被加入黑名单...");
 			return "/error/index";
 		}
 
 		Object s_time = request.getSession().getAttribute("time");
-
 		if (s_time != null) {
 			long time = Long.parseLong(s_time + "");
 			Long n_time = System.currentTimeMillis();
@@ -139,56 +93,38 @@ public class ArticleController {
 			}
 		}
 
-		int articleId = 0;
-
-		try {
-			articleId = Integer.parseInt(request.getParameter("articleId"));
-		} catch (Exception e) {
-
-		}
+		long articleId = ServletRequestUtils.getLongParameter(request, "articleId", 0L);
 		if (articleId <= 0) {
 			request.setAttribute("error", "请不要恶意传递错误编号。");
 			return "/error/index";
 		}
 
 		String uname = Tools.checkString(request.getParameter("uname"));
-		if ("".equals(uname)) {
+		if (StringUtils.isBlank(uname)) {
 			request.setAttribute("error", "朋友请留下您的大名！");
 			return "/error/index";
 		}
 
-		String mail_qq = Tools.checkString(request.getParameter("mail_qq"));
-
 		String content = Tools.checkString(request.getParameter("comment"));
 
-		if ("".equals(content)) {
+		if (StringUtils.isBlank(content)) {
 			request.setAttribute("error", "朋友,你想说点什么呢？");
 			return "/error/index";
 		}
 
-		String sql = "insert into comment values(null," + articleId + ",'"
-				+ uname + "','" + mail_qq + "','" + content + "','" + ip
-				+ "',now())";
-		int result = adao.savaComment(sql);
-
-		if (result <= 0) {
-
+		CommentVO commentVO = new CommentVO();
+		commentVO.setArticleId(articleId);
+		commentVO.setContent(content);
+		commentVO.setCreateGmtDate(new Date());
+		commentVO.setIp(ip);
+		commentVO.setUserId(uname);
+		if (!commentManager.insertComment(commentVO)) {
 			request.setAttribute("error", "评论失败，请联系管理员。");
 			return "/error/index";
 		}
 
 		request.getSession().setAttribute("time", System.currentTimeMillis());
-
-		/* 更新首页静态文件 */
-		HtmlThread ht = new HtmlThread(request.getRealPath("/"),request);
-		ht.start();
-
-		try {
-			response.sendRedirect("index.htm?id=" + articleId);
-		} catch (IOException e) {
-			request.setAttribute("error", "页面跳转出错，请联系管理员。");
-			return "/error/index";
-		}
-		return null;
+		
+		return "/error/index";
 	}
 }

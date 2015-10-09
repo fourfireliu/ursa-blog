@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.fourfire.blog.convert.ArticleInfoConverter;
 import com.fourfire.blog.mapper.ArticleInfoMapper;
+import com.fourfire.blog.page.ArticlePageQuery;
 import com.fourfire.blog.page.BasePageQuery;
 import com.fourfire.blog.page.PageResult;
 import com.fourfire.blog.po.ArticleInfoPO;
@@ -132,15 +133,16 @@ public class ArticleInfoManager {
 	}
 	
 	/**
-	 * 分页获取文章列表
+	 * 分页获取文章列表, 若typeId>0 则获取相关分类的文章
 	 */
-	public PageResult<ArticleInfoVO> pageQueryArticles(int pageNo, int pageSize) {
-		BasePageQuery pageQuery = fillPageQuery(pageNo, pageSize);
+	public PageResult<ArticleInfoVO> pageQueryArticles(int pageNo, int pageSize, int typeId) {
+		ArticlePageQuery pageQuery = new ArticlePageQuery();
+		pageQuery.setPageNo(pageNo);
+		pageQuery.setPageSize(pageSize);
+		pageQuery.setTypeId(typeId);
+		pageQuery.setCheckNextPage(true);
+		
 		PageResult<ArticleInfoVO> pageResult = new PageResult<ArticleInfoVO>();
-		if (pageQuery == null) {
-			logger.error("pageQueryArticles==>pageQuery: " + pageQuery);
-			return pageResult;
-		}
 		pageResult.setPageNo(pageQuery.getPageNo());
 		pageResult.setPageSize(pageQuery.getOldPageSize());
 		

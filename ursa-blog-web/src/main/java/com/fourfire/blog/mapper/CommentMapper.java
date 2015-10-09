@@ -6,4 +6,5 @@ import com.fourfire.blog.po.CommentPO;
 
 public interface CommentMapper {
 	public List<CommentPO> getCommentsByArticleId(long articleId);
+	public int insertComment(CommentPO commentPO);
 }
