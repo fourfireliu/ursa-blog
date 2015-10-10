@@ -36,4 +36,17 @@ public class TypeInfoConverter {
 		
 		return typeInfoVO;
 	}
+	
+	public static TypeInfoPO convertFromVOToPO(TypeInfoVO typeInfoVO) {
+		if (typeInfoVO == null) {
+			return null;
+		}
+		
+		TypeInfoPO typeInfoPO = new TypeInfoPO();
+		typeInfoPO.setDescription(typeInfoVO.getDescription());
+		typeInfoPO.setName(typeInfoVO.getName());
+		typeInfoPO.setIconUrl(typeInfoVO.getIconUrl());
+		
+		return typeInfoPO;
+	}
 }

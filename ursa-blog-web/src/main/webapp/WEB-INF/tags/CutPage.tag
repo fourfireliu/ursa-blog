@@ -20,18 +20,18 @@
  }
  int end =(cp+1)*10;
 
- if(pm.getSumPage()<10){
-	 end=pm.getSumPage(); 
- }
+ //if(pm.getSumPage()<10){
+	// end=pm.getSumPage(); 
+ //}
  
  for(int i=start;i<=end;i++){
-	 if(i>pm.getSumPage()){
-		 break;
-	 }
+	 //if(i>pm.getSumPage()){
+		// break;
+	 //}
 	    out.print("<a");
-	  	if(i==pm.getCurrentPage()){
-	  		out.print(" class=\"now-page\" ");
-	  	}
+	  	//if(i==pm.getCurrentPage()){
+	  		//out.print(" class=\"now-page\" ");
+	  	//}
 		%> href="${url}?page=<%=i %>&key=${pm.keyWords}&id=${id}"><%=i %><%
 	    out.print("</a>");
  }

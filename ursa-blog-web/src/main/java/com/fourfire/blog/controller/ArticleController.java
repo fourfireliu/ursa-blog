@@ -15,12 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fourfire.blog.dao.ArticleInfoDao;
-import com.fourfire.blog.dao.CommentInfoDao;
-import com.fourfire.blog.dao.LinkInfoDao;
-import com.fourfire.blog.dao.MsgInfoDao;
-import com.fourfire.blog.dao.TagInfoDao;
-import com.fourfire.blog.dao.TypeInfoDao;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.BlackIpManager;
 import com.fourfire.blog.manager.CommentManager;

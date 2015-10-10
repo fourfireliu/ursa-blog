@@ -41,6 +41,14 @@ public class TypeInfoController{
 		String name = ServletRequestUtils.getStringParameter(request, "name", "新的分类");
 		String description = ServletRequestUtils.getStringParameter(request, "description", "新的分类");
 		
+		TypeInfoVO typeInfoVO = new TypeInfoVO();
+		typeInfoVO.setDescription(description);
+		typeInfoVO.setName(name);
+		if (!typeInfoManager.addNewType(typeInfoVO)) {
+			return "/error/index";
+		}
+		
+		return "/error/index";
 	}
 	
 }

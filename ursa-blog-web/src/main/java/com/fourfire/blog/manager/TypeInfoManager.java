@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,5 +37,24 @@ Logger logger = LogManager.getLogger(TypeInfoManager.class);
 		}
 		
 		return typeInfoVOList;
+	}
+	
+	public boolean addNewType(TypeInfoVO typeInfoVO) {
+		TypeInfoPO typeInfoPO = TypeInfoConverter.convertFromVOToPO(typeInfoVO);
+		if (typeInfoPO == null || StringUtils.isBlank(typeInfoPO.getName())) {
+			return false;
+		}
+		
+		int count = typeInfoMapper.countTypeByName(typeInfoPO.getName());
+		if (count > 0) {
+			return false;
+		}
+		
+		int result = typeInfoMapper.insertType(typeInfoPO);
+		if (result != 1) {
+			return false;
+		}
+		
+		return true;
 	}
 }

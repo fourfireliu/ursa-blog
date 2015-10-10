@@ -2,15 +2,9 @@ package com.fourfire.blog.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.fourfire.blog.dao.BaseDao;
 
 public class Tools {
 	
@@ -62,16 +56,6 @@ public class Tools {
 		
 	}
 	
-	private static ApplicationContext context=null;
-	
-	public static boolean checkBlackIp(String ip){
-		if(context==null){
-			context = new ClassPathXmlApplicationContext("classpath:spring-context.xml");
-		}
-		BaseDao bd=(BaseDao)context.getBean("baseDao");
-		return bd.checkIsblackIp(ip);
-	}
-	
 	public static String getWebPath(HttpServletRequest request){
 		if(request==null){
 			return "";
@@ -93,22 +77,4 @@ public class Tools {
 	public static String getTime(){
 		return sdf.format(new Date());
 	}
-	
-	/**
-	 * taglist to string
-	 * */
-	public static String listToString(List<Map> list){
-		StringBuffer tagstr=new StringBuffer("");
-		for (Map map : list) {
-			String tagName=map.get("tagName")+"";
-			if(checkNotNull(tagName)){
-				tagstr.append(map.get("tagName")+",");
-			}
-		}
-		if(!"".equals(tagstr.toString())){
-			return tagstr.toString().substring(0,tagstr.length()-1);
-		}
-		return "";
-	}
-	
 }

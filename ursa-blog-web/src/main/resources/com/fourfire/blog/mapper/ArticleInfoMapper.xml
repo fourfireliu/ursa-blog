@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fourfire.blog.mapper.ArticleInfoMapper">
+	<resultMap type="com.fourfire.blog.po.ArticleInfoPO" id="BaseResultMap">
+		<id column="id" property="id" jdbcType="BIGINT" />
+    	<result column="type" property="type" jdbcType="TINYINT" />
+    	<result column="title" property="title" jdbcType="VARCHAR" />
+    	<result column="content" property="content" jdbcType="VARCHAR" />
+    	<result column="author" property="author" jdbcType="VARCHAR" />
+    	<result column="read_count" property="readCount" jdbcType="INTEGER" />
+    	<result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+    	<result column="ip" property="ip" jdbcType="VARCHAR" />
+    	<result column="create_gmt_date" property="createGmtDate" jdbcType="TIMESTAMP" />
+    	<result column="modify_gmt_date" property="modifyGmtDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, type, title, content, author, read_count, comment_count, ip, create_gmt_date, modify_gmt_date
+	</sql>
+	
+	<insert id="insert" parameterType="com.fourfire.blog.po.ArticleInfoPO" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO article_info (
+			type, title, content, author, read_count, comment_count, ip, create_gmt_date, modify_gmt_date
+		) VALUES (
+			#{type, jdbcType=TINYINT}, #{title, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{author, jdbcType=VARCHAR}, 
+			#{readCount, jdbcType=INTEGER}, #{commentCount, jdbcType=INTEGER}, #{ip, jdbcType=VARCHAR}, 
+			#{createGmtDate, jdbcType=TIMESTAMP}, #{modifyGmtDate, jdbcType=TIMESTAMP}
+		) 
+	</insert>
+	
+	<update id="updateById" parameterType="com.fourfire.blog.po.ArticleInfoPO">
+		UPDATE article_info 
+		<set>
+			<if test="type != null">
+				type = #{type, jdbcType=TINYINT}
+			</if>
+			<if test="title != null">
+				title = #{title, jdbcType=VARCHAR}
+			</if>
+			<if test="content != null">
+				content = #{content, jdbcType=VARCHAR}
+			</if>
+			<if test="author != null">
+				author = #{author, jdbcType=VARCHAR}
+			</if>
+			<if test="readCount != null">
+				read_count = #{readCount, jdbcType=INTEGER}
+			</if>
+			<if test="commentCount != null">
+				comment_count = #{commentCount, jdbcType=INTEGER}
+			</if>
+			<if test="ip != null">
+				ip = #{ip, jdbcType=VARCHAR}
+			</if>
+			<if test="createGmtDate != null">
+				create_gmt_date = #{createGmtDate, jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifyGmtDate != null">
+				modify_gmt_date = #{modifyGmtDate, jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		WHERE id = #{id, jdbcType=BIGINT}
+	</update>
+	
+	<select id="getArticleInfoById" resultMap="BaseResultMap" parameterType="long">
+		SELECT <include refid="Base_Column_List" />
+		FROM article_info 
+		WHERE id = #{id, jdbcType=BIGINT}
+	</select>
+	
+	<select id="getUpArticleInfo" resultMap="BaseResultMap" parameterType="long">
+		SELECT <include refid="Base_Column_List" />
+		FROM article_info 
+		WHERE id <![CDATA[<]]> #{id, jdbcType=BIGINT} 
+		LIMIT 1
+	</select>
+	
+	<select id="getDownArticleInfo" resultMap="BaseResultMap" parameterType="long">
+		SELECT <include refid="Base_Column_List" />
+		FROM article_info 
+		WHERE id <![CDATA[>]]> #{id, jdbcType=BIGINT}
+		LIMIT 1
+	</select>
+</mapper>
