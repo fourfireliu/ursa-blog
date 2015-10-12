@@ -30,6 +30,13 @@ public class AdminController {
 	private ArticleInfoManager articleInfoManager;
 	@Resource
 	private TypeInfoManager typeInfoManager;
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("This is ftl");
+		
+		return "/test/test";
+	}
 
 	/**
 	 * 提交发文或者编辑文章
