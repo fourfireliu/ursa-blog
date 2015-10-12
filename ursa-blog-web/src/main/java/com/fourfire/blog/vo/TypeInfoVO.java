@@ -14,10 +14,10 @@ public class TypeInfoVO implements Serializable {
 		return "TypeInfoVO [id=" + id + ", name=" + name + ", description="
 				+ description + ", iconUrl=" + iconUrl + "]";
 	}
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -42,7 +42,7 @@ public class TypeInfoVO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2824872351469793671L;
-	private long id;
+	private int id;
 	private String name;
 	private String description;
 	private String iconUrl;

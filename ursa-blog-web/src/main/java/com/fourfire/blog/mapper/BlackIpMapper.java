@@ -1,5 +1,5 @@
 package com.fourfire.blog.mapper;
 
-public interface BlackListMapper {
+public interface BlackIpMapper {
 	public int getBlackCountByIp(String ip);
 }

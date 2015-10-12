@@ -38,6 +38,7 @@ public class ArticleController {
 	@RequestMapping(value = "/index")
 	public String indexView(HttpServletRequest request,
 			HttpServletResponse response) {
+		System.out.println("come to article index");
 		long id = ServletRequestUtils.getLongParameter(request, "id", 0L);
 		ArticleInfoVO articleInfoVO = articleInfoManager.getArticleInfoById(id);
 		request.setAttribute("article", articleInfoVO);

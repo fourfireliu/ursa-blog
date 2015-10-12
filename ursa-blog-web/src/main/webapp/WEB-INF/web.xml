@@ -31,11 +31,11 @@
   </filter>
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
-    <url-pattern>*.htm</url-pattern>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
     <filter-name>htmlFilter</filter-name>
-    <url-pattern>*.html</url-pattern>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
   
   <!-- Servlet -->
@@ -50,7 +50,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>dispatcherServlet</servlet-name>
-    <url-pattern>*.html</url-pattern>
+    <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
   <!-- Listener -->
@@ -58,14 +58,6 @@
   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   
-  <error-page>
-    <error-code>404</error-code>
-    <location>/404.html</location>
-  </error-page>
-  <error-page>
-    <error-code>500</error-code>
-    <location>/500.html</location>
-  </error-page>
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>

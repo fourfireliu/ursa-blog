@@ -27,6 +27,8 @@
 		<el.version>1.0</el.version>
 		<freemarker.version>2.3.23</freemarker.version>
 		<commons.lang3.version>3.4</commons.lang3.version>
+		<mybatis.spring.version>1.2.2</mybatis.spring.version>
+		<mybatis.version>3.2.8</mybatis.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -120,6 +122,16 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons.lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>${mybatis.spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

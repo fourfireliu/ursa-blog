@@ -81,4 +81,33 @@
 		WHERE id <![CDATA[>]]> #{id, jdbcType=BIGINT}
 		LIMIT 1
 	</select>
+	
+	<select id="pageQuery" resultMap="BaseResultMap" parameterType="com.fourfire.blog.page.ArticlePageQuery">
+		SELECT <include refid="Base_Column_List" />
+		FROM article_info 
+		<where>
+			<if test="typeId != -1">
+				type = #{typeId, jdbcType=TINYINT}
+			</if>
+		</where>
+		<choose>
+			<when test="orderByReadCount">
+				ORDER BY read_count 
+			</when>
+			<otherwise>
+				ORDER BY create_gmt_date ASC 
+			</otherwise>
+		</choose>
+		LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<update id="addReadCountById" parameterType="long">
+		UPDATE article_info 
+		<set>
+			read_count = read_count + 1 
+		</set>
+		<where>
+			id = #{id, jdbcType=BIGINT}
+		</where>
+	</update>
 </mapper>

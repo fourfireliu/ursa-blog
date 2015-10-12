@@ -9,10 +9,10 @@ import java.io.Serializable;
  * @date 2015-09-29
  */
 public class TypeInfoPO implements Serializable {
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -43,7 +43,7 @@ public class TypeInfoPO implements Serializable {
 	 */
 	private static final long serialVersionUID = 2041994120791300839L;
 	//分类ID
-	private long id;
+	private int id;
 	//类别名称
 	private String name;
 	//描述

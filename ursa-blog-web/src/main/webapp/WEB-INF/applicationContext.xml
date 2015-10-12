@@ -30,15 +30,21 @@
 	
 	<!-- 数据源配置 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="c	om.mysql.jdbc.Driver" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://101.200.232.159:3306/ursablog?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="username" value="root" />
 		<property name="password" value="ursaminor" />
 	</bean>
 	
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:mapper/*Mapper.xml"></property>
+		<property name="mapperLocations" value="classpath:com/fourfire/blog/mapper/*Mapper.xml"/>
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.fourfire.blog.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 	
 	<bean id="articleInfoManager" class="com.fourfire.blog.manager.ArticleInfoManager" />

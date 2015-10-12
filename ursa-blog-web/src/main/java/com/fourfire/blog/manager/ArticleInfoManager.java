@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import com.fourfire.blog.convert.ArticleInfoConverter;
 import com.fourfire.blog.mapper.ArticleInfoMapper;
 import com.fourfire.blog.page.ArticlePageQuery;
-import com.fourfire.blog.page.BasePageQuery;
 import com.fourfire.blog.page.PageResult;
 import com.fourfire.blog.po.ArticleInfoPO;
 import com.fourfire.blog.util.Constants;
@@ -97,12 +96,14 @@ public class ArticleInfoManager {
 	 * 获取热门文章(点击率高的)
 	 */
 	public PageResult<ArticleInfoVO> getHotArticles() {
-		BasePageQuery pageQuery = fillPageQuery(Constants.DEFAULT_PAGE_NUM, Constants.DEFAULT_PAGE_SIZE);
+		ArticlePageQuery pageQuery = fillPageQuery(Constants.DEFAULT_PAGE_NUM, Constants.DEFAULT_PAGE_SIZE);
+		pageQuery.setOrderByReadCount(true);
+		
 		PageResult<ArticleInfoVO> pageResult = new PageResult<ArticleInfoVO>();
 		pageResult.setPageNo(pageQuery.getPageNo());
 		pageResult.setPageSize(pageQuery.getOldPageSize());
 		
-		List<ArticleInfoPO> articleInfoPOList = articleInfoMapper.pageQueryOrderByReadCount(pageQuery);
+		List<ArticleInfoPO> articleInfoPOList = articleInfoMapper.pageQuery(pageQuery);
 		if (pageQuery.isCheckNextPage()) {
 			if (articleInfoPOList != null && articleInfoPOList.size() > pageQuery.getOldPageSize()) {
 				pageResult.setHasNext(true);
@@ -123,8 +124,8 @@ public class ArticleInfoManager {
 	/**
 	 * 构建分页查询对象
 	 */
-	private BasePageQuery fillPageQuery(int pageNo, int pageSize) {
-		BasePageQuery pageQuery = new BasePageQuery();
+	private ArticlePageQuery fillPageQuery(int pageNo, int pageSize) {
+		ArticlePageQuery pageQuery = new ArticlePageQuery();
 		pageQuery.setCheckNextPage(true);
 		pageQuery.setPageNo(pageNo);
 		pageQuery.setPageSize(pageSize);
@@ -169,7 +170,7 @@ public class ArticleInfoManager {
 			return false;
 		}
 		
-		int result = articleInfoMapper.addReadCountByArticleId(id);
+		int result = articleInfoMapper.addReadCountById(id);
 		if (result == 1) {
 			return true;
 		}

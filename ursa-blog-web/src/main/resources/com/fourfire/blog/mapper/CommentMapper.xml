@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fourfire.blog.mapper.CommentMapper">
+	<resultMap type="com.fourfire.blog.po.CommentPO" id="BaseResultMap">
+		<id column="id" property="id" jdbcType="BIGINT"/>
+		<result column="article_info_id" property="articleInfoId" jdbcType="BIGINT"/>
+		<result column="user_id" property="userId" jdbcType="VARCHAR"/>
+		<result column="content" property="content" jdbcType="VARCHAR"/>
+		<result column="ip" property="ip" jdbcType="VARCHAR"/>
+		<result column="create_gmt_date" property="createGmtDate" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, article_info_id, user_id, content, ip, create_gmt_date
+	</sql>
+	
+	<select id="getCommentsByArticleId" parameterType="long" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/>
+		FROM comment 
+		<where>
+			article_info_id = #{articleInfoId, jdbcType=BIGINT}
+		</where>
+	</select>
+	
+	<insert id="insertComment" parameterType="com.fourfire.blog.po.CommentPO">
+		INSERT INTO comment (
+			article_info_id, user_id, content, ip, create_gmt_date
+		) VALUES (
+			#{articleInfoId, jdbcType=BIGINT}, #{userId, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, 
+			#{ip, jdbcType=VARCHAR}, #{createGmtDate, jdbcType=TIMESTAMP}
+		)
+	</insert>
+</mapper>
