@@ -34,5 +34,7 @@
   <classpathentry kind="var" path="M2_REPO/commons-el/commons-el/1.0/commons-el-1.0.jar" sourcepath="M2_REPO/commons-el/commons-el/1.0/commons-el-1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/freemarker/freemarker/2.3.23/freemarker-2.3.23.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mybatis/mybatis-spring/1.2.2/mybatis-spring-1.2.2.jar" sourcepath="M2_REPO/org/mybatis/mybatis-spring/1.2.2/mybatis-spring-1.2.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mybatis/mybatis/3.2.8/mybatis-3.2.8.jar" sourcepath="M2_REPO/org/mybatis/mybatis/3.2.8/mybatis-3.2.8-sources.jar"/>
   <classpathentry kind="src" path="/ursa-blog-po"/>
 </classpath>

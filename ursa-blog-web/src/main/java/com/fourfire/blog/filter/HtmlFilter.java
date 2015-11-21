@@ -32,7 +32,6 @@ public class HtmlFilter extends CharacterEncodingFilter {
 				return;
 			}
 			
-			request.s
 			request.getRequestDispatcher(uri + "?id="+id).forward(request, response);
 			return;
 		}
