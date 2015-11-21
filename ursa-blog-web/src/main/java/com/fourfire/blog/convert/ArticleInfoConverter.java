@@ -24,7 +24,7 @@ public class ArticleInfoConverter {
 		articleInfoPO.setReadCount(articleInfoVO.getReadCount());
 		articleInfoPO.setCommentCount(articleInfoVO.getCommentCount());
 		articleInfoPO.setTitle(articleInfoVO.getTitle());
-		articleInfoPO.setType(articleInfoVO.getType());
+		articleInfoPO.setTypeId(articleInfoVO.getType());
 		if (!articleInfoVO.isExist()) {
 			articleInfoPO.setCreateGmtDate(new Date());
 		}
@@ -68,7 +68,7 @@ public class ArticleInfoConverter {
 		articleInfoVO.setReadCount(articleInfoPO.getReadCount());
 		articleInfoVO.setCommentCount(articleInfoPO.getCommentCount());
 		articleInfoVO.setTitle(articleInfoPO.getTitle());
-		articleInfoVO.setType(articleInfoPO.getType());
+		articleInfoVO.setType(articleInfoPO.getTypeId());
 		
 		return articleInfoVO;
 	}

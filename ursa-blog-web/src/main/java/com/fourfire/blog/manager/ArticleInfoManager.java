@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.fourfire.blog.convert.ArticleInfoConverter;
-import com.fourfire.blog.mapper.ArticleInfoMapper;
+import com.fourfire.blog.mapper.ArticleInfoPOMapper;
 import com.fourfire.blog.page.ArticlePageQuery;
 import com.fourfire.blog.page.PageResult;
 import com.fourfire.blog.po.ArticleInfoPO;
@@ -25,7 +25,7 @@ public class ArticleInfoManager {
 	Logger logger = LogManager.getLogger(ArticleInfoManager.class);
 	
 	@Resource
-	private ArticleInfoMapper articleInfoMapper;
+	private ArticleInfoPOMapper articleInfoMapper;
 	
 	/**
 	 * 修改或发表文章
@@ -38,7 +38,7 @@ public class ArticleInfoManager {
 		}
 		
 		if (articleInfoVO.isExist()) {
-			int modifyCount = articleInfoMapper.updateById(articleInfoPO);
+			int modifyCount = articleInfoMapper.updateByPrimaryKey(articleInfoPO);
 			if (modifyCount != 1) {
 				logger.info("addOrUpdateArticle==>update failed, modifyCount: " + modifyCount + ", articleInfoPO:\n"
 						+ articleInfoPO);
@@ -64,7 +64,7 @@ public class ArticleInfoManager {
 			return null;
 		}
 		
-		ArticleInfoPO articleInfoPO = articleInfoMapper.getArticleInfoById(id);
+		ArticleInfoPO articleInfoPO = articleInfoMapper.selectByPrimaryKey(id);
 		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
 	}
 	
