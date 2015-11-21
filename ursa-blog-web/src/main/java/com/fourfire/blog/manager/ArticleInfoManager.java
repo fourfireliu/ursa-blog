@@ -25,7 +25,7 @@ public class ArticleInfoManager {
 	Logger logger = LogManager.getLogger(ArticleInfoManager.class);
 	
 	@Resource
-	private ArticleInfoPOMapper articleInfoMapper;
+	private ArticleInfoPOMapper articleInfoPOMapper;
 	
 	/**
 	 * 修改或发表文章
@@ -38,14 +38,14 @@ public class ArticleInfoManager {
 		}
 		
 		if (articleInfoVO.isExist()) {
-			int modifyCount = articleInfoMapper.updateByPrimaryKey(articleInfoPO);
+			int modifyCount = articleInfoPOMapper.updateByPrimaryKey(articleInfoPO);
 			if (modifyCount != 1) {
 				logger.info("addOrUpdateArticle==>update failed, modifyCount: " + modifyCount + ", articleInfoPO:\n"
 						+ articleInfoPO);
 				return false;
 			}
 		} else {
-			int result = articleInfoMapper.insert(articleInfoPO);
+			int result = articleInfoPOMapper.insert(articleInfoPO);
 			if (result != 1) {
 				logger.info("addOrUpdateArticle==>insert failed, insertCount: " + result + ", articleInfoPO:\n"
 						+ articleInfoPO);
@@ -64,7 +64,7 @@ public class ArticleInfoManager {
 			return null;
 		}
 		
-		ArticleInfoPO articleInfoPO = articleInfoMapper.selectByPrimaryKey(id);
+		ArticleInfoPO articleInfoPO = articleInfoPOMapper.selectByPrimaryKey(id);
 		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
 	}
 	
@@ -76,7 +76,7 @@ public class ArticleInfoManager {
 			return null;
 		}
 		
-		ArticleInfoPO articleInfoPO = articleInfoMapper.getUpArticleInfo(id);
+		ArticleInfoPO articleInfoPO = articleInfoPOMapper.getUpArticleInfo(id);
 		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
 	}
 	
@@ -88,7 +88,7 @@ public class ArticleInfoManager {
 			return null;
 		}
 		
-		ArticleInfoPO articleInfoPO = articleInfoMapper.getDownArticleInfo(id);
+		ArticleInfoPO articleInfoPO = articleInfoPOMapper.getDownArticleInfo(id);
 		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
 	}
 	
@@ -97,13 +97,13 @@ public class ArticleInfoManager {
 	 */
 	public PageResult<ArticleInfoVO> getHotArticles() {
 		ArticlePageQuery pageQuery = fillPageQuery(Constants.DEFAULT_PAGE_NUM, Constants.DEFAULT_PAGE_SIZE);
-		pageQuery.setOrderByReadCount(true);
+		pageQuery.setOrderByColumn("read_count");
 		
 		PageResult<ArticleInfoVO> pageResult = new PageResult<ArticleInfoVO>();
 		pageResult.setPageNo(pageQuery.getPageNo());
 		pageResult.setPageSize(pageQuery.getOldPageSize());
 		
-		List<ArticleInfoPO> articleInfoPOList = articleInfoMapper.pageQuery(pageQuery);
+		List<ArticleInfoPO> articleInfoPOList = articleInfoPOMapper.pageQuery(pageQuery);
 		if (pageQuery.isCheckNextPage()) {
 			if (articleInfoPOList != null && articleInfoPOList.size() > pageQuery.getOldPageSize()) {
 				pageResult.setHasNext(true);
@@ -147,7 +147,7 @@ public class ArticleInfoManager {
 		pageResult.setPageNo(pageQuery.getPageNo());
 		pageResult.setPageSize(pageQuery.getOldPageSize());
 		
-		List<ArticleInfoPO> articleInfoPOList = articleInfoMapper.pageQuery(pageQuery);
+		List<ArticleInfoPO> articleInfoPOList = articleInfoPOMapper.pageQuery(pageQuery);
 		if (pageQuery.isCheckNextPage()) {
 			if (articleInfoPOList != null && articleInfoPOList.size() > pageQuery.getOldPageSize()) {
 				pageResult.setHasNext(true);
@@ -170,7 +170,7 @@ public class ArticleInfoManager {
 			return false;
 		}
 		
-		int result = articleInfoMapper.addReadCountById(id);
+		int result = articleInfoPOMapper.addReadCountById(id);
 		if (result == 1) {
 			return true;
 		}

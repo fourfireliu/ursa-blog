@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-	<classPathEntry  location="D:/workspace/snscenter/run/mysql-connector-java-5.1.30.jar" />
-	<context id="context1" targetRuntime="MyBatis3" >	
+	<!-- <classPathEntry  location="D:/workspace/snscenter/run/mysql-connector-java-5.1.30.jar" />-->
+	<classPathEntry location="D:/blog/ursa-blog-web/src/main/resources/mysql-connector-java-5.1.36.jar"/>
+	<context id="context1" targetRuntime="MyBatis3">	
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 		<!-- <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" 
 			/> -->
@@ -16,7 +17,7 @@
 		</commentGenerator>
 		
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://101.200.232.159:3306/ursablog?useUnicode=true&amp;characterEncoding=UTF-8"
+			connectionURL="jdbc:mysql://101.200.232.159:3306/myblog?useUnicode=true&amp;characterEncoding=UTF-8"
             userId="root"
 			password="ursaminor" />
 		
@@ -27,152 +28,24 @@
 		<javaClientGenerator targetPackage="com.fourfire.blog.mapper"
 			targetProject="ursa-blog-web" type="XMLMAPPER" />
 
-		<table tableName="sns_circle" domainObjectName="SnsCircleDO" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="JDBC" />
-            <columnOverride column="id" javaType="long" />
-            <columnOverride column="vip_doctor_type_id" javaType="long" />
-            <columnOverride column="chat_tag_id" javaType="long" />
-            <columnOverride column="weight" javaType="int" />
-            <columnOverride column="status" javaType="int" />
-        </table>
-
-        <table tableName="sns_circle_top" domainObjectName="SnsCircleTopDO" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="JDBC" />
-            <columnOverride column="id" javaType="long" />
-            <columnOverride column="circle_id" javaType="long" />
-            <columnOverride column="subject_id" javaType="long" />
-            <columnOverride column="weight" javaType="int" />
-            <columnOverride column="status" javaType="int" />
-        </table>
-        
-		<!-- 
-        <table tableName="sns_follow_relation" domainObjectName="SnsFollowRelationDO">
-            <generatedKey column="id" sqlStatement="JDBC" />
-            <columnOverride column="id" javaType="long" />
-            <columnOverride column="user_id" javaType="long" />
-            <columnOverride column="status" javaType="int" />
-            <columnOverride column="followed_id" javaType="long" />
-            <columnOverride column="followed_type" javaType="int" />
-        </table>
-
-        <table tableName="sns_tag" domainObjectName="SnsTagDO">
-            <generatedKey column="id" sqlStatement="JDBC" />
-            <columnOverride column="id" javaType="long" />
-            <columnOverride column="score" javaType="int" />
-            <columnOverride column="status" javaType="int" />
-        </table>
-
-        <table tableName="sns_tag_user" domainObjectName="SnsTagUserDO">
-            <generatedKey column="id" sqlStatement="JDBC" />
-            <columnOverride column="id" javaType="long" />
-            <columnOverride column="user_id" javaType="long" />
-            <columnOverride column="tag_id" javaType="long" />
-        </table>
-		 -->
-
-        <!--<table tableName="sns_subject_topic" domainObjectName="SnsSubjectTopicDO">-->
-            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
-            <!--<columnOverride column="id" javaType="long" />-->
-            <!--<columnOverride column="weight" javaType="int" />-->
-            <!--<columnOverride column="subject_id" javaType="long" />-->
-            <!--<columnOverride column="topic_id" javaType="long" />-->
-        <!--</table>-->
-
-        <!--<table tableName="sns_unread" domainObjectName="SnsUnreadDO">-->
-            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
-            <!--<columnOverride column="id" javaType="long" />-->
-            <!--<columnOverride column="status" javaType="int" />-->
-            <!--<columnOverride column="version" javaType="long" />-->
-        <!--</table>-->
-
-        <!--<table tableName="sns_notify" domainObjectName="SnsNotifyDO">-->
-            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
-            <!--<columnOverride column="id" javaType="long" />-->
-            <!--<columnOverride column="user_id" javaType="long" />-->
-            <!--<columnOverride column="category_id" javaType="long" />-->
-            <!--<columnOverride column="community_id" javaType="long" />-->
-            <!--<columnOverride column="subject_id" javaType="long" />-->
-            <!--<columnOverride column="comment_id" javaType="long" />-->
-            <!--<columnOverride column="reply_id" javaType="long" />-->
-            <!--<columnOverride column="type" javaType="int" />-->
-            <!--<columnOverride column="comment_praise" javaType="int" />-->
-            <!--<columnOverride column="comment_reply_praise" javaType="int" />-->
-        <!--</table>-->
-
-        <!--<table tableName="sns_subject_related_user" domainObjectName="SnsSubjectRelatedUserDO">-->
-            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
-            <!--<columnOverride column="id" javaType="long" />-->
-            <!--<columnOverride column="category_id" javaType="long" />-->
-            <!--<columnOverride column="community_id" javaType="long" />-->
-            <!--<columnOverride column="subject_id" javaType="long" />-->
-            <!--<columnOverride column="user_id" javaType="long" />-->
-        <!--</table>-->
-
-        <!--<table tableName="sns_category" domainObjectName="SnsCategoryDO">-->
-            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
-            <!--<columnOverride column="id" javaType="long" />-->
-        <!--</table>-->
-
-
-        <!--<table tableName="sns_comment" domainObjectName="SnsCommentDO">-->
-            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
-            <!--<columnOverride column="id" javaType="long" />-->
-            <!--<columnOverride column="category_id" javaType="long" />-->
-            <!--<columnOverride column="community_id" javaType="long" />-->
-            <!--<columnOverride column="subject_id" javaType="long" />-->
-            <!--<columnOverride column="type" javaType="int" />-->
-            <!--<columnOverride column="user_id" javaType="long" />-->
-            <!--<columnOverride column="reply_to_user_id" javaType="long" />-->
-            <!--<columnOverride column="status" javaType="int" />-->
-        <!--</table>-->
-
-        <!--<table tableName="sns_community" domainObjectName="SnsCommunityDO">-->
-            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
-            <!--<columnOverride column="id" javaType="long" />-->
-            <!--<columnOverride column="category_id" javaType="long" />-->
-        <!--</table>-->
-
-        <!--<table tableName="sns_reply" domainObjectName="SnsReplyDO">-->
-            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
-            <!--<columnOverride column="id" javaType="long" />-->
-            <!--<columnOverride column="category_id" javaType="long" />-->
-            <!--<columnOverride column="community_id" javaType="long" />-->
-            <!--<columnOverride column="subject_id" javaType="long" />-->
-            <!--<columnOverride column="comment_id" javaType="long" />-->
-            <!--<columnOverride column="type" javaType="int" />-->
-            <!--<columnOverride column="user_id" javaType="long" />-->
-            <!--<columnOverride column="reply_to_user_id" javaType="long" />-->
-            <!--<columnOverride column="status" javaType="int" />-->
-        <!--</table>-->
-
-        <!--<table tableName="sns_subject" domainObjectName="SnsSubjectDO">-->
-            <!--<generatedKey column="id" sqlStatement="JDBC" />-->
-            <!--<columnOverride column="id" javaType="long" />-->
-            <!--<columnOverride column="category_id" javaType="long" />-->
-            <!--<columnOverride column="community_id" javaType="long" />-->
-            <!--<columnOverride column="user_id" javaType="long" />-->
-            <!--<columnOverride column="status" javaType="int" />-->
-        <!--</table>-->
-		<!-- 
-		<table tableName="pro_prize" domainObjectName="PrizeDO">
-			<generatedKey column="id" sqlStatement="JDBC" />
-			<columnOverride column="total" javaType="int" />
-			<columnOverride column="level" javaType="int" />
-			<columnOverride column="version" javaType="long" />
+		<table tableName="blog_article_info" domainObjectName="ArticleInfoPO" 
+			enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" enableUpdateByPrimaryKey="false">
+			<generatedKey column="id" sqlStatement="JDBC"/>
+			<columnOverride column="id" javaType="long" />
+            <columnOverride column="type_id" javaType="int" />
+            <columnOverride column="read_count" javaType="int" />
+            <columnOverride column="comment_count" javaType="int" />
 		</table>
 		
-		<table tableName="pro_win_record" domainObjectName="WinRecordDO">
-			<generatedKey column="id" sqlStatement="JDBC" />
-			<columnOverride column="user_id" javaType="long" />
-			<columnOverride column="prize_id" javaType="long" />
-			<columnOverride column="status" javaType="int" />
-			<columnOverride column="version" javaType="long" />
+		<table tableName="blog_article_info" domainObjectName="ArticleInfoPO" 
+			enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" enableUpdateByPrimaryKey="false">
+			<generatedKey column="id" sqlStatement="JDBC"/>
+			<columnOverride column="id" javaType="long" />
+            <columnOverride column="type_id" javaType="int" />
+            <columnOverride column="read_count" javaType="int" />
+            <columnOverride column="comment_count" javaType="int" />
 		</table>
-		 -->
-		
 	</context>
 </generatorConfiguration>

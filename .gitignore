@@ -10,8 +10,8 @@
 *.ear
 *.bak
 
-ursa-blog-po/target/
-ursa-blog-web/target/
+ursa-blog-po/target/*
+ursa-blog-web/target/*
 ursa-blog-po/.settings/
 ursa-blog-web/.settings/
 

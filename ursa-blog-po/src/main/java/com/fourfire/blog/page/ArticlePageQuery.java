@@ -5,29 +5,29 @@ public class ArticlePageQuery extends BasePageQuery {
 	 * 
 	 */
 	private static final long serialVersionUID = 1954354068730846369L;
-	private int typeId;
-	private boolean orderByReadCount;
+	private Integer typeId;
+	private String orderByColumn;
 
-	public boolean isOrderByReadCount() {
-		return orderByReadCount;
+	public String getOrderByColumn() {
+		return orderByColumn;
 	}
 
-	public void setOrderByReadCount(boolean orderByReadCount) {
-		this.orderByReadCount = orderByReadCount;
+	public void setOrderByColumn(String orderByColumn) {
+		this.orderByColumn = orderByColumn;
 	}
 
-	public int getTypeId() {
+	public Integer getTypeId() {
 		return typeId;
 	}
 
-	public void setTypeId(int typeId) {
+	public void setTypeId(Integer typeId) {
 		this.typeId = typeId;
 	}
 
 	@Override
 	public String toString() {
-		return "ArticlePageQuery [typeId=" + typeId + ", orderByReadCount="
-				+ orderByReadCount + ", getPageNo()=" + getPageNo()
+		return "ArticlePageQuery [typeId=" + typeId + ", orderByColumn="
+				+ orderByColumn + ", getPageNo()=" + getPageNo()
 				+ ", getPageSize()=" + getPageSize() + ", getOldPageSize()="
 				+ getOldPageSize() + ", isCheckNextPage()=" + isCheckNextPage()
 				+ ", getStartRow()=" + getStartRow() + ", toString()="
