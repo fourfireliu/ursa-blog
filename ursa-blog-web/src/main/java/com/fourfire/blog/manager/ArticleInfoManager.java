@@ -1,5 +1,6 @@
 package com.fourfire.blog.manager;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,6 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.fourfire.blog.convert.ArticleInfoConverter;
+import com.fourfire.blog.entity.BaseResult;
+import com.fourfire.blog.entity.ErrorInfo;
 import com.fourfire.blog.mapper.ArticleInfoPOMapper;
 import com.fourfire.blog.page.ArticlePageQuery;
 import com.fourfire.blog.page.PageResult;
@@ -30,31 +33,42 @@ public class ArticleInfoManager {
 	/**
 	 * 修改或发表文章
 	 */
-	public boolean addOrUpdateArticle(ArticleInfoVO articleInfoVO) {
-		ArticleInfoPO articleInfoPO = ArticleInfoConverter.convertVOToPO(articleInfoVO);
-		if (articleInfoPO == null) {
-			logger.info("addOrUpdateArticle==>articleInfoPO convert to null, articleInfoVO:\n" + articleInfoVO);
-			return false;
+	public BaseResult<ArticleInfoVO> addOrUpdateArticle(ArticleInfoVO articleInfoVO) {
+		BaseResult<ArticleInfoVO> baseResult = new BaseResult<ArticleInfoVO>();
+		
+		try {
+			ArticleInfoPO articleInfoPO = ArticleInfoConverter.convertVOToPO(articleInfoVO);
+			if (articleInfoPO == null) {
+				logger.error("addOrUpdateArticle==>articleInfoPO convert to null, articleInfoVO:\n" + articleInfoVO);
+				baseResult.setErrorInfo(ErrorInfo.INVALID_PARAM);
+				return baseResult;
+			}
+			
+			
+			if (articleInfoPO.getId() <= 0) {
+				articleInfoPO.setCreateGmtDate(new Date());
+				articleInfoPO.setModifyGmtDate(new Date());
+				articleInfoPOMapper.insert(articleInfoPO);
+				articleInfoVO.setId(articleInfoPO.getId());
+			} else {
+				articleInfoPO.setModifyGmtDate(new Date());
+				int modifyCount = articleInfoPOMapper.updateByPrimaryKey(articleInfoPO);
+				if (modifyCount != 1) {
+					logger.error("addOrUpdateArticle==>update failed, modifyCount: " + modifyCount + ", articleInfoPO:\n"
+							+ articleInfoPO);
+					baseResult.setErrorInfo(ErrorInfo.UPDATE_DB_RESULT_ERROR);
+					return baseResult;
+				}
+			}
+		} catch (Exception e) {
+			logger.error("addOrUpdateArticle==>unknown error", e);
+			baseResult.setErrorInfo(ErrorInfo.SYSTEM_ERROR);
 		}
 		
-		if (articleInfoVO.isExist()) {
-			int modifyCount = articleInfoPOMapper.updateByPrimaryKey(articleInfoPO);
-			if (modifyCount != 1) {
-				logger.info("addOrUpdateArticle==>update failed, modifyCount: " + modifyCount + ", articleInfoPO:\n"
-						+ articleInfoPO);
-				return false;
-			}
-		} else {
-			int result = articleInfoPOMapper.insert(articleInfoPO);
-			if (result != 1) {
-				logger.info("addOrUpdateArticle==>insert failed, insertCount: " + result + ", articleInfoPO:\n"
-						+ articleInfoPO);
-				return false;
-			}
-		}
-		
-		return true;
-	}
+		baseResult.setT(articleInfoVO);
+		baseResult.setSuccess(true);
+		return baseResult;
+	} 
 	
 	/**
 	 * 根据ID获取文章详情

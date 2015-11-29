@@ -1,7 +1,6 @@
 package com.fourfire.blog.convert;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.fourfire.blog.po.ArticleInfoPO;
@@ -12,7 +11,7 @@ public class ArticleInfoConverter {
 	 * 业务VO对象转换为数据PO对象
 	 */
 	public static ArticleInfoPO convertVOToPO(ArticleInfoVO articleInfoVO) {
-		if (articleInfoVO == null || articleInfoVO.getId() <= 0) {
+		if (articleInfoVO == null) {
 			return null;
 		}
 		
@@ -25,10 +24,8 @@ public class ArticleInfoConverter {
 		articleInfoPO.setCommentCount(articleInfoVO.getCommentCount());
 		articleInfoPO.setTitle(articleInfoVO.getTitle());
 		articleInfoPO.setTypeId(articleInfoVO.getType());
-		if (!articleInfoVO.isExist()) {
-			articleInfoPO.setCreateGmtDate(new Date());
-		}
-		articleInfoPO.setModifyGmtDate(new Date());
+		articleInfoPO.setCreateGmtDate(articleInfoVO.getCreateDate());
+		articleInfoPO.setModifyGmtDate(articleInfoVO.getModifyDate());
 		
 		return articleInfoPO;
 	}
@@ -58,9 +55,6 @@ public class ArticleInfoConverter {
 		}
 		
 		ArticleInfoVO articleInfoVO = new ArticleInfoVO();
-		if (articleInfoPO.getCreateGmtDate() != null) {
-			articleInfoVO.setExist(true);
-		}
 		articleInfoVO.setAuthor(articleInfoPO.getAuthor());
 		articleInfoVO.setContent(articleInfoPO.getContent());
 		articleInfoVO.setId(articleInfoPO.getId());
@@ -69,6 +63,8 @@ public class ArticleInfoConverter {
 		articleInfoVO.setCommentCount(articleInfoPO.getCommentCount());
 		articleInfoVO.setTitle(articleInfoPO.getTitle());
 		articleInfoVO.setType(articleInfoPO.getTypeId());
+		articleInfoVO.setCreateDate(articleInfoPO.getCreateGmtDate());
+		articleInfoVO.setModifyDate(articleInfoPO.getModifyGmtDate());
 		
 		return articleInfoVO;
 	}

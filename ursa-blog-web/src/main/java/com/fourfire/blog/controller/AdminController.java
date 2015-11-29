@@ -13,6 +13,7 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fourfire.blog.entity.BaseResult;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.TypeInfoManager;
 import com.fourfire.blog.page.PageResult;
@@ -49,13 +50,9 @@ public class AdminController {
 		String op = ServletRequestUtils.getStringParameter(request, "op", "");
 		//修改文章
 		if ("update".equalsIgnoreCase(op)) {
-			articleInfoVO.setExist(true);
 			articleInfoVO.setId(ServletRequestUtils.getLongParameter(request, "id", 0L));
 			articleInfoVO.setReadCount(0);
-		} else {
-			//新文章 生成ID
-			articleInfoVO.setId(Tools.getId());
-		}
+		} 
 		//文章类型
 		articleInfoVO.setType(ServletRequestUtils.getIntParameter(request, "typeId", 0));
 		//文章标题
@@ -68,15 +65,16 @@ public class AdminController {
 		//访问者IP
 		articleInfoVO.setIp(request.getRemoteAddr());
 		
-		boolean isSuccess = articleInfoManager.addOrUpdateArticle(articleInfoVO);
-		if (isSuccess) {
-			if (articleInfoVO.isExist()) {
+		boolean isNewArticle = (articleInfoVO.getId() <= 0);
+		BaseResult<ArticleInfoVO> result = articleInfoManager.addOrUpdateArticle(articleInfoVO);
+		if (result.isSuccess()) {
+			if (!isNewArticle) {
 				request.setAttribute("message", "更新成功...");
 			} else {
 				request.setAttribute("message", "添加成功...");
 			}
 		} else {
-			if (articleInfoVO.isExist()) {
+			if (!isNewArticle) {
 				request.setAttribute("message", "更新失败...");
 			} else {
 				request.setAttribute("message", "添加失败...");

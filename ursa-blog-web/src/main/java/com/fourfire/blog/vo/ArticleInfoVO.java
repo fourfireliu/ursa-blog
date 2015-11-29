@@ -1,6 +1,7 @@
 package com.fourfire.blog.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 博文的VO对象
@@ -18,10 +19,9 @@ public class ArticleInfoVO implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "ArticleInfoVO [id=" + id + ", type=" + type + ", title="
-				+ title + ", content=" + content + ", author=" + author
-				+ ", readCount=" + readCount + ", commentCount=" + commentCount
-				+ ", ip=" + ip + ", isExist=" + isExist + "]";
+		return "ArticleInfoVO [id=" + id + ", type=" + type + ", title=" + title + ", content=" + content + ", author="
+				+ author + ", readCount=" + readCount + ", commentCount=" + commentCount + ", ip=" + ip
+				+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + "]";
 	}
 	public int getType() {
 		return type;
@@ -59,12 +59,6 @@ public class ArticleInfoVO implements Serializable {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public boolean isExist() {
-		return isExist;
-	}
-	public void setExist(boolean isExist) {
-		this.isExist = isExist;
-	}
 	/**
 	 * 
 	 */
@@ -92,6 +86,20 @@ public class ArticleInfoVO implements Serializable {
 	}
 	//ip地址
 	private String ip;
-	//是否已有博文
-	private boolean isExist;
+	//创建时间
+	private Date createDate;
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	//最新修改时间
+	private Date modifyDate;
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
 }
