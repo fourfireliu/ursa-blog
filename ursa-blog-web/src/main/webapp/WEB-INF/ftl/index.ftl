@@ -1,3 +1,4 @@
+<#import "spring.ftl" as s />
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -5,15 +6,15 @@
 		<meta name="keywords" content="Java, Blog, IT, Lift, Book, Read" />
 		<meta name="description" content="Ursa的个人博客 记录生活" />
 		<title>Ursa's Blog</title>
-		<link href="css/base.css" rel="stylesheet"/>
-		<link href="css/index.css" rel="stylesheet"/>
+		<link type="text/css" href="<@s.url '/css/index.css'/>" rel="stylesheet"/>
+		<link type="text/css" href="<@s.url '/css/base.css'/>" rel="stylesheet"/>
 		
 	</head>
 	<body>
 		<!-- 置顶 -->
 		<header>
   			<div class="logo f_l">
-  				<a href="/"><img src="images/logo.png"></a> 
+  				<a href="/"><img src="<@s.url '/images/logo.png'/>" /></a> 
   			</div>
   			<nav id="topnav" class="f_r">
     			<ul>
@@ -26,10 +27,10 @@
     			<div class="banner">
       				<div id="slide-holder">
         				<div id="slide-runner">
-        					<a href="/" target="_blank"><img id="slide-img-1" src="images/a1.jpg"  alt="" /></a>
-        					<a href="/" target="_blank"><img id="slide-img-2" src="images/a2.jpg"  alt="" /></a>
-        					<a href="/" target="_blank"><img id="slide-img-3" src="images/a3.jpg"  alt="" /></a>
-        					<a href="/" target="_blank"><img id="slide-img-4" src="images/a4.jpg"  alt="" /></a>
+        					<a href="/" target="_blank"><img id="slide-img-1" src="/images/a1.jpg"  alt="" /></a>
+        					<a href="/" target="_blank"><img id="slide-img-2" src="/images/a2.jpg"  alt="" /></a>
+        					<a href="/" target="_blank"><img id="slide-img-3" src="/images/a3.jpg"  alt="" /></a>
+        					<a href="/" target="_blank"><img id="slide-img-4" src="/images/a4.jpg"  alt="" /></a>
           					<div id="slide-controls">
             					<p id="slide-client" class="text">
             						<strong></strong>
@@ -51,7 +52,7 @@
       					<b>文章</b>推荐
       				</h2>
       				<div class="blogs">
-        				<figure><img src="images/01.jpg"></figure>
+        				<figure><img src="/images/01.jpg"></figure>
         				<ul>
           					<li><h3><a href="/">住在手机里的朋友</a></h3></li>
 				            <li><p>ͨ通信时代，无论是初次相见还是老友重逢，交换联系方式，常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号码。在快节奏的生活里，我们不知不觉中就成为住在别人手机里的朋友。又因某些意外，变成了别人手机里匆忙的过客，这种快餐式的友谊 ...</p></li>
@@ -212,10 +213,10 @@
   				<a id="gotop" href="javascript:void(0)"></a>
   			</div>
 		</footer>
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/sliders.js"></script>
-		<script type="text/javascript" src="js/nav.js"></script>
-		<script type="text/javascript" src="js/sliderrunner.js"></script>
-		<script type="text/javascript" src="js/onload.js"></script>
+		<script type="text/javascript" src="/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/sliders.js"></script>
+		<script type="text/javascript" src="/js/nav.js"></script>
+		<script type="text/javascript" src="/js/sliderrunner.js"></script>
+		<script type="text/javascript" src="/js/onload.js"></script>
 	</body>
 </html>
