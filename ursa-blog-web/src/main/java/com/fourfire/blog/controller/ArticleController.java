@@ -8,10 +8,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -95,14 +95,14 @@ public class ArticleController {
 		}
 
 		String uname = Tools.checkString(request.getParameter("uname"));
-		if (StringUtils.isBlank(uname)) {
+		if (StringUtils.isEmpty(uname)) {
 			request.setAttribute("error", "朋友请留下您的大名！");
 			return "/error/index";
 		}
 
 		String content = Tools.checkString(request.getParameter("comment"));
 
-		if (StringUtils.isBlank(content)) {
+		if (StringUtils.isEmpty(content)) {
 			request.setAttribute("error", "朋友,你想说点什么呢？");
 			return "/error/index";
 		}

@@ -1,6 +1,8 @@
 *.class
 *.classpath
 *.project
+*/.project
+ursa-blog-po/.project
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -13,8 +15,8 @@
 
 ursa-blog-po/target/*
 ursa-blog-web/target/*
-ursa-blog-po/.settings/
-ursa-blog-web/.settings/
+ursa-blog-po/.settings/*
+ursa-blog-web/.settings/*
 
 */META-INF/*
 ursa-blog-po/src/main/java/META-INF/
