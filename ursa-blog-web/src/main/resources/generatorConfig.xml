@@ -38,7 +38,7 @@
             <columnOverride column="comment_count" javaType="int" />
 		</table>
 		
-		<table tableName="blog_article_info" domainObjectName="ArticleInfoPO" 
+		<table tableName="blog_comment" domainObjectName="CommentPO" 
 			enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" enableUpdateByPrimaryKey="false">
 			<generatedKey column="id" sqlStatement="JDBC"/>

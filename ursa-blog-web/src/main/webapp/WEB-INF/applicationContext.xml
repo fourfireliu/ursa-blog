@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd">
 	<context:component-scan base-package="com.fourfire.blog.controller" />
-		
+	
 	<!-- Freemarker配置 -->
 	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath" value="/WEB-INF/ftl/" />
@@ -24,9 +24,10 @@
 	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="cache" value="true" />
-		<property name="prefix" value="" />
 		<property name="suffix" value=".ftl" />
 	</bean>
+	
+	
 	
 	<!-- 数据源配置 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

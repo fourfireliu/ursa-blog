@@ -8,8 +8,6 @@
 		<link href="css/base.css" rel="stylesheet"/>
 		<link href="css/index.css" rel="stylesheet"/>
 		
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/sliders.js"></script>
 	</head>
 	<body>
 		<!-- 置顶 -->
@@ -19,10 +17,9 @@
   			</div>
   			<nav id="topnav" class="f_r">
     			<ul>
-    				<li><a href="index.html">首页</a> <a href="myself.html">关于我</a> <a href="articles.html">文章列表</a> <a href="login.html">博主登录</a></li> 
+    				<li><a href="index.html">首页</a>&nbsp;<a href="myself.html">关于我</a>&nbsp;<a href="articles.html">文章列表</a>&nbsp;<a href="login.html">博主登录</a></li> 
     			</ul>
-    			<script src="js/nav.js"></script>
-  			</nav>
+    		</nav>
 		</header>
 		<article>
 			<div class="l_box f_l">
@@ -43,7 +40,6 @@
           					</div>
         				</div>
       				</div>
-       				<script src="js/sliderrunner.js"></script>
 			    </div>
 			    <!-- banner代码结束 -->
 			    <div class="topnews">
@@ -112,7 +108,6 @@
     				<img src="images/ad300x100.jpg">
     			</div>
     			<div class="moreSelect" id="lp_right_select"> 
-      				<script src="js/onload.js"></script>
 		       		<div class="ms-top">
         				<ul class="hd" id="tab">
           					<li class="cur"><a href="/">点击排行</a></li>
@@ -127,95 +122,100 @@
             					<li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
             					<li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
   					        </ul>
-        			</div>
-        			<div  class="bd bd-news">
-          				<ul>
-            				<li><a href="/" target="_blank">住在手机里的朋友</a></li>
-            				<li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-            				<li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
-          				</ul>
-        			</div>
-        			<div class="bd bd-news">
-          				<ul>
-            				<li><a href="/" target="_blank">住在手机里的朋友</a></li>
-            				<li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-            				<li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
-          				</ul>
-        			</div>
-      			</div>
-			    <!--ms-main end --> 
-    		</div>
-		    <!--切换卡 moreSelect end -->
+        				</div>
+        				<div  class="bd bd-news">
+          					<ul>
+            					<li><a href="/" target="_blank">住在手机里的朋友</a></li>
+            					<li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
+            					<li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
+          					</ul>
+	        			</div>
+	        			<div class="bd bd-news">
+	          				<ul>
+	            				<li><a href="/" target="_blank">住在手机里的朋友</a></li>
+	            				<li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
+	            				<li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
+	          				</ul>
+	        			</div>
+	      			</div>
+			    	<!--ms-main end --> 
+    			</div>
+		    	<!--切换卡 moreSelect end -->
     
-    		<div class="cloud">
-      			<h3>标签云</h3>
-      			<ul>
-        			<li><a href="/">个人博客</a></li>
-			        <li><a href="/">web开发</a></li>
-			        <li><a href="/">前端设计</a></li>
-			        <li><a href="/">Html</a></li>
-			        <li><a href="/">CSS3</a></li>
-			        <li><a href="/">Html5+css3</a></li>
-			        <li><a href="/">百度</a></li>
-			        <li><a href="/">Javasript</a></li>
-			        <li><a href="/">web开发</a></li>
-			        <li><a href="/">前端设计</a></li>
-			        <li><a href="/">Html</a></li>
-			        <li><a href="/">CSS3</a></li>
-			        <li><a href="/">Html5+css3</a></li>
-			        <li><a href="/">百度</a></li>
-      			</ul>
-    		</div>
-    		<div class="tuwen">
-      			<h3>图文推荐</h3>
-			    <ul>
-		        	<li>
-		        		<a href="/"><img src="images/01.jpg"><b>住在手机里的朋友</b></a>
-		          		<p>
-		          			<span class="tulanmu"><a href="/">手机配件</a></span>
-		          			<span class="tutime">2015-02-15</span>
-		          		</p>
-		        	</li>
-		        	<li>
-		        		<a href="/"><img src="images/01.jpg"><b>住在手机里的朋友</b></a>
-		          		<p>
-		          			<span class="tulanmu"><a href="/">手机配件</a></span>
-		          			<span class="tutime">2015-02-15</span>
-		          		</p>
-		        	</li>
-		        	<li>
-		        		<a href="/"><img src="images/01.jpg"><b>住在手机里的朋友</b></a>
-		          		<p>
-		          			<span class="tulanmu"><a href="/">手机配件</a></span>
-		          			<span class="tutime">2015-02-15</span>
-		          		</p>
-		        	</li>
-		      	</ul>
-    		</div>
-    		<div class="ad"> 
-    			<img src="images/03.jpg">
-    		</div>
-    		<div class="links">
-      			<h3><span>[<a href="/">申请友情链接</a>]</span>友情链接</h3>
-      			<ul>
-        			<li><a href="/">杨青个人博客</a></li>
-			        <li><a href="/">web开发</a></li>
-			        <li><a href="/">前端设计</a></li>
-			        <li><a href="/">Html</a></li>
-			        <li><a href="/">CSS3</a></li>
-			        <li><a href="/">Html5+css3</a></li>
-			        <li><a href="/">百度</a></li>
-      			</ul>
-    		</div>
-  		</div>
+	    		<div class="cloud">
+	      			<h3>标签云</h3>
+	      			<ul>
+	        			<li><a href="/">个人博客</a></li>
+				        <li><a href="/">web开发</a></li>
+				        <li><a href="/">前端设计</a></li>
+				        <li><a href="/">Html</a></li>
+				        <li><a href="/">CSS3</a></li>
+				        <li><a href="/">Html5+css3</a></li>
+				        <li><a href="/">百度</a></li>
+				        <li><a href="/">Javasript</a></li>
+				        <li><a href="/">web开发</a></li>
+				        <li><a href="/">前端设计</a></li>
+				        <li><a href="/">Html</a></li>
+				        <li><a href="/">CSS3</a></li>
+				        <li><a href="/">Html5+css3</a></li>
+				        <li><a href="/">百度</a></li>
+	      			</ul>
+	    		</div>
+	    		<div class="tuwen">
+	      			<h3>图文推荐</h3>
+				    <ul>
+			        	<li>
+			        		<a href="/"><img src="images/01.jpg"><b>住在手机里的朋友</b></a>
+			          		<p>
+			          			<span class="tulanmu"><a href="/">手机配件</a></span>
+			          			<span class="tutime">2015-02-15</span>
+			          		</p>
+			        	</li>
+			        	<li>
+			        		<a href="/"><img src="images/01.jpg"><b>住在手机里的朋友</b></a>
+			          		<p>
+			          			<span class="tulanmu"><a href="/">手机配件</a></span>
+			          			<span class="tutime">2015-02-15</span>
+			          		</p>
+			        	</li>
+			        	<li>
+			        		<a href="/"><img src="images/01.jpg"><b>住在手机里的朋友</b></a>
+			          		<p>
+			          			<span class="tulanmu"><a href="/">手机配件</a></span>
+			          			<span class="tutime">2015-02-15</span>
+			          		</p>
+			        	</li>
+			      	</ul>
+	    		</div>
+	    		<div class="ad"> 
+	    			<img src="images/03.jpg">
+	    		</div>
+	    		<div class="links">
+	      			<h3><span>[<a href="/">申请友情链接</a>]</span>友情链接</h3>
+	      			<ul>
+	        			<li><a href="/">杨青个人博客</a></li>
+				        <li><a href="/">web开发</a></li>
+				        <li><a href="/">前端设计</a></li>
+				        <li><a href="/">Html</a></li>
+				        <li><a href="/">CSS3</a></li>
+				        <li><a href="/">Html5+css3</a></li>
+				        <li><a href="/">百度</a></li>
+	      			</ul>
+	    		</div>
+  			</div>
   			<!--r_box end --> 
 		</article>
 		<footer>
-  			<p class="ft-copyright">兔小白博客 Design by DanceSmile 蜀ICP备11002373号-1</p>
+  			<p class="ft-copyright">Ursa's Home Design by Fourfire 蜀ICP备11002373号-1</p>
   			<div id="tbox">
   				<a id="togbook" href="/"></a>
   				<a id="gotop" href="javascript:void(0)"></a>
   			</div>
 		</footer>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/sliders.js"></script>
+		<script type="text/javascript" src="js/nav.js"></script>
+		<script type="text/javascript" src="js/sliderrunner.js"></script>
+		<script type="text/javascript" src="js/onload.js"></script>
 	</body>
 </html>

@@ -36,7 +36,7 @@ public class AdminController {
 	public String test(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("This is ftl");
 		
-		return "/test/test";
+		return "index";
 	}
 
 	/**
