@@ -27,10 +27,10 @@
     			<div class="banner">
       				<div id="slide-holder">
         				<div id="slide-runner">
-        					<a href="/" target="_blank"><img id="slide-img-1" src="/images/a1.jpg"  alt="" /></a>
-        					<a href="/" target="_blank"><img id="slide-img-2" src="/images/a2.jpg"  alt="" /></a>
-        					<a href="/" target="_blank"><img id="slide-img-3" src="/images/a3.jpg"  alt="" /></a>
-        					<a href="/" target="_blank"><img id="slide-img-4" src="/images/a4.jpg"  alt="" /></a>
+        					<a href="/" target="_blank"><img id="slide-img-1" src="<@s.url '/images/a1.jpg'/>"  alt="" /></a>
+        					<a href="/" target="_blank"><img id="slide-img-2" src="<@s.url '/images/a2.jpg'/>"  alt="" /></a>
+        					<a href="/" target="_blank"><img id="slide-img-3" src="<@s.url '/images/a3.jpg'/>"  alt="" /></a>
+        					<a href="/" target="_blank"><img id="slide-img-4" src="<@s.url '/images/a4.jpg'/>"  alt="" /></a>
           					<div id="slide-controls">
             					<p id="slide-client" class="text">
             						<strong></strong>
@@ -52,7 +52,7 @@
       					<b>文章</b>推荐
       				</h2>
       				<div class="blogs">
-        				<figure><img src="/images/01.jpg"></figure>
+        				<figure><img src="<@s.url '/images/01.jpg'/>"></figure>
         				<ul>
           					<li><h3><a href="/">住在手机里的朋友</a></h3></li>
 				            <li><p>ͨ通信时代，无论是初次相见还是老友重逢，交换联系方式，常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号码。在快节奏的生活里，我们不知不觉中就成为住在别人手机里的朋友。又因某些意外，变成了别人手机里匆忙的过客，这种快餐式的友谊 ...</p></li>
@@ -65,7 +65,7 @@
         				</ul>
       				</div>
       				<div class="blogs">
-        				<figure><img src="images/02.jpg"/></figure>
+        				<figure><img src="<@s.url '/images/02.jpg'/>"/></figure>
         				<ul>
           					<li><h3><a href="/">教你怎样用欠费手机拨打电话</a></h3></li>
           					<li><p>初次相识的喜悦，让你觉得似乎找到了知音。于是，对于投缘的人，开始了较频繁的交往。渐渐地，初识的喜悦退尽，接下来就是仅仅保持着联系，平淡到偶尔在节假曰发短信互致问候...</p></li>
@@ -78,7 +78,7 @@
 				        </ul>
       				</div>
       				<div class="blogs">
-        				<figure><img src="images/03.jpg"></img></figure>
+        				<figure><img src="<@s.url '/images/03.jpg'/>"></img></figure>
         				<ul>
           					<li><h3><a href="/">教你怎样用欠费手机拨打电话</a></h3></li>
           					<li><p>初次相识的喜悦，让你觉得似乎找到了知音。于是，对于投缘的人，开始了较频繁的交往。渐渐地，初识的喜悦退尽，接下来就是仅仅保持着联系，平淡到偶尔在节假曰发短信互致问候...</p></li>
@@ -106,7 +106,7 @@
     			</div>
     			<!--tit01 end-->
     			<div class="ad300x100">
-    				<img src="images/ad300x100.jpg">
+    				<img src="<@s.url '/images/ad300x100.jpg'/>">
     			</div>
     			<div class="moreSelect" id="lp_right_select"> 
 		       		<div class="ms-top">
@@ -166,21 +166,21 @@
 	      			<h3>图文推荐</h3>
 				    <ul>
 			        	<li>
-			        		<a href="/"><img src="images/01.jpg"><b>住在手机里的朋友</b></a>
+			        		<a href="/"><img src="<@s.url '/images/01.jpg'/>"><b>住在手机里的朋友</b></a>
 			          		<p>
 			          			<span class="tulanmu"><a href="/">手机配件</a></span>
 			          			<span class="tutime">2015-02-15</span>
 			          		</p>
 			        	</li>
 			        	<li>
-			        		<a href="/"><img src="images/01.jpg"><b>住在手机里的朋友</b></a>
+			        		<a href="/"><img src="<@s.url '/images/01.jpg'/>"><b>住在手机里的朋友</b></a>
 			          		<p>
 			          			<span class="tulanmu"><a href="/">手机配件</a></span>
 			          			<span class="tutime">2015-02-15</span>
 			          		</p>
 			        	</li>
 			        	<li>
-			        		<a href="/"><img src="images/01.jpg"><b>住在手机里的朋友</b></a>
+			        		<a href="/"><img src="<@s.url '/images/01.jpg'/>"><b>住在手机里的朋友</b></a>
 			          		<p>
 			          			<span class="tulanmu"><a href="/">手机配件</a></span>
 			          			<span class="tutime">2015-02-15</span>
@@ -189,7 +189,7 @@
 			      	</ul>
 	    		</div>
 	    		<div class="ad"> 
-	    			<img src="images/03.jpg">
+	    			<img src="<@s.url '/images/03.jpg'/>">
 	    		</div>
 	    		<div class="links">
 	      			<h3><span>[<a href="/">申请友情链接</a>]</span>友情链接</h3>
@@ -213,10 +213,10 @@
   				<a id="gotop" href="javascript:void(0)"></a>
   			</div>
 		</footer>
-		<script type="text/javascript" src="/js/jquery.min.js"></script>
-		<script type="text/javascript" src="/js/sliders.js"></script>
-		<script type="text/javascript" src="/js/nav.js"></script>
-		<script type="text/javascript" src="/js/sliderrunner.js"></script>
-		<script type="text/javascript" src="/js/onload.js"></script>
+		<script type="text/javascript" src="<@s.url '/js/jquery.min.js'/>"></script>
+		<script type="text/javascript" src="<@s.url '/js/sliders.js'/>"></script>
+		<script type="text/javascript" src="<@s.url '/js/nav.js'/>"></script>
+		<script type="text/javascript" src="<@s.url '/js/sliderrunner.js'/>"></script>
+		<script type="text/javascript" src="<@s.url '/js/onload.js'/>"></script>
 	</body>
 </html>
