@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,9 +34,11 @@ public class AdminController {
 	@Resource
 	private TypeInfoManager typeInfoManager;
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("This is ftl");
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String get(HttpServletRequest request, HttpServletResponse response) {
+		long begin = System.currentTimeMillis();
+		logger.info("");
+		List<TypeInfoVO> typeInfoVOs = typeInfoManager.getAllTypeInfos();
 		
 		return "index";
 	}
@@ -128,8 +132,28 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/index")
-	public String index(HttpServletRequest request, HttpServletResponse response) {
-
-		return "/mywhere/index";
+	public String index(ModelMap modelMap) {
+		long begin = System.currentTimeMillis();
+		logger.info("index method begin");
+		
+		try {
+			PageResult<TypeInfoVO> pageResult = typeInfoManager.pageQueryTypeInfos(0, 3);
+			if (pageResult != null)
+			if (CollectionUtils.isEmpty(typeInfoVOs)) {
+				logger.info("index method get type list=" + typeInfoVOs);
+			} else {
+				modelMap.put("typeInfos", typeInfoVOs);
+				if (typeInfoVOs.get(0) != null) {
+					int defaultTypeId = typeInfoVOs.get(0).getId();
+					articleInfoManager.pageQueryArticles(0, 3, defaultTypeId);
+				}
+			}
+		} catch (Exception e) {
+			logger.error("unknown exception", e);
+		}
+		
+		long end = System.currentTimeMillis();
+		logger.info("index method end, cost time=" + (end - begin) + "ms");
+		return "index";
 	}
 }

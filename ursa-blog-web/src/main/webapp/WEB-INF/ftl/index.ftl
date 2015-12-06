@@ -35,9 +35,20 @@
 			    <!-- banner代码结束 -->
 			    <div class="topnews">
       				<h2>
-      					<span><a href="/" target="_blank">栏目标题</a>
-      						  <a href="/" target="_blank">栏目标题</a>
-      						  <a href="/" target="_blank">栏目标题</a>
+      					<span id="taglist">
+      						<ul>
+      							<li class="tag_list_item"><a href="/" target="_blank">栏目标题</a></li>
+      						 	<li class="tag_list_item"><a href="/" target="_blank">栏目标题</a></li>
+      							<li class="tag_list_item"><a href="/" target="_blank">栏目标题</a></li>
+      						    <li class="tag_list_item">
+      						    	<a href="/" target="_blank">更多</a>
+      						  		<ul class="more_tag_list">
+      						  			<li class="more_tag_item"> <a href="/" target="_blank">更多栏目</a></li>
+		        						<li class="more_tag_item"> <a href="/" target="_blank">更多栏目</a></li>
+		        						<li class="more_tag_item"> <a href="/" target="_blank">更多栏目</a></li>
+							      	</ul>
+      						  	</li>
+      						</ul>
       					</span>
       					<b>文章</b>推荐
       				</h2>

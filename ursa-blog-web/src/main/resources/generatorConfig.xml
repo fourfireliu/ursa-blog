@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
 	<!-- <classPathEntry  location="D:/workspace/snscenter/run/mysql-connector-java-5.1.30.jar" />-->
-	<classPathEntry location="D:/blog/ursa-blog-web/src/main/resources/mysql-connector-java-5.1.36.jar"/>
+	<classPathEntry location="/home/fourfire/workspace/ursa-blog/mysql-connector-java-5.1.36.jar"/>
 	<context id="context1" targetRuntime="MyBatis3">	
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 		<!-- <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" 
@@ -28,24 +28,11 @@
 		<javaClientGenerator targetPackage="com.fourfire.blog.mapper"
 			targetProject="ursa-blog-web" type="XMLMAPPER" />
 
-		<table tableName="blog_article_info" domainObjectName="ArticleInfoPO" 
+		<table tableName="blog_topic_info" domainObjectName="TopicInfoPO" 
 			enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" enableUpdateByPrimaryKey="false">
 			<generatedKey column="id" sqlStatement="JDBC"/>
-			<columnOverride column="id" javaType="long" />
-            <columnOverride column="type_id" javaType="int" />
-            <columnOverride column="read_count" javaType="int" />
-            <columnOverride column="comment_count" javaType="int" />
-		</table>
-		
-		<table tableName="blog_comment" domainObjectName="CommentPO" 
-			enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" enableUpdateByPrimaryKey="false">
-			<generatedKey column="id" sqlStatement="JDBC"/>
-			<columnOverride column="id" javaType="long" />
-            <columnOverride column="type_id" javaType="int" />
-            <columnOverride column="read_count" javaType="int" />
-            <columnOverride column="comment_count" javaType="int" />
+			<columnOverride column="id" javaType="int" />
 		</table>
 	</context>
 </generatorConfiguration>

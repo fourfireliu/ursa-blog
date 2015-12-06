@@ -1,6 +1,5 @@
 package com.fourfire.blog.manager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,7 +9,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.fourfire.blog.convert.TypeInfoConverter;
-import com.fourfire.blog.mapper.TypeInfoMapper;
+import com.fourfire.blog.mapper.TypeInfoPOMapper;
+import com.fourfire.blog.page.BasePageQuery;
+import com.fourfire.blog.page.PageResult;
 import com.fourfire.blog.po.TypeInfoPO;
 import com.fourfire.blog.vo.TypeInfoVO;
 
@@ -24,19 +25,37 @@ public class TypeInfoManager {
 Logger logger = LogManager.getLogger(TypeInfoManager.class);
 	
 	@Resource
-	private TypeInfoMapper typeInfoMapper;
+	private TypeInfoPOMapper typeInfoPOMapper;
 	
 	/**
 	 * 由于类别不可能多 可以一次取出
 	 */
-	public List<TypeInfoVO> getAllTypeInfos() {
-		List<TypeInfoPO> typeInfoPOList = typeInfoMapper.getAllTypes();
-		List<TypeInfoVO> typeInfoVOList = new ArrayList<TypeInfoVO>();
-		if (typeInfoPOList != null && typeInfoPOList.size() > 0) {
-			typeInfoVOList = TypeInfoConverter.convertListFromPOToVO(typeInfoPOList);
+	public PageResult<TypeInfoVO> pageQueryTypeInfos(int pageNo, int pageSize) {
+		BasePageQuery pageQuery = new BasePageQuery();
+		pageQuery.setPageNo(pageNo);
+		pageQuery.setPageSize(pageSize);
+		pageQuery.setCheckNextPage(true);
+		
+		PageResult<TypeInfoVO> pageResult = new PageResult<TypeInfoVO>();
+		pageResult.setPageNo(pageQuery.getPageNo());
+		pageResult.setPageSize(pageQuery.getOldPageSize());
+		
+		List<TypeInfoPO> typeInfoPOList = typeInfoPOMapper.pageQuery(pageQuery);
+		if (pageQuery.isCheckNextPage()) {
+			if (typeInfoPOList != null && typeInfoPOList.size() > pageQuery.getOldPageSize()) {
+				pageResult.setHasNext(true);
+				typeInfoPOList.remove(typeInfoPOList.size() - 1);
+			}
+		}
+		List<TypeInfoVO> typeInfoVOList = TypeInfoConverter.convertListFromPOToVO(typeInfoPOList);
+		pageResult.setPageResult(typeInfoVOList);
+		if (typeInfoVOList == null) {
+			logger.error("pageQueryTypeInfos==>typeInfoVOList: " + typeInfoVOList);
+		} else {
+			pageResult.setSuccess(true);
 		}
 		
-		return typeInfoVOList;
+		return pageResult;
 	}
 	
 	public boolean addNewType(TypeInfoVO typeInfoVO) {
@@ -45,12 +64,7 @@ Logger logger = LogManager.getLogger(TypeInfoManager.class);
 			return false;
 		}
 		
-		int count = typeInfoMapper.countTypeByName(typeInfoPO.getName());
-		if (count > 0) {
-			return false;
-		}
-		
-		int result = typeInfoMapper.insertType(typeInfoPO);
+		int result = typeInfoPOMapper.insert(typeInfoPO);
 		if (result != 1) {
 			return false;
 		}

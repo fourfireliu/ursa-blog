@@ -14,8 +14,31 @@
 .topnews h2 { font-size: 16px; font-weight: bold; line-height: 36px; color: #333; border-bottom: #db6d4c 4px solid; }
 .topnews h2 b { }
 .topnews h2 span { float: right; font-size: 12px; font-weight: normal; }
-.topnews h2 span a { display: inline-block; padding: 0 5px; }
-.topnews h2 span a:hover { color: #000 }
+.tag_list_item {
+  display: inline-block;
+  position: relative;
+  padding: 0 10px;
+}
+.topnews h2 span li a:hover { color: #000 }
+
+.tag_list_item:hover .more_tag_list {
+  display: block;
+  width: 100px;
+}
+.more_tag_list {
+  text-transform: none;
+  display: none;
+  position: absolute;
+}
+
+.more_tag_list:hover {
+	display: block;
+}
+
+.more_tag_item:hover {
+	display: block;
+}
+
 .blogs { padding: 30px 0; position: relative; border-bottom: #CCC 1px solid; overflow: hidden }
 .blogs h3 { font-size: 16px; font-weight: bold; transition: all .5s; margin-bottom: 10px }
 .blogs h3 a { color: #474645; }
