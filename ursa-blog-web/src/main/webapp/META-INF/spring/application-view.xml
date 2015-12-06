@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+    	http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<!-- Freemarker配置 -->
+	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/ftl/" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="defaultEncoding">UTF-8</prop>
+				<!-- 将spring-webmvc中的spring.ftl自动加载进来 -->
+				<prop key="auto_import">spring.ftl as s</prop>
+			</props>
+		</property>
+	</bean>
+		
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="cache" value="true" />
+		<property name="prefix" value=""/>
+		<property name="suffix" value=".ftl" />
+		<property name="contentType" value="text/html; charset=UTF-8"/>
+	</bean>
+	
+	<!-- 静态文件映射 -->
+	<mvc:annotation-driven/>
+	<mvc:resources mapping="/images/**"  location="/images/"  cache-period="2312332" />
+	<mvc:resources mapping="/css/**" location="/css/"  cache-period="2312332" />
+	<mvc:resources mapping="/js/**" location="/js/"  cache-period="2312332" />
+</beans>

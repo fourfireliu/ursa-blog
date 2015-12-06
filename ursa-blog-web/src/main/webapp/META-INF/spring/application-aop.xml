@@ -11,9 +11,4 @@
 		http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-	<import resource="../META-INF/spring/application-aop.xml"/>
-	<import resource="../META-INF/spring/application-controller.xml"/>
-	<import resource="../META-INF/spring/application-manager.xml"/>
-	<import resource="../META-INF/spring/application-persistance.xml"/>
-	<import resource="../META-INF/spring/application-view.xml"/>
 </beans>
