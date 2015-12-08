@@ -95,7 +95,7 @@
   			</div>
   			<div class="r_box f_r">
     			<div class="tit01">
-      				<h3>关注我</h3>
+      				<h3>技术站点</h3>
       				<div class="gzwm">
         				<ul>
           					<li><a class="xlwb" href="#" target="_blank">新浪微博</a></li>
