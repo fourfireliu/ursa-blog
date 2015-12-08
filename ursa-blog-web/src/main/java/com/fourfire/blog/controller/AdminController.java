@@ -10,12 +10,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fourfire.blog.constant.BlogConstant;
 import com.fourfire.blog.entity.BaseResult;
+import com.fourfire.blog.enums.ArticleInfoType;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.TypeInfoManager;
 import com.fourfire.blog.page.PageResult;
@@ -34,15 +35,6 @@ public class AdminController {
 	@Resource
 	private TypeInfoManager typeInfoManager;
 	
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String get(HttpServletRequest request, HttpServletResponse response) {
-		long begin = System.currentTimeMillis();
-		logger.info("");
-		List<TypeInfoVO> typeInfoVOs = typeInfoManager.getAllTypeInfos();
-		
-		return "index";
-	}
-
 	/**
 	 * 提交发文或者编辑文章
 	 */
@@ -95,11 +87,6 @@ public class AdminController {
 	public String getArticle(HttpServletRequest request,
 			HttpServletResponse response) {
 		String op = ServletRequestUtils.getStringParameter(request, "op", "");
-		List<TypeInfoVO> typeList = typeInfoManager.getAllTypeInfos();
-		request.setAttribute("typeList", typeList);
-		if ("add".equalsIgnoreCase(op)) {
-			return "/admin/article/article";
-		}
 
 		long id = ServletRequestUtils.getLongParameter(request, "id", 0L);
 		ArticleInfoVO articleInfoVO = articleInfoManager.getArticleInfoById(id);
@@ -117,7 +104,7 @@ public class AdminController {
 		int pageNo = ServletRequestUtils.getIntParameter(request, "pageNo", Constants.DEFAULT_PAGE_NUM);
 		int pageSize = ServletRequestUtils.getIntParameter(request, "pageSize", Constants.DEFAULT_PAGE_SIZE);
 		
-		PageResult<ArticleInfoVO> pageResult = articleInfoManager.pageQueryArticles(pageNo, pageSize, -1);
+		PageResult<ArticleInfoVO> pageResult = articleInfoManager.pageQueryArticles(pageNo, pageSize, -1, null);
 		request.setAttribute("hasNext", pageResult.isHasNext());
 		request.setAttribute("articleInfoList", pageResult.getPageResult());
 		
@@ -137,17 +124,28 @@ public class AdminController {
 		logger.info("index method begin");
 		
 		try {
-			PageResult<TypeInfoVO> pageResult = typeInfoManager.pageQueryTypeInfos(0, 3);
-			if (pageResult != null)
-			if (CollectionUtils.isEmpty(typeInfoVOs)) {
-				logger.info("index method get type list=" + typeInfoVOs);
+			List<TypeInfoVO> typeInfoVOs = typeInfoManager.getAllTypeInfos();
+			if (typeInfoVOs == null) {
+				logger.error("index method get type list null");
 			} else {
+				//置顶文章类型列表
 				modelMap.put("typeInfos", typeInfoVOs);
 				if (typeInfoVOs.get(0) != null) {
 					int defaultTypeId = typeInfoVOs.get(0).getId();
-					articleInfoManager.pageQueryArticles(0, 3, defaultTypeId);
+					PageResult<ArticleInfoVO> articleInfoPageResult = articleInfoManager.pageQueryArticles(0, BlogConstant.DEFAULT_ARTICLE_LIST_SIZE, defaultTypeId, null, ArticleInfoType.SHORT_CONTENT);
+					if (articleInfoPageResult != null && articleInfoPageResult.isSuccess() && articleInfoPageResult.getPageResult() != null) {
+						//置顶文章 按评论数排序
+						modelMap.put("topArticles", articleInfoPageResult.getPageResult());
+					}
 				}
 			}
+			
+			//获取最新文章列表
+			PageResult<ArticleInfoVO> newArticleInfoPageResult = articleInfoManager.pageQueryArticles(0, BlogConstant.DEFAULT_ARTICLE_LIST_SIZE, -1, "modify_gmt_date desc", ArticleInfoType.NO_CONTENT);
+			if (newArticleInfoPageResult != null && newArticleInfoPageResult.isSuccess() && newArticleInfoPageResult.getPageResult() != null) {
+				modelMap.put("newArticles", newArticleInfoPageResult.getPageResult());
+			}
+			
 		} catch (Exception e) {
 			logger.error("unknown exception", e);
 		}

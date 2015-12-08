@@ -6,7 +6,7 @@ public class ArticlePageQuery extends BasePageQuery {
 	 */
 	private static final long serialVersionUID = 1954354068730846369L;
 	private Integer typeId;
-	private String orderByColumn;
+	private String orderByColumn = "comment_count desc";
 
 	public String getOrderByColumn() {
 		return orderByColumn;

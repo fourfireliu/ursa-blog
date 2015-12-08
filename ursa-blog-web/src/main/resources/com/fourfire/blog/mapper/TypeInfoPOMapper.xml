@@ -6,9 +6,12 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
+    <result column="article_count" property="articleCount" jdbcType="INTEGER" />
+    <result column="create_gmt_date" property="createGmtDate" jdbcType="TIMESTAMP" />
+    <result column="modify_gmt_date" property="modifyGmtDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, description, icon_url
+    id, name, description, icon_url, article_count, create_gmt_date, modify_gmt_date 
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
     select 
@@ -21,18 +24,22 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.fourfire.blog.po.TypeInfoPO" useGeneratedKeys="true" keyProperty="id" >
-    insert into blog_type_info (name, description, icon_url
+    insert into blog_type_info (name, description, icon_url, article_count, create_gmt_date, modify_gmt_date 
       )
-    values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}
+    values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, 
+    	#{articleCount,jdbcType=INTEGER}, #{createGmtDate,jdbcType=TIMESTAMP}, #{modifyGmtDate,jdbcType=TIMESTAMP}
       )
   </insert>
 	
-	<select id="pageQuery" resultMap="BaseResultMap" parameterType="com.fourfire.blog.page.BasePageQuery">
+	<select id="pageQuery" resultMap="BaseResultMap" parameterType="com.fourfire.blog.page.TypeInfoPageQuery">
   	SELECT 
   	<include refid="Base_Column_List"/> 
   	FROM blog_type_info 
   	<where>
   		1=1 
+  		<if test="orderByColumn != null and orderByColumn != ''">
+  			ORDER BY ${orderByColumn} 
+  		</if>
   		<if test="pageNo > 0 and pageSize > 0">
   			LIMIT #{startRow}, #{pageSize}
   		</if>

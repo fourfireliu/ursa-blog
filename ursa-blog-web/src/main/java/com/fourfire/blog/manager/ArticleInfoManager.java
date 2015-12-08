@@ -5,12 +5,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.fourfire.blog.convert.ArticleInfoConverter;
 import com.fourfire.blog.entity.BaseResult;
 import com.fourfire.blog.entity.ErrorInfo;
+import com.fourfire.blog.enums.ArticleInfoType;
 import com.fourfire.blog.mapper.ArticleInfoPOMapper;
 import com.fourfire.blog.page.ArticlePageQuery;
 import com.fourfire.blog.page.PageResult;
@@ -150,12 +152,17 @@ public class ArticleInfoManager {
 	/**
 	 * 分页获取文章列表, 若typeId>0 则获取相关分类的文章
 	 */
-	public PageResult<ArticleInfoVO> pageQueryArticles(int pageNo, int pageSize, int typeId) {
+	public PageResult<ArticleInfoVO> pageQueryArticles(int pageNo, int pageSize, int typeId, String orderByColumn, ArticleInfoType articleInfoType) {
 		ArticlePageQuery pageQuery = new ArticlePageQuery();
 		pageQuery.setPageNo(pageNo);
 		pageQuery.setPageSize(pageSize);
-		pageQuery.setTypeId(typeId);
+		if (typeId > 0) {
+			pageQuery.setTypeId(typeId);
+		}
 		pageQuery.setCheckNextPage(true);
+		if (StringUtils.isNotBlank(orderByColumn)) {
+			pageQuery.setOrderByColumn(orderByColumn);
+		}
 		
 		PageResult<ArticleInfoVO> pageResult = new PageResult<ArticleInfoVO>();
 		pageResult.setPageNo(pageQuery.getPageNo());
@@ -168,7 +175,7 @@ public class ArticleInfoManager {
 				articleInfoPOList.remove(articleInfoPOList.size() - 1);
 			}
 		}
-		List<ArticleInfoVO> articleInfoVOList = ArticleInfoConverter.convertListFromPOToVO(articleInfoPOList);
+		List<ArticleInfoVO> articleInfoVOList = ArticleInfoConverter.convertListFromPOToVO(articleInfoPOList, articleInfoType);
 		pageResult.setPageResult(articleInfoVOList);
 		if (articleInfoVOList == null) {
 			logger.error("pageQueryArticles==>articleInfoVOList: " + articleInfoVOList);

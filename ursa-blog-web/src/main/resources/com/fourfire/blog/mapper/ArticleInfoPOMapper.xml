@@ -47,11 +47,11 @@
   	FROM blog_article_info 
   	<where>
   		1=1 
-  		<if test="typeId != null">
+  		<if test="typeId != null and typeId > 0">
   			AND type_id = #{typeId, jdbcType=INTEGER} 
   		</if>
   		<if test="orderByColumn != null and orderByColumn != ''">
-  			ORDER BY #{orderByColumn, jdbcType=VARCHAR} 
+  			ORDER BY ${orderByColumn} 
   		</if>
   		<if test="pageNo > 0 and pageSize > 0">
   			LIMIT #{startRow}, #{pageSize}

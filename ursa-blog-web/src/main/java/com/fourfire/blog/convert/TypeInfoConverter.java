@@ -33,6 +33,9 @@ public class TypeInfoConverter {
 		typeInfoVO.setName(typeInfoPO.getName());
 		typeInfoVO.setDescription(typeInfoPO.getDescription());
 		typeInfoVO.setIconUrl(typeInfoPO.getIconUrl());
+		typeInfoVO.setArticleCount(typeInfoPO.getArticleCount());
+		typeInfoVO.setCreateDate(typeInfoPO.getCreateGmtDate());
+		typeInfoVO.setModifyDate(typeInfoPO.getModifyGmtDate());
 		
 		return typeInfoVO;
 	}
@@ -46,6 +49,9 @@ public class TypeInfoConverter {
 		typeInfoPO.setDescription(typeInfoVO.getDescription());
 		typeInfoPO.setName(typeInfoVO.getName());
 		typeInfoPO.setIconUrl(typeInfoVO.getIconUrl());
+		typeInfoPO.setArticleCount(typeInfoVO.getArticleCount());
+		typeInfoPO.setCreateGmtDate(typeInfoVO.getCreateDate());
+		typeInfoPO.setModifyGmtDate(typeInfoVO.getModifyDate());
 		
 		return typeInfoPO;
 	}

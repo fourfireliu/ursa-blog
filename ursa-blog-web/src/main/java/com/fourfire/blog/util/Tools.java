@@ -2,9 +2,12 @@ package com.fourfire.blog.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+
+import com.fourfire.blog.constant.BlogConstant;
 
 public class Tools {
 	
@@ -76,5 +79,13 @@ public class Tools {
 
 	public static String getTime(){
 		return sdf.format(new Date());
+	}
+	
+	public static String getShortContent(String allContent) {
+		if (StringUtils.isBlank(allContent) || allContent.length() <= BlogConstant.DEFAULT_ARTICLE_SIZE) {
+			return allContent;
+		}
+		
+		return allContent.substring(0, BlogConstant.DEFAULT_ARTICLE_SIZE) + "...";
 	}
 }

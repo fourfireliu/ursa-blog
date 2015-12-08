@@ -8,10 +8,11 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.fourfire.blog.constant.BlogConstant;
 import com.fourfire.blog.convert.TypeInfoConverter;
 import com.fourfire.blog.mapper.TypeInfoPOMapper;
-import com.fourfire.blog.page.BasePageQuery;
 import com.fourfire.blog.page.PageResult;
+import com.fourfire.blog.page.TypeInfoPageQuery;
 import com.fourfire.blog.po.TypeInfoPO;
 import com.fourfire.blog.vo.TypeInfoVO;
 
@@ -28,10 +29,30 @@ Logger logger = LogManager.getLogger(TypeInfoManager.class);
 	private TypeInfoPOMapper typeInfoPOMapper;
 	
 	/**
+	 * 获取所有的文章类型列表
+	 */
+	public List<TypeInfoVO> getAllTypeInfos() {
+		PageResult<TypeInfoVO> result = pageQueryTypeInfos(-1, -1);
+		if (result == null || !result.isSuccess() || result.getPageResult() == null) {
+			return null;
+		}
+		
+		return result.getPageResult();
+	}
+	
+	/**
 	 * 由于类别不可能多 可以一次取出
 	 */
 	public PageResult<TypeInfoVO> pageQueryTypeInfos(int pageNo, int pageSize) {
-		BasePageQuery pageQuery = new BasePageQuery();
+		if (pageNo < 0) {
+			pageNo = 0;
+		}
+		
+		if (pageSize <= 0) {
+			pageSize = BlogConstant.DEFAULT_PAGE_SIZE;
+		}
+		
+		TypeInfoPageQuery pageQuery = new TypeInfoPageQuery();
 		pageQuery.setPageNo(pageNo);
 		pageQuery.setPageSize(pageSize);
 		pageQuery.setCheckNextPage(true);

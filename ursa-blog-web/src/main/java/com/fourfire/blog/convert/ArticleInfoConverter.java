@@ -3,7 +3,9 @@ package com.fourfire.blog.convert;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fourfire.blog.enums.ArticleInfoType;
 import com.fourfire.blog.po.ArticleInfoPO;
+import com.fourfire.blog.util.Tools;
 import com.fourfire.blog.vo.ArticleInfoVO;
 
 public class ArticleInfoConverter {
@@ -30,14 +32,14 @@ public class ArticleInfoConverter {
 		return articleInfoPO;
 	}
 	
-	public static List<ArticleInfoVO> convertListFromPOToVO(List<ArticleInfoPO> articleInfoPOList) {
+	public static List<ArticleInfoVO> convertListFromPOToVO(List<ArticleInfoPO> articleInfoPOList, ArticleInfoType articleInfoType) {
 		List<ArticleInfoVO> articleInfoVOList = new ArrayList<ArticleInfoVO>();
 		if (articleInfoPOList == null) {
 			return articleInfoVOList;
 		}
 		
 		for (ArticleInfoPO articleInfoPO:articleInfoPOList) {
-			ArticleInfoVO articleInfoVO = convertPOToVO(articleInfoPO);
+			ArticleInfoVO articleInfoVO = convertPOToVO(articleInfoPO, articleInfoType);
 			if (articleInfoVO != null) {
 				articleInfoVOList.add(articleInfoVO);
 			}
@@ -49,14 +51,18 @@ public class ArticleInfoConverter {
 	/**
 	 * 数据PO对象转换为业务VO对象
 	 */
-	public static ArticleInfoVO convertPOToVO(ArticleInfoPO articleInfoPO) {
+	public static ArticleInfoVO convertPOToVO(ArticleInfoPO articleInfoPO, ArticleInfoType articleInfoType) {
 		if (articleInfoPO == null || articleInfoPO.getId() <= 0) {
 			return null;
 		}
 		
 		ArticleInfoVO articleInfoVO = new ArticleInfoVO();
 		articleInfoVO.setAuthor(articleInfoPO.getAuthor());
-		articleInfoVO.setContent(articleInfoPO.getContent());
+		if (ArticleInfoType.SHORT_CONTENT == articleInfoType) {
+			articleInfoVO.setContent(Tools.getShortContent(articleInfoPO.getContent()));
+		} else if (ArticleInfoType.ALL_CONTENT == articleInfoType) {
+			articleInfoVO.setContent(articleInfoPO.getContent());
+		}
 		articleInfoVO.setId(articleInfoPO.getId());
 		articleInfoVO.setIp(articleInfoPO.getIp());
 		articleInfoVO.setReadCount(articleInfoPO.getReadCount());
