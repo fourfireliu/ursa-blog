@@ -7,7 +7,7 @@ public class TypeInfoPageQuery extends BasePageQuery {
 	 */
 	private static final long serialVersionUID = 1646696299950646276L;
 	
-	private String orderByColumn = "article_count";
+	private String orderByColumn = "article_count desc";
 
 	public String getOrderByColumn() {
 		return orderByColumn;

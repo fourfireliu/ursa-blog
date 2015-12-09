@@ -37,61 +37,45 @@
       				<h2>
       					<span id="taglist">
       						<ul>
-      							<li class="tag_list_item"><a href="/" target="_blank">栏目标题</a></li>
-      						 	<li class="tag_list_item"><a href="/" target="_blank">栏目标题</a></li>
-      							<li class="tag_list_item"><a href="/" target="_blank">栏目标题</a></li>
-      						    <li class="tag_list_item">
-      						    	<a href="/" target="_blank">更多</a>
-      						  		<ul class="more_tag_list">
-      						  			<li class="more_tag_item"> <a href="/" target="_blank">更多栏目</a></li>
-		        						<li class="more_tag_item"> <a href="/" target="_blank">更多栏目</a></li>
-		        						<li class="more_tag_item"> <a href="/" target="_blank">更多栏目</a></li>
-							      	</ul>
-      						  	</li>
+      							<#list typeInfos as typeInfo>
+      								<#if typeInfo_index lt 3>
+      									<li class="tag_list_item"><a href="/" target="_blank">${typeInfo.name}</a></li>
+      								<#elseif typeInfo_index = 3>
+      									<li class="tag_list_item">
+	      						    		<a href="/" target="_blank">更多</a>
+    		  						  			<ul class="more_tag_list">
+    		  						  				<li class="more_tag_item"> <a href="/" target="_blank">${typeInfo.name}</a></li>
+    		  						<#else>
+    		  							<li class="more_tag_item"> <a href="/" target="_blank">${typeInfo.name}</a></li>
+    		  						</#if>
+    		  						
+    		  						<#if !typeInfo_has_next>
+    		  								</ul>
+    		  							</li>
+    		  						</#if>
+      							</#list>
       						</ul>
       					</span>
       					<b>文章</b>推荐
       				</h2>
-      				<div class="blogs">
-        				<figure><img src="<@s.url '/images/01.jpg'/>"></figure>
-        				<ul>
-          					<li><h3><a href="/">住在手机里的朋友</a></h3></li>
-				            <li><p>ͨ通信时代，无论是初次相见还是老友重逢，交换联系方式，常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号码。在快节奏的生活里，我们不知不觉中就成为住在别人手机里的朋友。又因某些意外，变成了别人手机里匆忙的过客，这种快餐式的友谊 ...</p></li>
-          					<li><p class="autor">
-          						<span class="lm f_l"><a href="/">个人博客</a></span>
-          						<span class="dtime f_l">2014-02-19</span>
-          						<span class="viewnum f_r">浏览（<a href="/">459</a>）</span>
-          						<span class="pingl f_r">评论（<a href="/">30</a>）</span>
-          					</p></li>
-        				</ul>
-      				</div>
-      				<div class="blogs">
-        				<figure><img src="<@s.url '/images/02.jpg'/>"/></figure>
-        				<ul>
-          					<li><h3><a href="/">教你怎样用欠费手机拨打电话</a></h3></li>
-          					<li><p>初次相识的喜悦，让你觉得似乎找到了知音。于是，对于投缘的人，开始了较频繁的交往。渐渐地，初识的喜悦退尽，接下来就是仅仅保持着联系，平淡到偶尔在节假曰发短信互致问候...</p></li>
-          					<li><p class="autor">
-          						<span class="lm f_l"><a href="/">个人博客</a></span>
-          						<span class="dtime f_l">2014-02-19</span>
-          						<span class="viewnum f_r">浏览（<a href="/">459</a>）</span>
-          						<span class="pingl f_r">评论（<a href="/">30</a>）</span>
-          					</p></li>
-				        </ul>
-      				</div>
-      				<div class="blogs">
-        				<figure><img src="<@s.url '/images/03.jpg'/>"></img></figure>
-        				<ul>
-          					<li><h3><a href="/">教你怎样用欠费手机拨打电话</a></h3></li>
-          					<li><p>初次相识的喜悦，让你觉得似乎找到了知音。于是，对于投缘的人，开始了较频繁的交往。渐渐地，初识的喜悦退尽，接下来就是仅仅保持着联系，平淡到偶尔在节假曰发短信互致问候...</p></li>
-          					<li><p class="autor">
-          						<span class="lm f_l"><a href="/">个人博客</a></span>
-          						<span class="dtime f_l">2014-02-19</span>
-          						<span class="viewnum f_r">浏览（<a href="/">459</a>）</span>
-          						<span class="pingl f_r">评论（<a href="/">30</a>）</span>
-          					</p></li>
-          				</ul>
-      				</div>
- 			  	</div>
+      				<#list topArticles as topArticle>
+      					<div class="blogs">
+        					<figure><img src="<@s.url '/images/01.jpg'/>"></figure>
+        					<ul>
+          						<li><h3><a href="/">${topArticle.title}</a></h3></li>
+				            	<li><p>${topArticle.content}</p></li>
+          						<li>
+          							<p class="autor">
+          								<span class="lm f_l"><a href="/">个人博客</a></span>
+		          						<span class="dtime f_l">${topArticle.modifyDate?date}</span>
+		          						<span class="viewnum f_r">浏览（${topArticle.readCount}）</span>
+		          						<span class="pingl f_r">评论（${topArticle.commentCount}）</span>
+          							</p>
+          						</li>
+        					</ul>
+      					</div>
+      				</#list>
+      		  	</div>
   			</div>
   			<div class="r_box f_r">
     			<div class="tit01">
@@ -120,9 +104,9 @@
       				<div class="ms-main" id="ms-main">
         				<div style="display: block;" class="bd bd-news" >
           					<ul>
-            					<li><a href="/" target="_blank">住在手机里的朋友</a></li>
-            					<li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-            					<li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
+          						<#list newArticles as newArticle>
+          							<li><a href="/" target="_blank">${newArticle.title}</a></li>
+          						</#list>
   					        </ul>
         				</div>
         				<div  class="bd bd-news">

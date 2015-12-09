@@ -76,65 +76,69 @@ public class ArticleInfoManager {
 	 * 根据ID获取文章详情
 	 */
 	public ArticleInfoVO getArticleInfoById(long id) {
-		if (id <= 0) {
-			return null;
-		}
-		
-		ArticleInfoPO articleInfoPO = articleInfoPOMapper.selectByPrimaryKey(id);
-		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
+		return null;
+//		if (id <= 0) {
+//			return null;
+//		}
+//		
+//		ArticleInfoPO articleInfoPO = articleInfoPOMapper.selectByPrimaryKey(id);
+//		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
 	}
 	
 	/**
 	 * 获取当前ID文章的上一篇
 	 */
 	public ArticleInfoVO getUpArticleInfo(long id) {
-		if (id <= 0) {
-			return null;
-		}
-		
-		ArticleInfoPO articleInfoPO = articleInfoPOMapper.getUpArticleInfo(id);
-		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
+		return null;
+//		if (id <= 0) {
+//			return null;
+//		}
+//		
+//		ArticleInfoPO articleInfoPO = articleInfoPOMapper.getUpArticleInfo(id);
+//		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
 	}
 	
 	/**
 	 * 获取当前ID文章的下一篇
 	 */
 	public ArticleInfoVO getDownArticleInfo(long id) {
-		if (id <= 0) {
-			return null;
-		}
-		
-		ArticleInfoPO articleInfoPO = articleInfoPOMapper.getDownArticleInfo(id);
-		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
+		return null;
+//		if (id <= 0) {
+//			return null;
+//		}
+//		
+//		ArticleInfoPO articleInfoPO = articleInfoPOMapper.getDownArticleInfo(id);
+//		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
 	}
 	
 	/**
 	 * 获取热门文章(点击率高的)
 	 */
 	public PageResult<ArticleInfoVO> getHotArticles() {
-		ArticlePageQuery pageQuery = fillPageQuery(Constants.DEFAULT_PAGE_NUM, Constants.DEFAULT_PAGE_SIZE);
-		pageQuery.setOrderByColumn("read_count");
-		
-		PageResult<ArticleInfoVO> pageResult = new PageResult<ArticleInfoVO>();
-		pageResult.setPageNo(pageQuery.getPageNo());
-		pageResult.setPageSize(pageQuery.getOldPageSize());
-		
-		List<ArticleInfoPO> articleInfoPOList = articleInfoPOMapper.pageQuery(pageQuery);
-		if (pageQuery.isCheckNextPage()) {
-			if (articleInfoPOList != null && articleInfoPOList.size() > pageQuery.getOldPageSize()) {
-				pageResult.setHasNext(true);
-				articleInfoPOList.remove(articleInfoPOList.size() - 1);
-			}
-		}
-		List<ArticleInfoVO> articleInfoVOList = ArticleInfoConverter.convertListFromPOToVO(articleInfoPOList);
-		pageResult.setPageResult(articleInfoVOList);
-		if (articleInfoVOList == null) {
-			logger.error("getHotArticles==>articleInfoVOList: " + articleInfoVOList);
-		} else {
-			pageResult.setSuccess(true);
-		}
-		
-		return pageResult;
+		return null;
+//		ArticlePageQuery pageQuery = fillPageQuery(Constants.DEFAULT_PAGE_NUM, Constants.DEFAULT_PAGE_SIZE);
+//		pageQuery.setOrderByColumn("read_count");
+//		
+//		PageResult<ArticleInfoVO> pageResult = new PageResult<ArticleInfoVO>();
+//		pageResult.setPageNo(pageQuery.getPageNo());
+//		pageResult.setPageSize(pageQuery.getOldPageSize());
+//		
+//		List<ArticleInfoPO> articleInfoPOList = articleInfoPOMapper.pageQuery(pageQuery);
+//		if (pageQuery.isCheckNextPage()) {
+//			if (articleInfoPOList != null && articleInfoPOList.size() > pageQuery.getOldPageSize()) {
+//				pageResult.setHasNext(true);
+//				articleInfoPOList.remove(articleInfoPOList.size() - 1);
+//			}
+//		}
+//		List<ArticleInfoVO> articleInfoVOList = ArticleInfoConverter.convertListFromPOToVO(articleInfoPOList);
+//		pageResult.setPageResult(articleInfoVOList);
+//		if (articleInfoVOList == null) {
+//			logger.error("getHotArticles==>articleInfoVOList: " + articleInfoVOList);
+//		} else {
+//			pageResult.setSuccess(true);
+//		}
+//		
+//		return pageResult;
 	}
 	
 	/**

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <RollingFile name="INFO" fileName="logs/info.log" filePattern="logs/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log.gz">
+    	<PatternLayout>
+    		<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+    	</PatternLayout>
+    	<Policies>
+    		<TimeBasedTriggeringPolicy />
+        	<SizeBasedTriggeringPolicy size="50 MB"/>
+    	</Policies>
+    </RollingFile>
+    <RollingFile name="ERROR" fileName="logs/error.log" filePattern="logs/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log.gz">
+    	<PatternLayout>
+    		<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+    	</PatternLayout>
+    	<Policies>
+    		<TimeBasedTriggeringPolicy />
+        	<SizeBasedTriggeringPolicy size="50 MB"/>
+    	</Policies>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Root level="INFO">
+    	<AppenderRef ref="INFO"/>
+    	<AppenderRef ref="ERROR"/>
+    </Root>
+  </Loggers>
+</Configuration>

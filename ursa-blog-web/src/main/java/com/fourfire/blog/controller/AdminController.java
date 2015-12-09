@@ -101,13 +101,13 @@ public class AdminController {
 	@RequestMapping(value = "/article/articleList")
 	public String getArticleList(HttpServletRequest request,
 			HttpServletResponse response) {
-		int pageNo = ServletRequestUtils.getIntParameter(request, "pageNo", Constants.DEFAULT_PAGE_NUM);
-		int pageSize = ServletRequestUtils.getIntParameter(request, "pageSize", Constants.DEFAULT_PAGE_SIZE);
-		
-		PageResult<ArticleInfoVO> pageResult = articleInfoManager.pageQueryArticles(pageNo, pageSize, -1, null);
-		request.setAttribute("hasNext", pageResult.isHasNext());
-		request.setAttribute("articleInfoList", pageResult.getPageResult());
-		
+//		int pageNo = ServletRequestUtils.getIntParameter(request, "pageNo", Constants.DEFAULT_PAGE_NUM);
+//		int pageSize = ServletRequestUtils.getIntParameter(request, "pageSize", Constants.DEFAULT_PAGE_SIZE);
+//		
+//		PageResult<ArticleInfoVO> pageResult = articleInfoManager.pageQueryArticles(pageNo, pageSize, -1, null);
+//		request.setAttribute("hasNext", pageResult.isHasNext());
+//		request.setAttribute("articleInfoList", pageResult.getPageResult());
+//		
 		return "/admin/article/articleList";
 	}
 

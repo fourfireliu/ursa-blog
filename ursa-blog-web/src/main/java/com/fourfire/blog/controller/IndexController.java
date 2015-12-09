@@ -1,22 +1,20 @@
 package com.fourfire.blog.controller;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import javax.annotation.Resource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fourfire.blog.constant.BlogConstant;
+import com.fourfire.blog.enums.ArticleInfoType;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.TypeInfoManager;
 import com.fourfire.blog.page.PageResult;
-import com.fourfire.blog.util.Constants;
 import com.fourfire.blog.vo.ArticleInfoVO;
 import com.fourfire.blog.vo.TypeInfoVO;
 
@@ -31,29 +29,42 @@ public class IndexController{
 	@Resource
 	private ArticleInfoManager articleInfoManager;
 	
-	@RequestMapping(value="/index")
-	public String indexView(HttpServletRequest request,HttpServletResponse response){
-		//导航
-		List<TypeInfoVO> typeInfoVOList = typeInfoManager.getAllTypeInfos();
-		request.setAttribute("typeList", typeInfoVOList);
+	//首页
+	@RequestMapping(value = "/index")
+	public String index(ModelMap modelMap) {
+		long begin = System.currentTimeMillis();
+		logger.info("index method begin");
 		
-		PageResult<ArticleInfoVO> hotResult = articleInfoManager.getHotArticles();
-		List<ArticleInfoVO> hotArticleInfoVOList = new ArrayList<ArticleInfoVO>();
-		if (hotResult != null) {
-			hotArticleInfoVOList = hotResult.getPageResult();
+		try {
+			List<TypeInfoVO> typeInfoVOs = typeInfoManager.getAllTypeInfos();
+			if (typeInfoVOs == null) {
+				logger.error("index method get type list null");
+			} else {
+				//置顶文章类型列表
+				modelMap.put("typeInfos", typeInfoVOs);
+				if (typeInfoVOs.get(0) != null) {
+					int defaultTypeId = typeInfoVOs.get(0).getId();
+					PageResult<ArticleInfoVO> articleInfoPageResult = articleInfoManager.pageQueryArticles(0, BlogConstant.DEFAULT_ARTICLE_LIST_SIZE, defaultTypeId, null, ArticleInfoType.SHORT_CONTENT);
+					if (articleInfoPageResult != null && articleInfoPageResult.isSuccess() && articleInfoPageResult.getPageResult() != null) {
+						//置顶文章 按评论数排序
+						modelMap.put("topArticles", articleInfoPageResult.getPageResult());
+					}
+				}
+			}
+			
+			//获取最新文章列表
+			PageResult<ArticleInfoVO> newArticleInfoPageResult = articleInfoManager.pageQueryArticles(0, BlogConstant.DEFAULT_ARTICLE_LIST_SIZE, -1, "modify_gmt_date desc", ArticleInfoType.NO_CONTENT);
+			if (newArticleInfoPageResult != null && newArticleInfoPageResult.isSuccess() && newArticleInfoPageResult.getPageResult() != null) {
+				modelMap.put("newArticles", newArticleInfoPageResult.getPageResult());
+			}
+			
+		} catch (Exception e) {
+			logger.error("unknown exception", e);
 		}
-		request.setAttribute("hotArticleList", hotArticleInfoVOList);
 		
-		int pageNo = ServletRequestUtils.getIntParameter(request, "pageNo", Constants.DEFAULT_PAGE_NUM);
-		int typeId = ServletRequestUtils.getIntParameter(request, "typeId", -1);
-		PageResult<ArticleInfoVO> articlePageResult = articleInfoManager.pageQueryArticles(pageNo, Constants.DEFAULT_PAGE_SIZE, typeId);
-		List<ArticleInfoVO> articleInfoVOList = new ArrayList<ArticleInfoVO>();
-		if (articlePageResult != null) {
-			articleInfoVOList = articlePageResult.getPageResult();
-		}
-		request.setAttribute("articleList", articleInfoVOList);
-		
+		long end = System.currentTimeMillis();
+		logger.info("index method end, cost time=" + (end - begin) + "ms");
 		return "index";
-	 }
+	}
 	
 }
