@@ -42,13 +42,10 @@ public class IndexController{
 			} else {
 				//置顶文章类型列表
 				modelMap.put("typeInfos", typeInfoVOs);
-				if (typeInfoVOs.get(0) != null) {
-					int defaultTypeId = typeInfoVOs.get(0).getId();
-					PageResult<ArticleInfoVO> articleInfoPageResult = articleInfoManager.pageQueryArticles(0, BlogConstant.DEFAULT_ARTICLE_LIST_SIZE, defaultTypeId, null, ArticleInfoType.SHORT_CONTENT);
-					if (articleInfoPageResult != null && articleInfoPageResult.isSuccess() && articleInfoPageResult.getPageResult() != null) {
-						//置顶文章 按评论数排序
-						modelMap.put("topArticles", articleInfoPageResult.getPageResult());
-					}
+				PageResult<ArticleInfoVO> articleInfoPageResult = articleInfoManager.pageQueryArticles(0, BlogConstant.DEFAULT_ARTICLE_LIST_SIZE, -1, null, ArticleInfoType.SHORT_CONTENT);
+				if (articleInfoPageResult != null && articleInfoPageResult.isSuccess() && articleInfoPageResult.getPageResult() != null) {
+					//置顶文章 按评论数排序
+					modelMap.put("topArticles", articleInfoPageResult.getPageResult());
 				}
 			}
 			

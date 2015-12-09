@@ -8,7 +8,6 @@
 		<title>Ursa's Blog</title>
 		<link type="text/css" href="<@s.url '/css/index.css'/>" rel="stylesheet"/>
 		<link type="text/css" href="<@s.url '/css/base.css'/>" rel="stylesheet"/>
-		
 	</head>
 	<body>
 		<@header.header />

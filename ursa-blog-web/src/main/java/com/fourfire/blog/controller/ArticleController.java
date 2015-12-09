@@ -39,30 +39,8 @@ public class ArticleController {
 	public String indexView(HttpServletRequest request,
 			HttpServletResponse response) {
 		System.out.println("come to article index");
-		long id = ServletRequestUtils.getLongParameter(request, "id", 0L);
-		ArticleInfoVO articleInfoVO = articleInfoManager.getArticleInfoById(id);
-		request.setAttribute("article", articleInfoVO);
-		//查询日志评论
-		request.setAttribute("articleCommentList", commentManager.getCommentsByArticleId(id));
-		// 上一篇
-		request.setAttribute("upArticle", articleInfoManager.getUpArticleInfo(id));
-		// 下一篇
-		request.setAttribute("downArticle", articleInfoManager.getDownArticleInfo(id));
-		//评论列表
-		request.setAttribute("commentList", commentManager.getCommentsByArticleId(id));
-
-		PageResult<ArticleInfoVO> result = articleInfoManager.getHotArticles();
-		List<ArticleInfoVO> hotArticles = new ArrayList<ArticleInfoVO>();
-		if (result != null && result.isSuccess() && result.getPageResult() != null) {
-			hotArticles = result.getPageResult();
-		}
-		request.setAttribute("hotArticles", hotArticles);
-		// 浏览次数加1
-		if (id > 0) {
-			articleInfoManager.addReadCountByArticleId(id);
-		}
-
-		return "article/index";
+		
+		return "page/article";
 	}
 
 	@RequestMapping(value = "/submitComment")
