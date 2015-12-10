@@ -77,7 +77,7 @@ public class AdminController {
 			}
 		}
 		
-		return "/error/index";
+		return "/result";
 	}
 
 	/**

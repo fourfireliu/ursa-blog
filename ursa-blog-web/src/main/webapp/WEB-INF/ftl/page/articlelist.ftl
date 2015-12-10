@@ -13,16 +13,27 @@
 		<@header.header />
 		<article class="blogs">
 			<h1 class="t_nav">
-				<span>“慢生活”不是懒惰，放慢速度不是拖延时间，而是让我们在生活中寻找到平衡。</span><a href="/" class="n1">网站首页</a><a href="#" class="n2">慢生活</a></h1>
-<div class="newblog left">
-<h2><a title="【孕期日记】生活本该如此" href="/news/s/2015-01-23/741.html" >【孕期日记】生活本该如此</a></h2>
-   <p class="dateview"><span>发布时间：2015-01-28</span><span>作者：杨青</span><span>[<a href=/news/s/>日记</a>]</span></p>
-    <figure><a title="【孕期日记】生活本该如此" href="/news/s/2015-01-23/741.html" ><img src="/d/file/news/s/2015-01-23/7b1559b0c4343a005531ef245a5c5246.jpg" alt="【孕期日记】生活本该如此" ></a></figure>
-    <ul class="nlist">
-      <p>这是第一篇2015年的生活日记，我的这个博客也因为孕期给耽搁了不少，要不然每个月都能出一两套模板，或者定时更新一些技术文章，群里面也很少参与讨论。现在因为这个即将到来的小家伙，我不得不舍弃一些时间和精力。</p>
-      <a href="/news/s/2015-01-23/741.html" title="【孕期日记】生活本该如此" target="_blank" class="readmore">阅读全文>></a>
-    </ul>
-    <div class="line"></div><h2><a title="即便是坑，我也想要拉你入伙！" href="/news/life/2014-07-31/725.html" >即便是坑，我也想要拉你入伙！</a></h2>
+				<span>“慢生活”不是懒惰，放慢速度不是拖延时间，而是让我们在生活中寻找到平衡。</span>
+				<a href="/" class="n1">网站首页</a><a href="#" class="n2">慢生活</a>
+			</h1>
+			<div class="newblog left">
+				<h2>
+					<a title="【孕期日记】生活本该如此" href="/news/s/2015-01-23/741.html" >【孕期日记】生活本该如此</a>
+				</h2>
+   				<p class="dateview">
+   					<span>发布时间：2015-01-28</span><span>作者：杨青</span><span>[<a href=/news/s/>日记</a>]</span>
+ 				</p>
+			    <figure>
+			    	<a title="【孕期日记】生活本该如此" href="/news/s/2015-01-23/741.html" ><img src="/d/file/news/s/2015-01-23/7b1559b0c4343a005531ef245a5c5246.jpg" alt="【孕期日记】生活本该如此" ></a>
+			    </figure>
+    			<ul class="nlist">
+      				<p>这是第一篇2015年的生活日记，我的这个博客也因为孕期给耽搁了不少，要不然每个月都能出一两套模板，或者定时更新一些技术文章，群里面也很少参与讨论。现在因为这个即将到来的小家伙，我不得不舍弃一些时间和精力。</p>
+      				<a href="/news/s/2015-01-23/741.html" title="【孕期日记】生活本该如此" target="_blank" class="readmore">阅读全文>></a>
+    			</ul>
+    			<div class="line"></div>
+    			<h2>
+    				<a title="即便是坑，我也想要拉你入伙！" href="/news/life/2014-07-31/725.html" >即便是坑，我也想要拉你入伙！</a>
+    			</h2>
    <p class="dateview"><span>发布时间：2014-07-31</span><span>作者：杨青</span><span>[<a href=/news/life/>程序人生</a>]</span></p>
     <figure><a title="即便是坑，我也想要拉你入伙！" href="/news/life/2014-07-31/725.html" ><img src="/d/file/news/life/2014-07-31/ae167e7d81612318949460aad1143e0d.jpg" alt="即便是坑，我也想要拉你入伙！" ></a></figure>
     <ul class="nlist">
