@@ -23,7 +23,7 @@
     <where>
     	1=1 
     	<if test="id != null and id > 0">
-    		id = #{id,jdbcType=BIGINT}
+    		AND id = #{id, jdbcType=BIGINT}
     	</if>
     </where>
   </select>
