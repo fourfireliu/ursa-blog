@@ -14,7 +14,7 @@ import com.fourfire.blog.constant.BlogConstant;
 import com.fourfire.blog.enums.ArticleInfoType;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.TypeInfoManager;
-import com.fourfire.blog.page.PageResult;
+import com.fourfire.blog.result.PageResult;
 import com.fourfire.blog.vo.ArticleInfoVO;
 import com.fourfire.blog.vo.TypeInfoVO;
 
@@ -47,6 +47,12 @@ public class IndexController{
 					//置顶文章 按评论数排序
 					modelMap.put("topArticles", articleInfoPageResult.getPageResult());
 				}
+			}
+			
+			//获取点击排行文章列表
+			PageResult<ArticleInfoVO> hotArticleInfoPageResult = articleInfoManager.pageQueryArticles(0, BlogConstant.DEFAULT_ARTICLE_LIST_SIZE, -1, "read_count desc", ArticleInfoType.NO_CONTENT);
+			if (hotArticleInfoPageResult != null && hotArticleInfoPageResult.isSuccess() && hotArticleInfoPageResult.getPageResult() != null) {
+				modelMap.put("hotArticles", hotArticleInfoPageResult.getPageResult());
 			}
 			
 			//获取最新文章列表

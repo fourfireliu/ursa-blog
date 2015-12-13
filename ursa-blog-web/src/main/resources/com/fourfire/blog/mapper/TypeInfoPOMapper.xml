@@ -31,7 +31,7 @@
       )
   </insert>
 	
-	<select id="pageQuery" resultMap="BaseResultMap" parameterType="com.fourfire.blog.page.TypeInfoPageQuery">
+	<select id="pageQuery" resultMap="BaseResultMap" parameterType="com.fourfire.blog.query.TypeInfoPageQuery">
   	SELECT 
   	<include refid="Base_Column_List"/> 
   	FROM blog_type_info 

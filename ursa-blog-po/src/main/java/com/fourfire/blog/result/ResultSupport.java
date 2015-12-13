@@ -1,4 +1,4 @@
-package com.fourfire.blog.entity;
+package com.fourfire.blog.result;
 
 import java.io.Serializable;
 

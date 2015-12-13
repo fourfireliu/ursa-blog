@@ -12,7 +12,7 @@ public class ArticleInfoConverter {
 	/**
 	 * 业务VO对象转换为数据PO对象
 	 */
-	public static ArticleInfoPO convertVOToPO(ArticleInfoVO articleInfoVO) {
+	public static ArticleInfoPO convertFromVOToPO(ArticleInfoVO articleInfoVO) {
 		if (articleInfoVO == null) {
 			return null;
 		}
@@ -39,7 +39,7 @@ public class ArticleInfoConverter {
 		}
 		
 		for (ArticleInfoPO articleInfoPO:articleInfoPOList) {
-			ArticleInfoVO articleInfoVO = convertPOToVO(articleInfoPO, articleInfoType);
+			ArticleInfoVO articleInfoVO = convertFromPOToVO(articleInfoPO, articleInfoType);
 			if (articleInfoVO != null) {
 				articleInfoVOList.add(articleInfoVO);
 			}
@@ -51,7 +51,7 @@ public class ArticleInfoConverter {
 	/**
 	 * 数据PO对象转换为业务VO对象
 	 */
-	public static ArticleInfoVO convertPOToVO(ArticleInfoPO articleInfoPO, ArticleInfoType articleInfoType) {
+	public static ArticleInfoVO convertFromPOToVO(ArticleInfoPO articleInfoPO, ArticleInfoType articleInfoType) {
 		if (articleInfoPO == null || articleInfoPO.getId() <= 0) {
 			return null;
 		}

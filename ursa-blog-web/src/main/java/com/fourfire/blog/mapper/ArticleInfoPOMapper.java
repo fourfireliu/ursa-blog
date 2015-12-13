@@ -2,8 +2,8 @@ package com.fourfire.blog.mapper;
 
 import java.util.List;
 
-import com.fourfire.blog.page.ArticlePageQuery;
 import com.fourfire.blog.po.ArticleInfoPO;
+import com.fourfire.blog.query.ArticlePageQuery;
 
 public interface ArticleInfoPOMapper {
     int deleteByPrimaryKey(long id);
@@ -16,9 +16,7 @@ public interface ArticleInfoPOMapper {
     
     int updateByPrimaryKey(ArticleInfoPO articleInfoPO);
     
-    ArticleInfoPO getUpArticleInfo(long id);
-    
-    ArticleInfoPO getDownArticleInfo(long id);
+    ArticleInfoPO getUpOrDownArticleInfo(long id, int typeId, boolean isUp);
     
     List<ArticleInfoPO> pageQuery(ArticlePageQuery articlePageQuery);
     

@@ -20,7 +20,10 @@
         					<a href="/" target="_blank"><img id="slide-img-2" src="<@s.url '/images/a2.jpg'/>"  alt="" /></a>
         					<a href="/" target="_blank"><img id="slide-img-3" src="<@s.url '/images/a3.jpg'/>"  alt="" /></a>
         					<a href="/" target="_blank"><img id="slide-img-4" src="<@s.url '/images/a4.jpg'/>"  alt="" /></a>
-          					<div id="slide-controls">
+        					<a href="/" target="_blank"><img id="slide-img-5" src="<@s.url '/images/a5.jpg'/>"  alt="" /></a>
+        					<a href="/" target="_blank"><img id="slide-img-6" src="<@s.url '/images/a6.jpg'/>"  alt="" /></a>
+        					<a href="/" target="_blank"><img id="slide-img-7" src="<@s.url '/images/a7.jpg'/>"  alt="" /></a>
+        					<div id="slide-controls">
             					<p id="slide-client" class="text">
             						<strong></strong>
             						<span></span>
@@ -101,25 +104,25 @@
         				</ul>
       				</div>
       				<div class="ms-main" id="ms-main">
-        				<div style="display: block;" class="bd bd-news" >
+        				<div style="display: block;" class="bd" id="read_count_ranking" >
           					<ul>
-          						<#list newArticles as newArticle>
-          							<li><a href="/" target="_blank">${newArticle.title}</a></li>
+          						<#list hotArticles as hotArticle>
+          							<li><a href="/" target="_blank">${hotArticle.title}</a></li>
           						</#list>
   					        </ul>
         				</div>
-        				<div  class="bd bd-news">
+        				<div  class="bd" id="new_blog_ranking">
           					<ul>
-            					<li><a href="/" target="_blank">住在手机里的朋友</a></li>
-            					<li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-            					<li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
+            					<#list newArticles as newArticle>
+          							<li><a href="/" target="_blank">${newArticle.title}</a></li>
+          						</#list>
           					</ul>
 	        			</div>
-	        			<div class="bd bd-news">
+	        			<div class="bd" id="comment_count_ranking">
 	          				<ul>
-	            				<li><a href="/" target="_blank">住在手机里的朋友</a></li>
-	            				<li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-	            				<li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
+	          					<#list topArticles as topArticle>
+	          						<li><a href="/" target="_blank">${topArticle.title}</a></li>
+	          					</#list>
 	          				</ul>
 	        			</div>
 	      			</div>
@@ -201,6 +204,6 @@
 		<script type="text/javascript" src="<@s.url '/js/sliders.js'/>"></script>
 		<script type="text/javascript" src="<@s.url '/js/nav.js'/>"></script>
 		<script type="text/javascript" src="<@s.url '/js/sliderrunner.js'/>"></script>
-		<script type="text/javascript" src="<@s.url '/js/onload.js'/>"></script>
+		<script type="text/javascript" src="<@s.url '/js/index/onload.js'/>"></script>
 	</body>
 </html>

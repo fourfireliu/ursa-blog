@@ -1,4 +1,4 @@
-package com.fourfire.blog.page;
+package com.fourfire.blog.query;
 
 public class TypeInfoPageQuery extends BasePageQuery {
 

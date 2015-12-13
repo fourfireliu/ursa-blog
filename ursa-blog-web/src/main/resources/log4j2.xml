@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
   <Appenders>
-    <RollingFile name="INFO" fileName="/home/admin/logs/info.log" filePattern="/home/admin/logs/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log.gz">
+    <RollingFile name="INFO" fileName="/home/fourfire/logs/info.log" filePattern="/home/fourfire/logs/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log.gz">
     	<Filters>
 	    	<ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
     		<ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
@@ -14,7 +14,7 @@
         	<SizeBasedTriggeringPolicy size="50 MB"/>
     	</Policies>
     </RollingFile>
-    <RollingFile name="ERROR" fileName="/home/admin/logs/error.log" filePattern="/home/admin/logs/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log.gz">
+    <RollingFile name="ERROR" fileName="/home/fourfire/logs/error.log" filePattern="/home/fourfire/logs/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log.gz">
     	<ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
     	<PatternLayout>
     		<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>

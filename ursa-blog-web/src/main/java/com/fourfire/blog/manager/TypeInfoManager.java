@@ -11,9 +11,11 @@ import org.apache.logging.log4j.Logger;
 import com.fourfire.blog.constant.BlogConstant;
 import com.fourfire.blog.convert.TypeInfoConverter;
 import com.fourfire.blog.mapper.TypeInfoPOMapper;
-import com.fourfire.blog.page.PageResult;
-import com.fourfire.blog.page.TypeInfoPageQuery;
 import com.fourfire.blog.po.TypeInfoPO;
+import com.fourfire.blog.query.TypeInfoPageQuery;
+import com.fourfire.blog.result.BaseResult;
+import com.fourfire.blog.result.ErrorInfo;
+import com.fourfire.blog.result.PageResult;
 import com.fourfire.blog.vo.TypeInfoVO;
 
 /**
@@ -38,6 +40,29 @@ Logger logger = LogManager.getLogger(TypeInfoManager.class);
 		}
 		
 		return result.getPageResult();
+	}
+	
+	/**
+	 * 根据ID获取分类详情
+	 */
+	public BaseResult<TypeInfoVO> getTypeInfoById(int typeId) {
+		BaseResult<TypeInfoVO> baseResult = new BaseResult<TypeInfoVO>();
+		if (typeId <= 0) {
+			baseResult.setErrorInfo(ErrorInfo.INVALID_PARAM);
+			return baseResult;
+		}
+		
+		TypeInfoPO typeInfoPO = typeInfoPOMapper.selectByPrimaryKey(typeId);
+		TypeInfoVO typeInfoVO = TypeInfoConverter.convertFromPOToVO(typeInfoPO);
+		if (typeInfoVO == null) {
+			logger.error("getTypeInfoById==>typeInfoVO:" + typeInfoVO);
+			baseResult.setErrorInfo(ErrorInfo.INVALID_RESULT);
+		} else {
+			baseResult.setSuccess(true);
+		}
+		baseResult.setT(typeInfoVO);
+		
+		return baseResult;
 	}
 	
 	/**

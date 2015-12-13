@@ -1,6 +1,5 @@
-package com.fourfire.blog.page;
+package com.fourfire.blog.result;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +9,7 @@ import java.util.List;
  * @date 2015-09-29
  * @param <T>
  */
-public class PageResult<T> implements Serializable {
+public class PageResult<T> extends ResultSupport {
 	/**
 	 * 
 	 */
@@ -21,23 +20,18 @@ public class PageResult<T> implements Serializable {
 	private List<T> pageResult;
 	private boolean hasNext;
 	private int totalCount;
-	private boolean isSuccess;
-	public boolean isSuccess() {
-		return isSuccess;
-	}
-	public void setSuccess(boolean isSuccess) {
-		this.isSuccess = isSuccess;
-	}
+
 	public int getPageNo() {
 		return pageNo;
 	}
+	
 	@Override
 	public String toString() {
-		return "PageResult [pageNo=" + pageNo + ", pageSize=" + pageSize
-				+ ", pageResult=" + pageResult + ", hasNext=" + hasNext
-				+ ", totalCount=" + totalCount + ", isSuccess=" + isSuccess
-				+ "]";
+		return "PageResult [pageNo=" + pageNo + ", pageSize=" + pageSize + ", pageResult=" + pageResult + ", hasNext="
+				+ hasNext + ", totalCount=" + totalCount + ", isSuccess()=" + isSuccess() + ", getErrorInfo()="
+				+ getErrorInfo() + "]";
 	}
+
 	public void setPageNo(int pageNo) {
 		if (pageNo <= 0) {
 			pageNo = 1;

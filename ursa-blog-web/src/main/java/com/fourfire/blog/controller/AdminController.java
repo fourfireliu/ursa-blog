@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fourfire.blog.constant.BlogConstant;
-import com.fourfire.blog.entity.BaseResult;
 import com.fourfire.blog.enums.ArticleInfoType;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.TypeInfoManager;
-import com.fourfire.blog.page.PageResult;
+import com.fourfire.blog.result.BaseResult;
+import com.fourfire.blog.result.PageResult;
 import com.fourfire.blog.util.Constants;
 import com.fourfire.blog.util.Tools;
 import com.fourfire.blog.vo.ArticleInfoVO;
@@ -89,8 +89,7 @@ public class AdminController {
 		String op = ServletRequestUtils.getStringParameter(request, "op", "");
 
 		long id = ServletRequestUtils.getLongParameter(request, "id", 0L);
-		ArticleInfoVO articleInfoVO = articleInfoManager.getArticleInfoById(id);
-		request.setAttribute("article", articleInfoVO);
+		
 
 		return "/admin/article/article";
 	}
@@ -118,15 +117,25 @@ public class AdminController {
 		return "/admin/index";
 	}
 
-	@RequestMapping(value = "/index")
-	public String index(ModelMap modelMap) {
+	@RequestMapping(value = "/writearticle")
+	public String writeBlog(ModelMap modelMap) {
 		long begin = System.currentTimeMillis();
-		logger.info("index method begin");
+		logger.info("wrtieBlog method begin");
 		
-		
+		try {
+			List<TypeInfoVO> typeInfoVOs = typeInfoManager.getAllTypeInfos();
+			if (typeInfoVOs == null) {
+				logger.error("writeArticle method get type list null");
+			} else {
+				//置顶文章类型列表
+				modelMap.put("typeInfos", typeInfoVOs);
+			}
+		} catch (Exception e) {
+			logger.error("unknown exception", e);
+		}
 		
 		long end = System.currentTimeMillis();
-		logger.info("index method end, cost time=" + (end - begin) + "ms");
+		logger.info("writeBlog method end, cost time=" + (end - begin) + "ms");
 		return "page/writearticle";
 	}
 }

@@ -10,14 +10,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.fourfire.blog.convert.ArticleInfoConverter;
-import com.fourfire.blog.entity.BaseResult;
-import com.fourfire.blog.entity.ErrorInfo;
 import com.fourfire.blog.enums.ArticleInfoType;
 import com.fourfire.blog.mapper.ArticleInfoPOMapper;
-import com.fourfire.blog.page.ArticlePageQuery;
-import com.fourfire.blog.page.PageResult;
 import com.fourfire.blog.po.ArticleInfoPO;
-import com.fourfire.blog.util.Constants;
+import com.fourfire.blog.query.ArticlePageQuery;
+import com.fourfire.blog.result.BaseResult;
+import com.fourfire.blog.result.ErrorInfo;
+import com.fourfire.blog.result.PageResult;
 import com.fourfire.blog.vo.ArticleInfoVO;
 
 /**
@@ -39,7 +38,7 @@ public class ArticleInfoManager {
 		BaseResult<ArticleInfoVO> baseResult = new BaseResult<ArticleInfoVO>();
 		
 		try {
-			ArticleInfoPO articleInfoPO = ArticleInfoConverter.convertVOToPO(articleInfoVO);
+			ArticleInfoPO articleInfoPO = ArticleInfoConverter.convertFromVOToPO(articleInfoVO);
 			if (articleInfoPO == null) {
 				logger.error("addOrUpdateArticle==>articleInfoPO convert to null, articleInfoVO:\n" + articleInfoVO);
 				baseResult.setErrorInfo(ErrorInfo.INVALID_PARAM);
@@ -75,40 +74,77 @@ public class ArticleInfoManager {
 	/**
 	 * 根据ID获取文章详情
 	 */
-	public ArticleInfoVO getArticleInfoById(long id) {
-		return null;
-//		if (id <= 0) {
-//			return null;
-//		}
-//		
-//		ArticleInfoPO articleInfoPO = articleInfoPOMapper.selectByPrimaryKey(id);
-//		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
+	public BaseResult<ArticleInfoVO> getArticleInfoById(long articleId) {
+		BaseResult<ArticleInfoVO> baseResult = new BaseResult<ArticleInfoVO>();
+		if (articleId <= 0) {
+			baseResult.setErrorInfo(ErrorInfo.INVALID_PARAM);
+			return baseResult;
+		}
+		
+		ArticleInfoPO articleInfoPO = articleInfoPOMapper.selectByPrimaryKey(articleId);
+		ArticleInfoVO articleInfoVO = ArticleInfoConverter.convertFromPOToVO(articleInfoPO, ArticleInfoType.ALL_CONTENT);
+		if (articleInfoVO == null) {
+			logger.error("getArticleInfoById==>articleInfoVO:" + articleInfoVO);
+			baseResult.setErrorInfo(ErrorInfo.INVALID_RESULT);
+		} else {
+			baseResult.setSuccess(true);
+		}
+		baseResult.setT(articleInfoVO);
+		
+		return baseResult;
 	}
 	
 	/**
-	 * 获取当前ID文章的上一篇
+	 * 根据ID修改文章详情
+	 * 
+	 * @param articleInfoVO
+	 * @return
 	 */
-	public ArticleInfoVO getUpArticleInfo(long id) {
-		return null;
-//		if (id <= 0) {
-//			return null;
-//		}
-//		
-//		ArticleInfoPO articleInfoPO = articleInfoPOMapper.getUpArticleInfo(id);
-//		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
+	public BaseResult<ArticleInfoVO> updateArticleInfo(ArticleInfoVO articleInfoVO) {
+		BaseResult<ArticleInfoVO> baseResult = new BaseResult<ArticleInfoVO>();
+		ArticleInfoPO articleInfoPO = ArticleInfoConverter.convertFromVOToPO(articleInfoVO);
+		if (articleInfoPO == null || articleInfoPO.getId() <= 0) {
+			baseResult.setErrorInfo(ErrorInfo.INVALID_PARAM);
+			return baseResult;
+		}
+		
+		int modifyCount = articleInfoPOMapper.updateByPrimaryKey(articleInfoPO);
+		if (modifyCount == 1) {
+			baseResult.setSuccess(true);
+			baseResult.setT(articleInfoVO);
+		} else {
+			logger.error("updateArticleInfo==>modifyCount:" + modifyCount);
+			baseResult.setErrorInfo(ErrorInfo.INVALID_RESULT);
+		}
+		
+		return baseResult;
 	}
 	
 	/**
-	 * 获取当前ID文章的下一篇
+	 * 获取当前ID文章的上一篇/下一篇
 	 */
-	public ArticleInfoVO getDownArticleInfo(long id) {
-		return null;
-//		if (id <= 0) {
-//			return null;
-//		}
-//		
-//		ArticleInfoPO articleInfoPO = articleInfoPOMapper.getDownArticleInfo(id);
-//		return ArticleInfoConverter.convertPOToVO(articleInfoPO);
+	public BaseResult<ArticleInfoVO> getUpOrDownArticleInfo(long articleId, int typeId, boolean isUp) {
+		BaseResult<ArticleInfoVO> baseResult = new BaseResult<ArticleInfoVO>();
+		if (articleId <= 0 || typeId <= 0) {
+			baseResult.setErrorInfo(ErrorInfo.INVALID_PARAM);
+			return baseResult;
+		}
+		
+		ArticleInfoPO articleInfoPO = articleInfoPOMapper.getUpOrDownArticleInfo(articleId, typeId, isUp);
+		if (articleInfoPO == null) {
+			baseResult.setSuccess(true);
+		} else {
+			ArticleInfoVO articleInfoVO = ArticleInfoConverter.convertFromPOToVO(articleInfoPO, ArticleInfoType.NO_CONTENT);
+			if (articleInfoVO == null) {
+				logger.error("getUpOrDownArticleInfo==>articleInfoVO:" + articleInfoVO);
+				baseResult.setErrorInfo(ErrorInfo.INVALID_RESULT);
+			} else {
+				baseResult.setSuccess(true);
+				baseResult.setT(articleInfoVO);
+			}
+		}
+		
+		return baseResult;
 	}
 	
 	/**
@@ -183,6 +219,7 @@ public class ArticleInfoManager {
 		pageResult.setPageResult(articleInfoVOList);
 		if (articleInfoVOList == null) {
 			logger.error("pageQueryArticles==>articleInfoVOList: " + articleInfoVOList);
+			pageResult.setErrorInfo(ErrorInfo.INVALID_RESULT);
 		} else {
 			pageResult.setSuccess(true);
 		}

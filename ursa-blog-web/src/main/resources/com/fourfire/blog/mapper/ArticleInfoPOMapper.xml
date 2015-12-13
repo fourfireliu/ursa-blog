@@ -16,32 +16,39 @@
   <sql id="Base_Column_List" >
     id, type_id, title, author, read_count, comment_count, ip, create_gmt_date, modify_gmt_date, content
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="long" >
-    select 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    SELECT 
     <include refid="Base_Column_List" />
-    from blog_article_info
-    where id = #{id,jdbcType=BIGINT}
+    FROM blog_article_info
+    <where>
+    	1=1 
+    	<if test="id != null and id > 0">
+    		id = #{id,jdbcType=BIGINT}
+    	</if>
+    </where>
   </select>
   
-  <select id="getUpArticleInfo" resultMap="BaseResultMap" parameterType="long">
+  <select id="getUpOrDownArticleInfo" resultMap="BaseResultMap">
   	SELECT 
   	<include refid="Base_Column_List"/>
   	FROM blog_article_info 
-  	WHERE id <![CDATA[ < ]]> #{id,jdbcType=BIGINT} 
-  	ORDER BY id DESC 
-  	LIMIT 1
-  </select>
-  
-  <select id="getDownArticleInfo" resultMap="BaseResultMap" parameterType="long">
-  	SELECT 
-  	<include refid="Base_Column_List"/>
-  	FROM blog_article_info 
-  	WHERE id <![CDATA[ > ]]> #{id,jdbcType=BIGINT} 
+  	<where>
+  		1=1 
+  		<if test="typeId > 0">
+  			AND type_id = #{typeId, jdbcType=INTEGER}
+  		</if>
+  		<if test="id > 0">
+  			AND id <![CDATA[ > ]]> #{id,jdbcType=BIGINT} 
+  		</if>
+  	</where>	
   	ORDER BY id 
+  	<if test="!#{isUp}">
+  		DESC
+  	</if>
   	LIMIT 1
   </select>
   
-  <select id="pageQuery" resultMap="BaseResultMap" parameterType="com.fourfire.blog.page.ArticlePageQuery">
+  <select id="pageQuery" resultMap="BaseResultMap" parameterType="com.fourfire.blog.query.ArticlePageQuery">
   	SELECT 
   	<include refid="Base_Column_List"/> 
   	FROM blog_article_info 
