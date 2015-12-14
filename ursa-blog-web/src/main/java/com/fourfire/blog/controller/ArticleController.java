@@ -27,7 +27,6 @@ import com.fourfire.blog.vo.CommentVO;
 import com.fourfire.blog.vo.TypeInfoVO;
 
 @Controller
-@RequestMapping(value = "/article")
 public class ArticleController {
 	Logger logger = LogManager.getLogger(ArticleController.class);
 	
@@ -40,7 +39,17 @@ public class ArticleController {
 	@Resource
 	private BlackIpManager blackIpManager;
 	
-	@RequestMapping(value = "/{id}", method=RequestMethod.GET)
+	@RequestMapping(path = "/articlelist/{typeId}", method=RequestMethod.GET)
+	public String getArticleList(@PathVariable Long typeId, ModelMap modelMap) {
+		long begin = System.currentTimeMillis();
+		logger.info("getArticleList method begin");
+		
+		long end = System.currentTimeMillis();
+		logger.info("getArticleList method end, cost time=" + (end - begin) + "ms");
+		return "page/articlelist";
+	}
+	
+	@RequestMapping(value = "/article/{id}", method=RequestMethod.GET)
 	public String viewArticle(@PathVariable Long id, ModelMap modelMap) {
 		long begin = System.currentTimeMillis();
 		logger.info("viewArticle method begin");
