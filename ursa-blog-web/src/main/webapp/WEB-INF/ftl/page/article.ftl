@@ -13,7 +13,7 @@
 		<@header.header />
 		<article class="blogs">
   			<h1 class="t_nav">
-  				<span>您当前的位置：<a href="/">首页</a>&nbsp;>&nbsp;<a href="/jstt/">${typeInfo.name}</a></span>
+  				<span>您当前的位置：<a href="<@s.url '/index'/>">首页</a>&nbsp;>&nbsp;<a href="/jstt/">${typeInfo.name}</a></span>
   			</h1>
   			<div class="index_about">
     			<h2 class="c_titile">${articleInfo.title}</h2>

@@ -38,13 +38,16 @@
   			AND type_id = #{typeId, jdbcType=INTEGER}
   		</if>
   		<if test="id > 0">
-  			AND id <![CDATA[ > ]]> #{id,jdbcType=BIGINT} 
+  			<choose>
+  				<when test="isUp">
+  					AND id <![CDATA[ < ]]> #{id,jdbcType=BIGINT} ORDER BY id DESC 
+  				</when>
+  				<otherwise>
+  					AND id <![CDATA[ > ]]> #{id,jdbcType=BIGINT} ORDER BY id 
+  				</otherwise>
+  			</choose>
   		</if>
   	</where>	
-  	ORDER BY id 
-  	<if test="!#{isUp}">
-  		DESC
-  	</if>
   	LIMIT 1
   </select>
   

@@ -25,6 +25,14 @@ public class SqlTest {
 	}
 	
 	@Test
+	public void testGetUpOrDown() {
+		long id = 4L;
+		System.out.println("=========");
+		System.out.println(articleInfoManager.getUpOrDownArticleInfo(id, 5, true));
+		System.out.println("=============");
+	}
+	
+	@Test
 	public void testAddOrUpdateArticle() {
 		ArticleInfoVO articleInfoVO = new ArticleInfoVO();
 		articleInfoVO.setAuthor("liuyi");

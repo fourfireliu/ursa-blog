@@ -64,7 +64,7 @@
       					<div class="blogs">
         					<figure><img src="<@s.url '/images/01.jpg'/>"></figure>
         					<ul>
-          						<li><h3><a href="/">${topArticle.title}</a></h3></li>
+          						<li><h3><a href="<@s.url '/article/${topArticle.id}'/>">${topArticle.title}</a></h3></li>
 				            	<li><p>${topArticle.content}</p></li>
           						<li>
           							<p class="autor">
