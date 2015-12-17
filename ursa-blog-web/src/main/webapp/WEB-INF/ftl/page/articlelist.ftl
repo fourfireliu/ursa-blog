@@ -36,7 +36,11 @@
 	    		<div class="line"></div>
     			<div class="blank"></div>
     			<div class="page">
-    				<a title="Total record"><b>106</b> </a><b>1</b><a href="/news/index_2.html">2</a><a href="/news/index_3.html">3</a><a href="/news/index_4.html">4</a><a href="/news/index_5.html">5</a><a href="/news/index_2.html">></a><a href="/news/index_5.html">>></a>
+    				<a title="Total record"><b>${totalCount}</b> </a>
+    					<#if pageNo gt 1>
+    						
+    					</#if>
+    					<#list <b>1</b><a href="/news/index_2.html">2</a><a href="/news/index_3.html">3</a><a href="/news/index_4.html">4</a><a href="/news/index_5.html">5</a><a href="/news/index_2.html">></a><a href="/news/index_5.html">>></a>
     			</div>
 			</div>
 		</article>

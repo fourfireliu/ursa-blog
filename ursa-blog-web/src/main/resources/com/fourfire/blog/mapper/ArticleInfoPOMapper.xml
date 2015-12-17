@@ -28,6 +28,17 @@
     </where>
   </select>
   
+  <select id="getArticleCount">
+  	SELECT COUNT(*)
+  	FROM blog_article_info 
+  	<where>
+  		1=1 
+  		<if test="typeId > 0">
+  			AND type_id = #{typeId, jdbcType=INTEGER}
+  		</if>
+  	</where>
+  </select>
+  
   <select id="getUpOrDownArticleInfo" resultMap="BaseResultMap">
   	SELECT 
   	<include refid="Base_Column_List"/>

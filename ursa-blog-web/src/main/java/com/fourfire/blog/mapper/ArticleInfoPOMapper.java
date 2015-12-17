@@ -23,4 +23,6 @@ public interface ArticleInfoPOMapper {
     List<ArticleInfoPO> pageQuery(ArticlePageQuery articlePageQuery);
     
     int addReadCountById(long id);
+    
+    int getArticleCount(@Param("typeId") int typeId);
 }

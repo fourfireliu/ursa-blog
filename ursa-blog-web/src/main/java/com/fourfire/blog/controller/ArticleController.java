@@ -43,11 +43,21 @@ public class ArticleController {
 	private BlackIpManager blackIpManager;
 	
 	@RequestMapping(value = "/articlelist", method=RequestMethod.POST)
-	public String getArticleList(ModelMap modelMap, int typeId, String typeName, String typeDesc) {
+	public String getArticleList(ModelMap modelMap, int typeId, String typeName, String typeDesc, int pageNo, int pageSize) {
 		long begin = System.currentTimeMillis();
 		logger.info("getArticleList method begin");
 		
-		modelMap.put("pageNo", 1);
+		if (pageNo <= 0) {
+			pageNo = 1;
+		}
+		
+		if (pageSize <= 0) {
+			pageSize = BlogConstant.DEFAULT_ARTICLE_PAGE_SIZE;
+		}
+		
+		modelMap.put("pageNo", pageNo);
+		modelMap.put("pageSize", pageSize);
+		
 		if (typeId > 0) {
 			modelMap.put("typeId", typeId);
 			modelMap.put("typeName", typeName);
@@ -60,7 +70,10 @@ public class ArticleController {
 			modelMap.put("hasNext", pageResult.isHasNext());
 		}
 		
-		
+		BaseResult<Integer> baseResult = articleInfoManager.getArticleCount(typeId);
+		if (baseResult != null && baseResult.isSuccess()) {
+			modelMap.put("totalCount", baseResult.getT());
+		}
 		
 		long end = System.currentTimeMillis();
 		logger.info("getArticleList method end, cost time=" + (end - begin) + "ms");
