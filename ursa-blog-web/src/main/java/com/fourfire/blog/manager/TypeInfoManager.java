@@ -69,12 +69,12 @@ Logger logger = LogManager.getLogger(TypeInfoManager.class);
 	 * 由于类别不可能多 可以一次取出
 	 */
 	public PageResult<TypeInfoVO> pageQueryTypeInfos(int pageNo, int pageSize) {
-		if (pageNo < 0) {
-			pageNo = 0;
+		if (pageNo <= 0) {
+			pageNo = 1;
 		}
 		
 		if (pageSize <= 0) {
-			pageSize = BlogConstant.DEFAULT_PAGE_SIZE;
+			pageSize = BlogConstant.DEFAULT_TYPE_PAGE_SIZE;
 		}
 		
 		TypeInfoPageQuery pageQuery = new TypeInfoPageQuery();

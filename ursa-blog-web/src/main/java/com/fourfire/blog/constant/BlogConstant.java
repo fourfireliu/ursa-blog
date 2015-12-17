@@ -7,8 +7,10 @@ package com.fourfire.blog.constant;
  * @date 2015-12-7
  */
 public class BlogConstant {
-	//默认分页大小
-	public static final int DEFAULT_PAGE_SIZE = 100;
+	//默认类型分页大小
+	public static final int DEFAULT_TYPE_PAGE_SIZE = 100;
+	//默认文章分页大小
+	public static final int DEFAULT_ARTICLE_PAGE_SIZE = 10;
 	
 	//默认首页文章列表大小
 	public static final int DEFAULT_ARTICLE_LIST_SIZE = 3;

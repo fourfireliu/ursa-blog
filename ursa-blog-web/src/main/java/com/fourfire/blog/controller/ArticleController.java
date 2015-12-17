@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fourfire.blog.constant.BlogConstant;
+import com.fourfire.blog.enums.ArticleInfoType;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.BlackIpManager;
 import com.fourfire.blog.manager.CommentManager;
 import com.fourfire.blog.manager.TypeInfoManager;
 import com.fourfire.blog.result.BaseResult;
+import com.fourfire.blog.result.PageResult;
 import com.fourfire.blog.util.Tools;
 import com.fourfire.blog.vo.ArticleInfoVO;
 import com.fourfire.blog.vo.CommentVO;
@@ -39,10 +42,25 @@ public class ArticleController {
 	@Resource
 	private BlackIpManager blackIpManager;
 	
-	@RequestMapping(path = "/articlelist/{typeId}", method=RequestMethod.GET)
-	public String getArticleList(@PathVariable Long typeId, ModelMap modelMap) {
+	@RequestMapping(value = "/articlelist", method=RequestMethod.POST)
+	public String getArticleList(ModelMap modelMap, int typeId, String typeName, String typeDesc) {
 		long begin = System.currentTimeMillis();
 		logger.info("getArticleList method begin");
+		
+		modelMap.put("pageNo", 1);
+		if (typeId > 0) {
+			modelMap.put("typeId", typeId);
+			modelMap.put("typeName", typeName);
+			modelMap.put("typeDesc", typeDesc);
+		}
+		
+		PageResult<ArticleInfoVO> pageResult = articleInfoManager.pageQueryArticles(1, BlogConstant.DEFAULT_ARTICLE_PAGE_SIZE, typeId, "create_gmt_date desc", ArticleInfoType.SHORT_CONTENT);
+		if (pageResult != null && pageResult.isSuccess()) {
+			modelMap.put("articleList", pageResult.getPageResult());
+			modelMap.put("hasNext", pageResult.isHasNext());
+		}
+		
+		
 		
 		long end = System.currentTimeMillis();
 		logger.info("getArticleList method end, cost time=" + (end - begin) + "ms");

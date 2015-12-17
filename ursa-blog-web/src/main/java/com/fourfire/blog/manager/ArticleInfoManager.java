@@ -148,48 +148,6 @@ public class ArticleInfoManager {
 	}
 	
 	/**
-	 * 获取热门文章(点击率高的)
-	 */
-	public PageResult<ArticleInfoVO> getHotArticles() {
-		return null;
-//		ArticlePageQuery pageQuery = fillPageQuery(Constants.DEFAULT_PAGE_NUM, Constants.DEFAULT_PAGE_SIZE);
-//		pageQuery.setOrderByColumn("read_count");
-//		
-//		PageResult<ArticleInfoVO> pageResult = new PageResult<ArticleInfoVO>();
-//		pageResult.setPageNo(pageQuery.getPageNo());
-//		pageResult.setPageSize(pageQuery.getOldPageSize());
-//		
-//		List<ArticleInfoPO> articleInfoPOList = articleInfoPOMapper.pageQuery(pageQuery);
-//		if (pageQuery.isCheckNextPage()) {
-//			if (articleInfoPOList != null && articleInfoPOList.size() > pageQuery.getOldPageSize()) {
-//				pageResult.setHasNext(true);
-//				articleInfoPOList.remove(articleInfoPOList.size() - 1);
-//			}
-//		}
-//		List<ArticleInfoVO> articleInfoVOList = ArticleInfoConverter.convertListFromPOToVO(articleInfoPOList);
-//		pageResult.setPageResult(articleInfoVOList);
-//		if (articleInfoVOList == null) {
-//			logger.error("getHotArticles==>articleInfoVOList: " + articleInfoVOList);
-//		} else {
-//			pageResult.setSuccess(true);
-//		}
-//		
-//		return pageResult;
-	}
-	
-	/**
-	 * 构建分页查询对象
-	 */
-	private ArticlePageQuery fillPageQuery(int pageNo, int pageSize) {
-		ArticlePageQuery pageQuery = new ArticlePageQuery();
-		pageQuery.setCheckNextPage(true);
-		pageQuery.setPageNo(pageNo);
-		pageQuery.setPageSize(pageSize);
-		
-		return pageQuery;
-	}
-	
-	/**
 	 * 分页获取文章列表, 若typeId>0 则获取相关分类的文章
 	 */
 	public PageResult<ArticleInfoVO> pageQueryArticles(int pageNo, int pageSize, int typeId, String orderByColumn, ArticleInfoType articleInfoType) {
@@ -225,18 +183,5 @@ public class ArticleInfoManager {
 		}
 		
 		return pageResult;
-	}
-	
-	public boolean addReadCountByArticleId(long id) {
-		if (id <= 0) {
-			return false;
-		}
-		
-		int result = articleInfoPOMapper.addReadCountById(id);
-		if (result == 1) {
-			return true;
-		}
-		
-		return false;
 	}
 }

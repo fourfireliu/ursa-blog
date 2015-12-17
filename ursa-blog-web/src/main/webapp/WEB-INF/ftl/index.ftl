@@ -38,10 +38,20 @@
 			    <div class="topnews">
       				<h2>
       					<span id="taglist">
+      						<form id="cur_type_form" action="<@s.url '/articlelist'/>" method="POST">
+      							<input type="hidden" id="typeId" name="typeId" value="-1"/>
+      							<input type="hidden" id="typeName" name="typeName" value=""/>
+      							<input type="hidden" id="typeDesc" name="typeDesc" value=""/>
+      						</form>
       						<ul>
       							<#list typeInfos as typeInfo>
       								<#if typeInfo_index lt 3>
-      									<li class="tag_list_item"><a href="/" target="_blank">${typeInfo.name}</a></li>
+      									<li class="tag_list_item">
+      										<a class="type_link" href="javascript:void(0)">${typeInfo.name}</a>
+      										<input type="hidden" id="type_id" value=${typeInfo.id} />
+      										<input type="hidden" id="type_name" value=${typeInfo.name} />
+      										<input type="hidden" id="type_desc" value=${typeInfo.description} />
+      									</li>
       								<#elseif typeInfo_index = 3>
       									<li class="tag_list_item">
 	      						    		<a href="/" target="_blank">更多</a>
