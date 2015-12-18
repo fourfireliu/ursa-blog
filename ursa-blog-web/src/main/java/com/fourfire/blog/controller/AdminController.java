@@ -38,9 +38,8 @@ public class AdminController {
 	/**
 	 * 提交发文或者编辑文章
 	 */
-	@RequestMapping(value = "/article/submit", method = RequestMethod.POST)
-	public String addAritcle(HttpServletRequest request,
-			HttpServletResponse response) {
+	@RequestMapping(value = "/newarticle/submit", method = RequestMethod.POST)
+	public String addAritcle(ModelMap modelMap, String title, String content, Integer selectTypeId) {
 		ArticleInfoVO articleInfoVO = new ArticleInfoVO();
 		
 		String op = ServletRequestUtils.getStringParameter(request, "op", "");

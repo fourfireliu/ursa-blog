@@ -38,9 +38,35 @@
     			<div class="page">
     				<a title="Total record"><b>${totalCount}</b> </a>
     					<#if pageNo gt 1>
-    						
+    						<a href="/news/index_2.html"><<</a><a href="/news/index_5.html"><</a>
     					</#if>
-    					<#list <b>1</b><a href="/news/index_2.html">2</a><a href="/news/index_3.html">3</a><a href="/news/index_4.html">4</a><a href="/news/index_5.html">5</a><a href="/news/index_2.html">></a><a href="/news/index_5.html">>></a>
+    					<#assign pageCount=(totalCount/pageSize+1)/>
+    					<#if pageCount lt 6>
+    						<#list 1..pageCount as curPage>
+    							<#if curPage == pageNo>
+    								<b>${pageNo}</b>
+    							<#else>
+    								<a href="/news/index_2.html">${curPage}</a>
+    							</#if>
+    						</#list>
+    					<#else>
+    						<#assign fromPage = 1 />
+    						<#assign toPage = 5 />
+    						<#if pageNo gt 3>
+    							<#assign fromPage = (pageNo - 2) />
+    							<#assign toPage = (pageNo + 2) />
+    						</#if>
+    						<#list fromPage..toPage as curPage>
+    							<#if curPage == pageNo>
+    								<b>${pageNo}</b>
+    							<#else>
+    								<a href="/news/index_2.html">${curPage}</a>
+    							</#if>
+    						</#list>
+    					</#if>
+    					<#if hasNext>
+    						<a href="/news/index_2.html">></a><a href="/news/index_5.html">>></a>
+    					</#if>
     			</div>
 			</div>
 		</article>

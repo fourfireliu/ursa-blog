@@ -28,7 +28,7 @@
     </where>
   </select>
   
-  <select id="getArticleCount">
+  <select id="getArticleCount" resultType="int">
   	SELECT COUNT(*)
   	FROM blog_article_info 
   	<where>

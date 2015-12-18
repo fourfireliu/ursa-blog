@@ -6,11 +6,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,23 +43,30 @@ public class ArticleController {
 	private BlackIpManager blackIpManager;
 	
 	@RequestMapping(value = "/articlelist", method=RequestMethod.POST)
-	public String getArticleList(ModelMap modelMap, int typeId, String typeName, String typeDesc, int pageNo, int pageSize) {
+	public String getArticleList(ModelMap modelMap, Integer typeId, String typeName, String typeDesc, Integer pageNo, Integer pageSize) {
 		long begin = System.currentTimeMillis();
 		logger.info("getArticleList method begin");
 		
-		if (pageNo <= 0) {
+		if (pageNo == null || pageNo <= 0) {
 			pageNo = 1;
 		}
 		
-		if (pageSize <= 0) {
+		if (pageSize == null || pageSize <= 0) {
 			pageSize = BlogConstant.DEFAULT_ARTICLE_PAGE_SIZE;
 		}
 		
 		modelMap.put("pageNo", pageNo);
 		modelMap.put("pageSize", pageSize);
 		
-		if (typeId > 0) {
+		if (typeId != null && typeId > 0) {
 			modelMap.put("typeId", typeId);
+			if (StringUtils.isBlank(typeName) || StringUtils.isBlank(typeDesc)) {
+				BaseResult<TypeInfoVO> typeInfoResult = typeInfoManager.getTypeInfoById(typeId);
+				if (typeInfoResult != null && typeInfoResult.isSuccess() && typeInfoResult.getT() != null) {
+					typeName = typeInfoResult.getT().getName();
+					typeDesc = typeInfoResult.getT().getDescription();
+				}
+			}
 			modelMap.put("typeName", typeName);
 			modelMap.put("typeDesc", typeDesc);
 		}

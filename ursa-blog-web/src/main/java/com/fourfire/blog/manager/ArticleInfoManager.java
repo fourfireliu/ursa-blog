@@ -76,6 +76,7 @@ public class ArticleInfoManager {
 	 * 获取指定分类的文章总数, 若typeId为-1时, 返回所有分类的文章总数
 	 */
 	public BaseResult<Integer> getArticleCount(int typeId) {
+		logger.info("getArticleCount param: typeId=" + typeId);
 		BaseResult<Integer> baseResult = new BaseResult<Integer>();
 		try {
 			baseResult.setT(articleInfoPOMapper.getArticleCount(typeId));
@@ -84,7 +85,8 @@ public class ArticleInfoManager {
 			logger.error("getArticleCount==>unknown error", e);
 			baseResult.setErrorInfo(ErrorInfo.SYSTEM_ERROR);
 		}
-			
+		logger.info("getArticleCount result: baseResult=" + baseResult);
+		
 		return baseResult;
 	}
 	

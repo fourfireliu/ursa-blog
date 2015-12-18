@@ -12,8 +12,11 @@
 	<body>
 		<@header.header />
 		<article class="blogs">
+			<form id="cur_type_form" action="<@s.url '/articlelist'/>" method="POST">
+      			<input type="hidden" id="typeId" name="typeId" value="${articleInfo.type}" />
+      		</form>
   			<h1 class="t_nav">
-  				<span>您当前的位置：<a href="<@s.url '/index'/>">首页</a>&nbsp;>&nbsp;<a href="/jstt/">${typeInfo.name}</a></span>
+  				<span>您当前的位置：<a href="<@s.url '/index'/>">首页</a>&nbsp;>&nbsp;<a class="type_link" href="javascript:void(0)">${typeInfo.name}</a></span>
   			</h1>
   			<div class="index_about">
     			<h2 class="c_titile">${articleInfo.title}</h2>
@@ -39,5 +42,7 @@
 		<footer>
   			<p>Design by DanceSmile <a href="http://www.miitbeian.gov.cn/" target="_blank">蜀ICP备11002373号-1</a></p>
 		</footer>
+		<script type="text/javascript" src="<@s.url '/js/jquery.min.js'/>"></script>
+		<script type="text/javascript" src="<@s.url '/js/article/onload.js'/>"></script>
 	</body>
 </html>		
