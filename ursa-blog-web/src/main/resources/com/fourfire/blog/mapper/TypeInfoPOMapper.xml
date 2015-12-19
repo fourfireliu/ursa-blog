@@ -30,6 +30,15 @@
     	#{articleCount,jdbcType=INTEGER}, #{createGmtDate,jdbcType=TIMESTAMP}, #{modifyGmtDate,jdbcType=TIMESTAMP}
       )
   </insert>
+  
+  <update id="addArticleCountInType">
+  	UPDATE blog_type_info 
+  	SET 
+  		article_count = (article_count + #{num, jdbcType=INTEGER})
+  	<where>
+  		id = #{typeId, jdbcType=INTEGER}
+  	</where>
+  </update>
 	
 	<select id="pageQuery" resultMap="BaseResultMap" parameterType="com.fourfire.blog.query.TypeInfoPageQuery">
   	SELECT 

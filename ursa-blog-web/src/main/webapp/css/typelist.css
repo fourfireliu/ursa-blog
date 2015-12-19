@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+.blog_main_title h2 { font-size: 16px; font-weight: bold; line-height: 36px; color: #333; border-bottom: #db6d4c 4px solid; }
+.admin { 
+	width: 950px;
+    margin: 0 auto;
+    padding: 0;
+    background: white;
+}
+.admin td { font-size: 1em; color: #060; font-weight: bold; }

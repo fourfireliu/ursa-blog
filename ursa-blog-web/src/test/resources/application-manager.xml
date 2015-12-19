@@ -7,4 +7,5 @@
 	default-lazy-init="true">
 	<context:annotation-config />
     <bean id="articleInfoManager" class="com.fourfire.blog.manager.ArticleInfoManager" />
+    <bean id="typeInfoManager" class="com.fourfire.blog.manager.TypeInfoManager" />
 </beans>

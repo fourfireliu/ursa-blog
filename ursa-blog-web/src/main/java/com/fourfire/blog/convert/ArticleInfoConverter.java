@@ -20,11 +20,11 @@ public class ArticleInfoConverter {
 		ArticleInfoPO articleInfoPO = new ArticleInfoPO();
 		articleInfoPO.setId(articleInfoVO.getId());
 		articleInfoPO.setAuthor(articleInfoVO.getAuthor());
-		articleInfoPO.setContent(articleInfoVO.getContent());
+		articleInfoPO.setContent(Tools.checkHtmlContent(articleInfoVO.getContent()));
 		articleInfoPO.setIp(articleInfoVO.getIp());
 		articleInfoPO.setReadCount(articleInfoVO.getReadCount());
 		articleInfoPO.setCommentCount(articleInfoVO.getCommentCount());
-		articleInfoPO.setTitle(articleInfoVO.getTitle());
+		articleInfoPO.setTitle(Tools.checkHtmlContent(articleInfoVO.getTitle()));
 		articleInfoPO.setTypeId(articleInfoVO.getType());
 		articleInfoPO.setCreateGmtDate(articleInfoVO.getCreateDate());
 		articleInfoPO.setModifyGmtDate(articleInfoVO.getModifyDate());
@@ -67,7 +67,7 @@ public class ArticleInfoConverter {
 		articleInfoVO.setIp(articleInfoPO.getIp());
 		articleInfoVO.setReadCount(articleInfoPO.getReadCount());
 		articleInfoVO.setCommentCount(articleInfoPO.getCommentCount());
-		articleInfoVO.setTitle(articleInfoPO.getTitle());
+		articleInfoVO.setTitle(Tools.changeToHtmlContent(articleInfoPO.getTitle()));
 		articleInfoVO.setType(articleInfoPO.getTypeId());
 		articleInfoVO.setCreateDate(articleInfoPO.getCreateGmtDate());
 		articleInfoVO.setModifyDate(articleInfoPO.getModifyGmtDate());

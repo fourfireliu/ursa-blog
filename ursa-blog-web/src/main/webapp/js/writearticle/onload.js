@@ -6,9 +6,14 @@
 	});	
 					
 	K('input[name=commit]').click(function(e) {
+		var selectTypeId = $("#blog_whole_type option:selected").val();
+		if (selectTypeId == undefined || selectTypeId == "") {
+			alert("请选择文章分类");
+		} else {
 			var htmlContent = editor.html();
 			$("#content").val(htmlContent);
-			$("#selectTypeId").val($("#blog_whole_type option:selected").val());
+			$("#selectTypeId").val(selectTypeId);
 			$("#article_edit_form").submit();
-		});
+		}
 	});
+});

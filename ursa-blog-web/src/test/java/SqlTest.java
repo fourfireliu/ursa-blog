@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.fourfire.blog.manager.ArticleInfoManager;
+import com.fourfire.blog.manager.TypeInfoManager;
 import com.fourfire.blog.vo.ArticleInfoVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -15,6 +16,8 @@ import com.fourfire.blog.vo.ArticleInfoVO;
 public class SqlTest {
 	@Autowired
 	private ArticleInfoManager articleInfoManager;
+	@Autowired
+	private TypeInfoManager typeInfoManager;
 	
 	@Test
 	public void testQueryArticle() {
@@ -48,5 +51,12 @@ public class SqlTest {
 		System.out.println("===============");
 		System.out.println(articleInfoManager.addOrUpdateArticle(articleInfoVO));
 		System.out.println("==================");
+	}
+	
+	@Test
+	public void testAddArticleCountInType() {
+		System.out.println("=======");
+		System.out.println(typeInfoManager.addArticleCountInType(1, 1));
+		System.out.println("============");
 	}
 }

@@ -54,13 +54,9 @@
       									</li>
       								<#elseif typeInfo_index = 3>
       									<li class="tag_list_item">
-	      						    		<a href="/" target="_blank">更多</a>
-    		  						  			<ul class="more_tag_list">
-    		  						  				<li class="more_tag_item"> <a href="/" target="_blank">${typeInfo.name}</a></li>
-    		  						<#else>
-    		  							<li class="more_tag_item"> <a href="/" target="_blank">${typeInfo.name}</a></li>
+	      						    		<a class="type_link" href="<@s.url '/typelist'/>">全部分类</a>
+	      						    	</li>
     		  						</#if>
-    		  						
     		  						<#if !typeInfo_has_next>
     		  								</ul>
     		  							</li>

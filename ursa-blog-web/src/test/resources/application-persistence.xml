@@ -36,4 +36,8 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
         <property name="mapperInterface" value="com.fourfire.blog.mapper.ArticleInfoPOMapper"/>
     </bean>
+    <bean id="typeInfoPOMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <property name="mapperInterface" value="com.fourfire.blog.mapper.TypeInfoPOMapper"/>
+    </bean>
 </beans>

@@ -13,7 +13,7 @@
 		<@header.header />
 		<article class="blogs">
 			<span>
-				<a href="<@s.url '/index'/>">返回首页</a>
+				<p>${info}</p><a href="<@s.url '/index'/>">返回首页</a>
 			</span>
 		</article>
 	</body>

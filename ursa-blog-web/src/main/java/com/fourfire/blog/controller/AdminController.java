@@ -39,9 +39,10 @@ public class AdminController {
 	 * 提交发文或者编辑文章
 	 */	
 	@RequestMapping(value = "/newarticle/submit", method = RequestMethod.POST)
-	public String addAritcle(ModelMap modelMap, String title, String content, int selectTypeId) {
-		if (StringUtils.isBlank(title) || StringUtils.isBlank(content) || selectTypeId == 0) {
+	public String addAritcle(HttpServletRequest request, ModelMap modelMap, String title, String content, Integer selectTypeId) {
+		if (StringUtils.isBlank(title) || StringUtils.isBlank(content) || selectTypeId == null) {
 			logger.error("invalid parameter: title={}, content={}, selectTypeId={}", title, content, selectTypeId);
+			modelMap.put("info", "发文失败");
 			return "page/middleDirect";
 		}
 		
@@ -50,13 +51,15 @@ public class AdminController {
 			articleInfoVO.setAuthor(BlogConstant.DEFAULT_AUTHOR);
 			articleInfoVO.setContent(Tools.checkHtmlContent(content));
 			articleInfoVO.setCreateDate(new Date());
-			articleInfoVO.setIp("122423");
+			articleInfoVO.setIp(Tools.getIp(request));
 			articleInfoVO.setModifyDate(new Date());
 			articleInfoVO.setTitle(Tools.checkHtmlContent(title));
 			articleInfoVO.setType(selectTypeId);
 			
 			BaseResult<ArticleInfoVO> result = articleInfoManager.addOrUpdateArticle(articleInfoVO);
 			if (result != null && result.isSuccess() && result.getT() != null) {
+				typeInfoManager.addArticleCountInType(selectTypeId, 1);
+				modelMap.put("info", "发文成功");
 				return "page/middleDirect";
 			} else {
 				logger.error("add article failed, result=" + result);
@@ -65,6 +68,7 @@ public class AdminController {
 			logger.error("unknown error", e);
 		}
 		
+		modelMap.put("info", "发文失败");
 		return "page/middleDirect";
 	}
 

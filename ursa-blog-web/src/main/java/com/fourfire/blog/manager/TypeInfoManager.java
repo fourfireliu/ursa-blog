@@ -65,6 +65,27 @@ Logger logger = LogManager.getLogger(TypeInfoManager.class);
 		return baseResult;
 	}
 	
+	public BaseResult<Boolean> addArticleCountInType(int typeId, int num) {
+		BaseResult<Boolean> result = new BaseResult<Boolean>();
+		if (typeId <= 0) {
+			logger.error("addArticleCountInType invalid parameter, typeId=" + typeId);
+			result.setErrorInfo(ErrorInfo.INVALID_PARAM);
+			return result;
+		}
+		
+		int affectCount = typeInfoPOMapper.addArticleCountInType(typeId, num);
+		if (affectCount != 1) {
+			logger.error("addArticleCountInType update article count failed, affectCount=" + affectCount);
+			result.setErrorInfo(ErrorInfo.UPDATE_DB_RESULT_ERROR);
+			return result;
+		}
+		
+		result.setSuccess(true);
+		result.setT(true);
+		
+		return result;
+	}
+	
 	/**
 	 * 由于类别不可能多 可以一次取出
 	 */
