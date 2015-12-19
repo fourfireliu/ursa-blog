@@ -17,4 +17,7 @@ public class BlogConstant {
 	
 	//默认文章简介字数
 	public static final int DEFAULT_ARTICLE_SIZE = 200;
+	
+	//默认作者ID
+	public static final String DEFAULT_AUTHOR = "fourfire";
 }

@@ -14,8 +14,8 @@
 	</head>
 	<body>
 		<@header.header />
-		<form id="article_edit_form" action="<@s.url '/admin/newarticle/submit'/>" method="POST">
-			<input type="hidden" id="selectTypeId" value="-1" />
+		<form id="article_edit_form" action="<@s.url '/admin/newarticle/submit'/>" method="POST" onsubmit="location.href='<@s.url '/index'/>';">
+			<input type="hidden" id="selectTypeId" name="selectTypeId" value="-1" />
 			<table id="editortable">
 				<tr>
   					<td class="row1">博客标题<span style="color:red;margin-left:5px;font-weight:bold">*</span></td>
@@ -26,7 +26,7 @@
     							<option value=${typeInfo.id}>${typeInfo.name}</option>
     						</#list>
 						</select>					
-    					<input class="text required min-length-3 bad-words" id="blog_title" maxlength="80" name="blog[title]" size="45" style="width:350px;" type="text" />
+    					<input class="text required min-length-3 bad-words" id="title" maxlength="80" name="title" size="45" style="width:350px;" type="text" />
   					</td>
 				</tr>
 				<tr>

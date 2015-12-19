@@ -61,7 +61,7 @@ public class ArticleInfoConverter {
 		if (ArticleInfoType.SHORT_CONTENT == articleInfoType) {
 			articleInfoVO.setContent(Tools.getShortContent(articleInfoPO.getContent()));
 		} else if (ArticleInfoType.ALL_CONTENT == articleInfoType) {
-			articleInfoVO.setContent(articleInfoPO.getContent());
+			articleInfoVO.setContent(Tools.changeToHtmlContent(articleInfoPO.getContent()));
 		}
 		articleInfoVO.setId(articleInfoPO.getId());
 		articleInfoVO.setIp(articleInfoPO.getIp());

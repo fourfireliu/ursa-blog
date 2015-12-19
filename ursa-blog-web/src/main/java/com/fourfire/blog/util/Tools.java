@@ -10,28 +10,41 @@ import org.apache.commons.lang.StringUtils;
 import com.fourfire.blog.constant.BlogConstant;
 
 public class Tools {
-	
-	public static String checkString(String str){
-		if(StringUtils.isNotBlank(str)){
-			//这里过滤参数
-			String newstr=str.replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#39;");
-			return newstr;
+	/**
+	 * 转换HTML内容
+	 */
+	public static String checkHtmlContent(String htmlContent) {
+		if (StringUtils.isNotBlank(htmlContent)) {
+			return htmlContent.replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#39;");
 		}
-		else{
-			return "";
-		}
-		
+		return  "";
 	}
 	
 	/**
-	 * 获取文章标题
+	 * 转换回HTML格式
+	 * 
+	 * @param content
+	 * @return
 	 */
-	public static String checkTitle(String title) {
-		if (StringUtils.isNotBlank(title)) {
-			return title.replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#39;");
+	public static String changeToHtmlContent(String content) {
+		if (StringUtils.isNotBlank(content)) {
+			return content.replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", "\"").replace("&#39;", "'");
 		}
-		
-		return Constants.DEFAULUT_TITLE;
+		return  "";
+	}
+	
+	public static String getIp(HttpServletRequest request) {
+		String ip = request.getHeader("x-forwarded-for"); 
+	       if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+	           ip = request.getHeader("Proxy-Client-IP"); 
+	       } 
+	       if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+	           ip = request.getHeader("WL-Proxy-Client-IP"); 
+	       } 
+	       if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+	           ip = request.getRemoteAddr(); 
+	       } 
+	       return ip;
 	}
 	
 	/**
@@ -41,38 +54,6 @@ public class Tools {
 	 * */
 	public static long getId(){
 		return Long.parseLong((System.currentTimeMillis()+"").substring(0, 10));
-	}
-	
-	/**
-	 * 判断字符是否为空
-	 * 
-	 * */
-	public static boolean checkNotNull(String str){
-		
-		if(str!=null){
-			if(str.equals("")||str.equals("null")){
-				return false;
-			}
-			return true;
-		}
-		return false;
-		
-	}
-	
-	public static String getWebPath(HttpServletRequest request){
-		if(request==null){
-			return "";
-		}
-		String path = request.getContextPath();
-		int port=request.getServerPort();
-		String basePath="";
-		if(port==80){
-			basePath=request.getScheme() + "://"+ request.getServerName()+path+"/";
-		}
-		else{
-			basePath=request.getScheme() + "://"+ request.getServerName()+":"+port+path + "/";
-		}
-		return basePath;
 	}
 	
 	private static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

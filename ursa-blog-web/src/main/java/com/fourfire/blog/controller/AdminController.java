@@ -1,11 +1,13 @@
 package com.fourfire.blog.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -13,14 +15,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fourfire.blog.constant.BlogConstant;
-import com.fourfire.blog.enums.ArticleInfoType;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.TypeInfoManager;
 import com.fourfire.blog.result.BaseResult;
-import com.fourfire.blog.result.PageResult;
-import com.fourfire.blog.util.Constants;
 import com.fourfire.blog.util.Tools;
 import com.fourfire.blog.vo.ArticleInfoVO;
 import com.fourfire.blog.vo.TypeInfoVO;
@@ -37,46 +37,35 @@ public class AdminController {
 	
 	/**
 	 * 提交发文或者编辑文章
-	 */
+	 */	
 	@RequestMapping(value = "/newarticle/submit", method = RequestMethod.POST)
-	public String addAritcle(ModelMap modelMap, String title, String content, Integer selectTypeId) {
-		ArticleInfoVO articleInfoVO = new ArticleInfoVO();
-		
-		String op = ServletRequestUtils.getStringParameter(request, "op", "");
-		//修改文章
-		if ("update".equalsIgnoreCase(op)) {
-			articleInfoVO.setId(ServletRequestUtils.getLongParameter(request, "id", 0L));
-			articleInfoVO.setReadCount(0);
-		} 
-		//文章类型
-		articleInfoVO.setType(ServletRequestUtils.getIntParameter(request, "typeId", 0));
-		//文章标题
-		articleInfoVO.setTitle(Tools.checkTitle(request.getParameter("title")));
-		//文章内容
-		articleInfoVO.setContent(ServletRequestUtils.getStringParameter(request,
-				"content", "").replace("'", "&#39;"));
-		//文章作者
-		articleInfoVO.setAuthor(Constants.BLOG_HOST);
-		//访问者IP
-		articleInfoVO.setIp(request.getRemoteAddr());
-		
-		boolean isNewArticle = (articleInfoVO.getId() <= 0);
-		BaseResult<ArticleInfoVO> result = articleInfoManager.addOrUpdateArticle(articleInfoVO);
-		if (result.isSuccess()) {
-			if (!isNewArticle) {
-				request.setAttribute("message", "更新成功...");
-			} else {
-				request.setAttribute("message", "添加成功...");
-			}
-		} else {
-			if (!isNewArticle) {
-				request.setAttribute("message", "更新失败...");
-			} else {
-				request.setAttribute("message", "添加失败...");
-			}
+	public String addAritcle(ModelMap modelMap, String title, String content, int selectTypeId) {
+		if (StringUtils.isBlank(title) || StringUtils.isBlank(content) || selectTypeId == 0) {
+			logger.error("invalid parameter: title={}, content={}, selectTypeId={}", title, content, selectTypeId);
+			return "page/middleDirect";
 		}
 		
-		return "/result";
+		try {
+			ArticleInfoVO articleInfoVO = new ArticleInfoVO();
+			articleInfoVO.setAuthor(BlogConstant.DEFAULT_AUTHOR);
+			articleInfoVO.setContent(Tools.checkHtmlContent(content));
+			articleInfoVO.setCreateDate(new Date());
+			articleInfoVO.setIp("122423");
+			articleInfoVO.setModifyDate(new Date());
+			articleInfoVO.setTitle(Tools.checkHtmlContent(title));
+			articleInfoVO.setType(selectTypeId);
+			
+			BaseResult<ArticleInfoVO> result = articleInfoManager.addOrUpdateArticle(articleInfoVO);
+			if (result != null && result.isSuccess() && result.getT() != null) {
+				return "page/middleDirect";
+			} else {
+				logger.error("add article failed, result=" + result);
+			}
+		} catch (Exception e) {
+			logger.error("unknown error", e);
+		}
+		
+		return "page/middleDirect";
 	}
 
 	/**

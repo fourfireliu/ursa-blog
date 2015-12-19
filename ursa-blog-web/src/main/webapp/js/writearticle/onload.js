@@ -8,7 +8,7 @@
 	K('input[name=commit]').click(function(e) {
 			var htmlContent = editor.html();
 			$("#content").val(htmlContent);
-			$("#selectTypeId").val($("#blog_whole_type option:selected").text());
+			$("#selectTypeId").val($("#blog_whole_type option:selected").val());
 			$("#article_edit_form").submit();
 		});
 	});

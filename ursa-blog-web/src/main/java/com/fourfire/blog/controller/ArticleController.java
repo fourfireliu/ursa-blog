@@ -165,59 +165,6 @@ public class ArticleController {
 
 	@RequestMapping(value = "/submitComment")
 	public String submitComment(HttpServletRequest request,HttpServletResponse response) {
-		String yes = request.getParameter("yes");
-		if (!"yes".equals(yes)) {
-			request.setAttribute("error", "请等待网页加载完毕，有js防虫功能...");
-			return "/error/index";
-		}
-		String ip = request.getRemoteAddr();
-		if (blackIpManager.checkIsBlack(ip)) {
-			request.setAttribute("error", "抱歉，您的Ip已被加入黑名单...");
-			return "/error/index";
-		}
-
-		Object s_time = request.getSession().getAttribute("time");
-		if (s_time != null) {
-			long time = Long.parseLong(s_time + "");
-			Long n_time = System.currentTimeMillis();
-			if (n_time - time < 10 * 1000) {
-				request.setAttribute("error", "抱歉，两次留言不能小于10秒...");
-				return "/error/index";
-			}
-		}
-
-		long articleId = ServletRequestUtils.getLongParameter(request, "articleId", 0L);
-		if (articleId <= 0) {
-			request.setAttribute("error", "请不要恶意传递错误编号。");
-			return "/error/index";
-		}
-
-		String uname = Tools.checkString(request.getParameter("uname"));
-		if (StringUtils.isEmpty(uname)) {
-			request.setAttribute("error", "朋友请留下您的大名！");
-			return "/error/index";
-		}
-
-		String content = Tools.checkString(request.getParameter("comment"));
-
-		if (StringUtils.isEmpty(content)) {
-			request.setAttribute("error", "朋友,你想说点什么呢？");
-			return "/error/index";
-		}
-
-		CommentVO commentVO = new CommentVO();
-		commentVO.setArticleId(articleId);
-		commentVO.setContent(content);
-		commentVO.setCreateGmtDate(new Date());
-		commentVO.setIp(ip);
-		commentVO.setUserId(uname);
-		if (!commentManager.insertComment(commentVO)) {
-			request.setAttribute("error", "评论失败，请联系管理员。");
-			return "/error/index";
-		}
-
-		request.getSession().setAttribute("time", System.currentTimeMillis());
-		
-		return "/error/index";
+		return null;
 	}
 }
