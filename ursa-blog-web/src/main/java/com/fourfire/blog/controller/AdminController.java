@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
@@ -13,11 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-
 import com.fourfire.blog.constant.BlogConstant;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.TypeInfoManager;
@@ -71,36 +67,6 @@ public class AdminController {
 		
 		modelMap.put("info", "发文失败");
 		return "page/middleDirect";
-	}
-
-	/**
-	 * 新建文章或编辑文章界面
-	 */
-	@RequestMapping(value = "/article/edit")
-	public String getArticle(HttpServletRequest request,
-			HttpServletResponse response) {
-		String op = ServletRequestUtils.getStringParameter(request, "op", "");
-
-		long id = ServletRequestUtils.getLongParameter(request, "id", 0L);
-		
-
-		return "/admin/article/article";
-	}
-
-	/**
-	 * 获取文章列表(简单信息无需内容)
-	 */
-	@RequestMapping(value = "/article/articleList")
-	public String getArticleList(HttpServletRequest request,
-			HttpServletResponse response) {
-//		int pageNo = ServletRequestUtils.getIntParameter(request, "pageNo", Constants.DEFAULT_PAGE_NUM);
-//		int pageSize = ServletRequestUtils.getIntParameter(request, "pageSize", Constants.DEFAULT_PAGE_SIZE);
-//		
-//		PageResult<ArticleInfoVO> pageResult = articleInfoManager.pageQueryArticles(pageNo, pageSize, -1, null);
-//		request.setAttribute("hasNext", pageResult.isHasNext());
-//		request.setAttribute("articleInfoList", pageResult.getPageResult());
-//		
-		return "/admin/article/articleList";
 	}
 	
 	@RequestMapping(value = "/logout")

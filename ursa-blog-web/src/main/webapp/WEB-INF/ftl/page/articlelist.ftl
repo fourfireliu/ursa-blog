@@ -1,4 +1,5 @@
 <#import "../common/header.ftl" as header>
+<#import "../common/footer.ftl" as footer>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -13,8 +14,9 @@
 		<@header.header />
 		<article class="blogs">
 			<h1 class="t_nav">
-				<span>${typeDesc}</span>
-				<a href="<@s.url '/index'/>" class="n1">网站首页</a><a href="#" class="n2">${typeName}</a>
+				<span class="n4">${typeDesc?default("全部博文")}</span>
+				<span class="n3"><#if Session.userId??>&nbsp;<a href="<@s.url '/admin/writearticle'/>">我要发文</a></#if></span>
+				<a href="<@s.url '/index'/>" class="n1">网站首页</a><a href="#" class="n2">${typeName?default("所有博文")}</a>
 			</h1>
 			
 			<div class="newblog left">
@@ -70,9 +72,7 @@
     			</div>
 			</div>
 		</article>
-		<footer>
-			<p>Design by DanceSmile <a href="http://www.miitbeian.gov.cn/" target="_blank">蜀ICP备11002373号-1</a></p>
-		</footer>
+		<@footer.footer />
 	</body>
 </html>
 		

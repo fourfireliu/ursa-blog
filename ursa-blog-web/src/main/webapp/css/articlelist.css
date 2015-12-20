@@ -5,6 +5,9 @@ h1.t_nav { border-bottom: #F1F1F1 1px solid; font-size: 12px; font-weight: norma
 h1.t_nav a { width: 100px; display: block; text-align: center; color: #fff; float: left }
 .n1 { background: #5EA51B; }
 .n2 { background: #8BBF5D; }
+.n3 { color:#999;  float: right; }
+.n4 { float: left; }
+.n3 a {background: #8BBF5D; float: right;}
 .newblog { width: 740px; overflow: hidden; background: url(../images/r_line.jpg) repeat-y right; margin: 10px 0 }
 .newblog h2 { color: #333; font-size: 14px; margin: 20px 0 10px 0; clear:both}
 p.dateview { margin-bottom: 10px }

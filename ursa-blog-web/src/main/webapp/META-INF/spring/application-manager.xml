@@ -12,7 +12,5 @@
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<bean id="articleInfoManager" class="com.fourfire.blog.manager.ArticleInfoManager" />
-	<bean id="blackIpManager" class="com.fourfire.blog.manager.BlackIpManager" />
-	<bean id="commentManager" class="com.fourfire.blog.manager.CommentManager" />
 	<bean id="typeInfoManager" class="com.fourfire.blog.manager.TypeInfoManager" />		
 </beans>

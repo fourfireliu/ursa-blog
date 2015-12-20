@@ -1,4 +1,5 @@
 <#import "../common/header.ftl" as header>
+<#import "../common/footer.ftl" as footer>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -36,12 +37,7 @@
     			</div>
     		</div>
 		</article>
-		<div id="tbox">
-			<a id="togbook" href="/e/tool/gbook/?bid=1"></a> <a id="gotop" href="javascript:void(0)" style="display: block;"></a>
-		</div>
-		<footer>
-  			<p>Design by DanceSmile <a href="http://www.miitbeian.gov.cn/" target="_blank">蜀ICP备11002373号-1</a></p>
-		</footer>
+		<@footer.footer />
 		<script type="text/javascript" src="<@s.url '/js/jquery.min.js'/>"></script>
 		<script type="text/javascript" src="<@s.url '/js/article/onload.js'/>"></script>
 	</body>

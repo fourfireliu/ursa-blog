@@ -1,4 +1,5 @@
 <#import "../common/header.ftl" as header>
+<#import "../common/footer.ftl" as footer>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -16,5 +17,6 @@
 				<p>${info}</p><a href="<@s.url '/index'/>">返回首页</a>
 			</span>
 		</article>
+		<@footer.footer />
 	</body>
 </html>

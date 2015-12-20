@@ -1,4 +1,5 @@
 <#import "common/header.ftl" as header>
+<#import "common/footer.ftl" as footer>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -90,10 +91,10 @@
       				<h3>技术站点</h3>
       				<div class="gzwm">
         				<ul>
-          					<li><a class="xlwb" href="#" target="_blank">新浪微博</a></li>
-          					<li><a class="txwb" href="#" target="_blank">腾讯微博</a></li>
-          					<li><a class="rss" href="portal.php?mod=rss" target="_blank">RSS</a></li>
-          					<li><a class="wx" href="mailto:admin@admin.com">邮箱</a></li>
+          					<li><a class="xlwb" href="#">新浪微博</a></li>
+          					<li><a class="txwb" href="#">腾讯微博</a></li>
+          					<li><a class="rss" href="#">RSS</a></li>
+          					<li><a class="wx" href="#">邮箱</a></li>
         				</ul>
       				</div>
     			</div>
@@ -113,21 +114,21 @@
         				<div style="display: block;" class="bd" id="read_count_ranking" >
           					<ul>
           						<#list hotArticles as hotArticle>
-          							<li><a href="/" target="_blank">${hotArticle.title}</a></li>
+          							<li><a href="<@s.url '/article/${hotArticle.id}'/>">${hotArticle.title}</a></li>
           						</#list>
   					        </ul>
         				</div>
         				<div  class="bd" id="new_blog_ranking">
           					<ul>
             					<#list newArticles as newArticle>
-          							<li><a href="/" target="_blank">${newArticle.title}</a></li>
+          							<li><a href="<@s.url '/article/${newArticle.id}'/>">${newArticle.title}</a></li>
           						</#list>
           					</ul>
 	        			</div>
 	        			<div class="bd" id="comment_count_ranking">
 	          				<ul>
 	          					<#list topArticles as topArticle>
-	          						<li><a href="/" target="_blank">${topArticle.title}</a></li>
+	          						<li><a href="<@s.url '/article/${topArticle.id}'/>">${topArticle.title}</a></li>
 	          					</#list>
 	          				</ul>
 	        			</div>
@@ -145,67 +146,13 @@
 				        <li><a href="/">Html</a></li>
 				        <li><a href="/">CSS3</a></li>
 				        <li><a href="/">Html5+css3</a></li>
-				        <li><a href="/">百度</a></li>
 				        <li><a href="/">Javasript</a></li>
-				        <li><a href="/">web开发</a></li>
-				        <li><a href="/">前端设计</a></li>
-				        <li><a href="/">Html</a></li>
-				        <li><a href="/">CSS3</a></li>
-				        <li><a href="/">Html5+css3</a></li>
-				        <li><a href="/">百度</a></li>
-	      			</ul>
-	    		</div>
-	    		<div class="tuwen">
-	      			<h3>图文推荐</h3>
-				    <ul>
-			        	<li>
-			        		<a href="/"><img src="<@s.url '/images/01.jpg'/>"><b>住在手机里的朋友</b></a>
-			          		<p>
-			          			<span class="tulanmu"><a href="/">手机配件</a></span>
-			          			<span class="tutime">2015-02-15</span>
-			          		</p>
-			        	</li>
-			        	<li>
-			        		<a href="/"><img src="<@s.url '/images/01.jpg'/>"><b>住在手机里的朋友</b></a>
-			          		<p>
-			          			<span class="tulanmu"><a href="/">手机配件</a></span>
-			          			<span class="tutime">2015-02-15</span>
-			          		</p>
-			        	</li>
-			        	<li>
-			        		<a href="/"><img src="<@s.url '/images/01.jpg'/>"><b>住在手机里的朋友</b></a>
-			          		<p>
-			          			<span class="tulanmu"><a href="/">手机配件</a></span>
-			          			<span class="tutime">2015-02-15</span>
-			          		</p>
-			        	</li>
-			      	</ul>
-	    		</div>
-	    		<div class="ad"> 
-	    			<img src="<@s.url '/images/03.jpg'/>">
-	    		</div>
-	    		<div class="links">
-	      			<h3><span>[<a href="/">申请友情链接</a>]</span>友情链接</h3>
-	      			<ul>
-	        			<li><a href="/">杨青个人博客</a></li>
-				        <li><a href="/">web开发</a></li>
-				        <li><a href="/">前端设计</a></li>
-				        <li><a href="/">Html</a></li>
-				        <li><a href="/">CSS3</a></li>
-				        <li><a href="/">Html5+css3</a></li>
-				        <li><a href="/">百度</a></li>
 	      			</ul>
 	    		</div>
   			</div>
   			<!--r_box end --> 
 		</article>
-		<footer>
-  			<p class="ft-copyright">Ursa's Home Design by Fourfire 蜀ICP备11002373号-1</p>
-  			<div id="tbox">
-  				<a id="togbook" href="/"></a>
-  				<a id="gotop" href="javascript:void(0)"></a>
-  			</div>
-		</footer>
+		<@footer.footer />
 		<script type="text/javascript" src="<@s.url '/js/jquery.min.js'/>"></script>
 		<script type="text/javascript" src="<@s.url '/js/sliders.js'/>"></script>
 		<script type="text/javascript" src="<@s.url '/js/nav.js'/>"></script>

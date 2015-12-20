@@ -1,4 +1,5 @@
 <#import "../common/header.ftl" as header>
+<#import "../common/footer.ftl" as footer>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -47,5 +48,6 @@
 		</form>
 		<script type="text/javascript" src="<@s.url '/js/writearticle/onload.js'/>"></script>
 		<script type="text/javascript" src="<@s.url '/js/jquery.min.js'/>"></script>
+		<@footer.footer />
 	</body>
  </html>		

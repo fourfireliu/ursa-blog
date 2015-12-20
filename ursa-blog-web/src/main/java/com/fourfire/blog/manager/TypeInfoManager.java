@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -123,19 +122,5 @@ Logger logger = LogManager.getLogger(TypeInfoManager.class);
 		}
 		
 		return pageResult;
-	}
-	
-	public boolean addNewType(TypeInfoVO typeInfoVO) {
-		TypeInfoPO typeInfoPO = TypeInfoConverter.convertFromVOToPO(typeInfoVO);
-		if (typeInfoPO == null || StringUtils.isBlank(typeInfoPO.getName())) {
-			return false;
-		}
-		
-		int result = typeInfoPOMapper.insert(typeInfoPO);
-		if (result != 1) {
-			return false;
-		}
-		
-		return true;
 	}
 }

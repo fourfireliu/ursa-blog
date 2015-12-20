@@ -1,4 +1,5 @@
 <#import "common/header.ftl" as header>
+<#import "common/footer.ftl" as footer>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -25,5 +26,6 @@
 				</form>
 			</div>
 		</article>
+		<@footer.footer />
 	</body>
 </html>
