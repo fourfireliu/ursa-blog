@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fourfire.blog.constant.BlogConstant;
 import com.fourfire.blog.manager.ArticleInfoManager;
@@ -101,20 +102,46 @@ public class AdminController {
 //		
 		return "/admin/article/articleList";
 	}
+	
+	@RequestMapping(value = "/logout")
+	public String logout(ModelMap modelMap, HttpSession session) {
+		session.removeAttribute("userId");
+		session.invalidate();
+		return "login";
+	}
 
 	@RequestMapping(value = "/login")
-	public String checkLogin(HttpServletRequest request,
-			HttpServletResponse response) {
-
-		return "/admin/index";
+	public String login(String id, String password, ModelMap modelMap, HttpSession session) {
+		if (session.getAttribute("userId") == null) {
+			if (StringUtils.isBlank(id) || StringUtils.isBlank(password)) {
+				return "login";
+			} else {
+				if (id.equals(BlogConstant.DEFAULT_USER_ID) && password.equals(BlogConstant.DEFAULT_USER_PASSWORD)) {
+					modelMap.put("userId", id);
+					session.setAttribute("userId", id);
+				} else {
+					return "login";
+				}
+			}
+		} else {
+			modelMap.put("info", "欢迎你, " + session.getAttribute("id"));
+			return "page/middleDirect";
+		}
+		
+		modelMap.put("info", "欢迎你的登录, " + id);
+		return "page/middleDirect";
 	}
 
 	@RequestMapping(value = "/writearticle")
-	public String writeBlog(ModelMap modelMap) {
+	public String writeBlog(ModelMap modelMap, HttpSession session) {
 		long begin = System.currentTimeMillis();
 		logger.info("wrtieBlog method begin");
 		
 		try {
+			if (session.getAttribute("userId") == null) {
+				return "login";
+			}
+				
 			List<TypeInfoVO> typeInfoVOs = typeInfoManager.getAllTypeInfos();
 			if (typeInfoVOs == null) {
 				logger.error("writeArticle method get type list null");

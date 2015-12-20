@@ -20,4 +20,8 @@ public class BlogConstant {
 	
 	//默认作者ID
 	public static final String DEFAULT_AUTHOR = "fourfire";
+	//默认用户ID
+	public static final String DEFAULT_USER_ID = "liuyi";
+	//默认用户密码
+	public static final String DEFAULT_USER_PASSWORD = "ursaminor1985";
 }
