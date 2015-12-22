@@ -38,23 +38,27 @@ public class ArticleController {
 		long begin = System.currentTimeMillis();
 		logger.info("getAllArticleList method begin");
 		
-		int pageNo = 1;
-		int pageSize = BlogConstant.DEFAULT_ARTICLE_PAGE_SIZE;
-		int typeId = -1;
-		
-		modelMap.put("pageNo", pageNo);
-		modelMap.put("pageSize", pageSize);
-		modelMap.put("typeId", typeId);
-		
-		PageResult<ArticleInfoVO> pageResult = articleInfoManager.pageQueryArticles(pageNo, pageSize, typeId, "create_gmt_date desc", ArticleInfoType.SHORT_CONTENT);
-		if (pageResult != null && pageResult.isSuccess()) {
-			modelMap.put("articleList", pageResult.getPageResult());
-			modelMap.put("hasNext", pageResult.isHasNext());
-		}
-		
-		BaseResult<Integer> baseResult = articleInfoManager.getArticleCount(typeId);
-		if (baseResult != null && baseResult.isSuccess()) {
-			modelMap.put("totalCount", baseResult.getT());
+		try {
+			int pageNo = 1;
+			int pageSize = BlogConstant.DEFAULT_ARTICLE_PAGE_SIZE;
+			int typeId = -1;
+			
+			modelMap.put("pageNo", pageNo);
+			modelMap.put("pageSize", pageSize);
+			modelMap.put("typeId", typeId);
+			
+			PageResult<ArticleInfoVO> pageResult = articleInfoManager.pageQueryArticles(pageNo, pageSize, typeId, "create_gmt_date desc", ArticleInfoType.SHORT_CONTENT);
+			if (pageResult != null && pageResult.isSuccess()) {
+				modelMap.put("articleList", pageResult.getPageResult());
+				modelMap.put("hasNext", pageResult.isHasNext());
+			}
+			
+			BaseResult<Integer> baseResult = articleInfoManager.getArticleCount(typeId);
+			if (baseResult != null && baseResult.isSuccess()) {
+				modelMap.put("totalCount", baseResult.getT());
+			}
+		} catch (Exception e) {
+			logger.error("unknown error", e);
 		}
 		
 		long end = System.currentTimeMillis();

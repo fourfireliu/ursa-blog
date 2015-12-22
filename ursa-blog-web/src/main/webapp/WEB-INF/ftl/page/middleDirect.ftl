@@ -6,6 +6,7 @@
 		<meta charset="UTF-8"/>
 		<meta name="keywords" content="Java, Blog, IT, 旅游, 读书, 生活" />
 		<meta name="description" content="Ursa的个人博客 记录生活" />
+		<meta http-equiv="refresh" content="3;URL=<@s.url '/index'/>">
 		<title>Ursa's Blog</title>
 		<link type="text/css" href="<@s.url '/css/base.css'/>" rel="stylesheet"/>
 		<link type="text/css" href="<@s.url '/css/article.css'/>" rel="stylesheet"/>
@@ -14,7 +15,7 @@
 		<@header.header />
 		<article class="blogs">
 			<span>
-				<p>${info}</p><a href="<@s.url '/index'/>">返回首页</a>
+				<p>${info}</p>3秒后自动进入首页
 			</span>
 		</article>
 		<@footer.footer />
