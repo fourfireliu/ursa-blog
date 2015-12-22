@@ -46,11 +46,11 @@ public class AdminController {
 		try {
 			ArticleInfoVO articleInfoVO = new ArticleInfoVO();
 			articleInfoVO.setAuthor(BlogConstant.DEFAULT_AUTHOR);
-			articleInfoVO.setContent(Tools.checkHtmlContent(content));
+			articleInfoVO.setContent(content);
 			articleInfoVO.setCreateDate(new Date());
 			articleInfoVO.setIp(Tools.getIp(request));
 			articleInfoVO.setModifyDate(new Date());
-			articleInfoVO.setTitle(Tools.checkHtmlContent(title));
+			articleInfoVO.setTitle(title);
 			articleInfoVO.setType(selectTypeId);
 			
 			BaseResult<ArticleInfoVO> result = articleInfoManager.addOrUpdateArticle(articleInfoVO);

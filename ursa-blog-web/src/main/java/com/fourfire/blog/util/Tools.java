@@ -1,5 +1,7 @@
 package com.fourfire.blog.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -16,23 +18,12 @@ public class Tools {
     private static final String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式 
 	
 	/**
-	 * 转换HTML内容
-	 */
-	public static String checkHtmlContent(String htmlContent) {
-		if (StringUtils.isNotBlank(htmlContent)) {
-			String filterContent = unknowCharacterFilter(htmlContent);
-			return filterContent.replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#39;");
-		}
-		return  "";
-	}
-	
-	/**
 	 * 过滤掉不可见字符
 	 * 
 	 * @param input
 	 * @return
 	 */
-	private static String unknowCharacterFilter(String input) {
+	public static String unknowCharacterFilter(String input) {
 		if (StringUtils.isBlank(input)) {
 			return "";
 		}
@@ -44,19 +35,6 @@ public class Tools {
 		}
 		
 		return input;
-	}
-	
-	/**
-	 * 转换回HTML格式
-	 * 
-	 * @param content
-	 * @return
-	 */
-	public static String changeToHtmlContent(String content) {
-		if (StringUtils.isNotBlank(content)) {
-			return content.replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", "\"").replace("&#39;", "'");
-		}
-		return  "";
 	}
 	
 	public static String getIp(HttpServletRequest request) {
@@ -105,9 +83,10 @@ public class Tools {
 	 * 
 	 * @param allContent
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
-	public static String getShortContent(String allContent) {
-		String htmlContent = changeToHtmlContent(allContent);
+	public static String getShortContent(String allContent) throws UnsupportedEncodingException {
+		String htmlContent = URLDecoder.decode(allContent, "UTF-8");
 		String oriContent = removeHtmlTag(htmlContent);
 		if (StringUtils.isBlank(oriContent) || oriContent.length() <= BlogConstant.DEFAULT_ARTICLE_SIZE) {
 			return oriContent;
@@ -117,7 +96,6 @@ public class Tools {
 	}
 	
 	public static void main(String args[]) {
-		String test = "&lt;p style=&quot;color:#000000;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;font-style:normal;font-weight:normal;text-align:left;text-indent:0px;background-color:#FFFFFF;&quot;&gt;   主要是由于多次升级内核后，老版本的内核没有卸载掉占了太多空间，但其实现在用的是新版本内核，老的已经没用了，所以卸载掉就好。  &lt;/p&gt;  &lt;p style=&quot;color:#000000;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;font-style:normal;font-weight:normal;text-align:left;text-indent:0px;background-color:#FFFFFF;&quot;&gt;   &nbsp;  &lt;/p&gt;  &lt;p style=&quot;color:#000000;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;font-style:normal;font-weight:normal;text-align:left;text-indent:0px;background-color:#FFFFFF;&quot;&gt;   ";
-		System.out.println(getShortContent(test));
+		String test = "<p><if test=\"userIds != null and userIds.length > 0\"></p>";
 	}
 }
