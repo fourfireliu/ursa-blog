@@ -1,3 +1,4 @@
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 import org.junit.Test;
@@ -6,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.fourfire.blog.constant.BlogConstant;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.TypeInfoManager;
+import com.fourfire.blog.result.BaseResult;
+import com.fourfire.blog.util.Tools;
 import com.fourfire.blog.vo.ArticleInfoVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,7 +24,7 @@ public class SqlTest {
 	private TypeInfoManager typeInfoManager;
 	
 	@Test
-	public void testQueryArticle() {
+	public void testQueryArticle() throws UnsupportedEncodingException {
 		long id = 1L;
 		System.out.println("============");
 		System.out.println(articleInfoManager.getArticleInfoById(id));
@@ -28,7 +32,23 @@ public class SqlTest {
 	}
 	
 	@Test
-	public void testGetUpOrDown() {
+	public void testAddBlog() {
+		ArticleInfoVO articleInfoVO = new ArticleInfoVO();
+		articleInfoVO.setAuthor(BlogConstant.DEFAULT_AUTHOR);
+		String content = "<p><if test=\"userIds != null and userIds.length > 0\"></p>";
+		articleInfoVO.setContent(content);
+		articleInfoVO.setCreateDate(new Date());
+		articleInfoVO.setIp("127.0.0.1");
+		articleInfoVO.setModifyDate(new Date());
+		articleInfoVO.setTitle("ABCD4");
+		articleInfoVO.setType(5);
+		
+		BaseResult<ArticleInfoVO> result = articleInfoManager.addOrUpdateArticle(articleInfoVO);
+		System.out.println(result);
+	}
+	
+	@Test
+	public void testGetUpOrDown() throws UnsupportedEncodingException {
 		long id = 4L;
 		System.out.println("=========");
 		System.out.println(articleInfoManager.getUpOrDownArticleInfo(id, 5, true));

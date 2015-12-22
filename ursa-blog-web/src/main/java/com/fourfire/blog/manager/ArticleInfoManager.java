@@ -1,5 +1,6 @@
 package com.fourfire.blog.manager;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
@@ -92,8 +93,9 @@ public class ArticleInfoManager {
 	
 	/**
 	 * 根据ID获取文章详情
+	 * @throws UnsupportedEncodingException 
 	 */
-	public BaseResult<ArticleInfoVO> getArticleInfoById(long articleId) {
+	public BaseResult<ArticleInfoVO> getArticleInfoById(long articleId) throws UnsupportedEncodingException {
 		BaseResult<ArticleInfoVO> baseResult = new BaseResult<ArticleInfoVO>();
 		if (articleId <= 0) {
 			baseResult.setErrorInfo(ErrorInfo.INVALID_PARAM);
@@ -118,8 +120,9 @@ public class ArticleInfoManager {
 	 * 
 	 * @param articleInfoVO
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
-	public BaseResult<ArticleInfoVO> updateArticleInfo(ArticleInfoVO articleInfoVO) {
+	public BaseResult<ArticleInfoVO> updateArticleInfo(ArticleInfoVO articleInfoVO) throws UnsupportedEncodingException {
 		BaseResult<ArticleInfoVO> baseResult = new BaseResult<ArticleInfoVO>();
 		ArticleInfoPO articleInfoPO = ArticleInfoConverter.convertFromVOToPO(articleInfoVO);
 		if (articleInfoPO == null || articleInfoPO.getId() <= 0) {
@@ -141,8 +144,9 @@ public class ArticleInfoManager {
 	
 	/**
 	 * 获取当前ID文章的上一篇/下一篇
+	 * @throws UnsupportedEncodingException 
 	 */
-	public BaseResult<ArticleInfoVO> getUpOrDownArticleInfo(long articleId, int typeId, boolean isUp) {
+	public BaseResult<ArticleInfoVO> getUpOrDownArticleInfo(long articleId, int typeId, boolean isUp) throws UnsupportedEncodingException {
 		BaseResult<ArticleInfoVO> baseResult = new BaseResult<ArticleInfoVO>();
 		if (articleId <= 0 || typeId <= 0) {
 			baseResult.setErrorInfo(ErrorInfo.INVALID_PARAM);
@@ -168,8 +172,9 @@ public class ArticleInfoManager {
 	
 	/**
 	 * 分页获取文章列表, 若typeId>0 则获取相关分类的文章
+	 * @throws UnsupportedEncodingException 
 	 */
-	public PageResult<ArticleInfoVO> pageQueryArticles(int pageNo, int pageSize, int typeId, String orderByColumn, ArticleInfoType articleInfoType) {
+	public PageResult<ArticleInfoVO> pageQueryArticles(int pageNo, int pageSize, int typeId, String orderByColumn, ArticleInfoType articleInfoType) throws UnsupportedEncodingException {
 		ArticlePageQuery pageQuery = new ArticlePageQuery();
 		pageQuery.setPageNo(pageNo);
 		pageQuery.setPageSize(pageSize);
