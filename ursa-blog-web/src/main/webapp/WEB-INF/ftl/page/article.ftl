@@ -22,7 +22,7 @@
   			<div class="index_about">
     			<h2 class="c_titile">${articleInfo.title}</h2>
     			<p class="box_c">
-    				<span class="d_time">发布时间：${articleInfo.createDate?date}</span><span>作者：<a href='mailto:dancesmiling@qq.com'>${articleInfo.author}</a></span><span>阅读（${articleInfo.readCount}）</span>
+    				<span class="d_time">发布时间：${articleInfo.createDate?date}</span><span>作者：<a href='mailto:fourfireliu@gmail.com'>${articleInfo.author}</a></span><span>阅读（${articleInfo.readCount}）</span>
     			</p>
     			<ul class="infos">
       				<p>${articleInfo.content}</p>
