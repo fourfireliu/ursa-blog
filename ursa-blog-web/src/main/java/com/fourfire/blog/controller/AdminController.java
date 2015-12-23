@@ -37,6 +37,9 @@ public class AdminController {
 	 */	
 	@RequestMapping(value = "/newarticle/submit", method = RequestMethod.POST)
 	public String addAritcle(HttpServletRequest request, ModelMap modelMap, String title, String content, Integer selectTypeId) {
+		long begin = System.currentTimeMillis();
+		logger.info("addAritcle method begin");
+		
 		if (StringUtils.isBlank(title) || StringUtils.isBlank(content) || selectTypeId == null) {
 			logger.error("invalid parameter: title={}, content={}, selectTypeId={}", title, content, selectTypeId);
 			modelMap.put("info", "发文失败");
@@ -57,6 +60,10 @@ public class AdminController {
 			if (result != null && result.isSuccess() && result.getT() != null) {
 				typeInfoManager.addArticleCountInType(selectTypeId, 1);
 				modelMap.put("info", "发文成功");
+				
+				long end = System.currentTimeMillis();
+				logger.info("addAritcle method end, cost time=" + (end - begin) + "ms");
+				
 				return "page/middleDirect";
 			} else {
 				logger.error("add article failed, result=" + result);
@@ -64,6 +71,9 @@ public class AdminController {
 		} catch (Exception e) {
 			logger.error("unknown error", e);
 		}
+		
+		long end = System.currentTimeMillis();
+		logger.info("addAritcle method end, cost time=" + (end - begin) + "ms");
 		
 		modelMap.put("info", "发文失败");
 		return "page/middleDirect";
@@ -122,5 +132,11 @@ public class AdminController {
 		long end = System.currentTimeMillis();
 		logger.info("writeBlog method end, cost time=" + (end - begin) + "ms");
 		return "page/writearticle";
+	}
+	
+	@RequestMapping(value="/deleteInBlog", method=RequestMethod.POST)
+	public String deleteInBlog(Long articleId, ModelMap modelMap) {
+		long begin = System.currentTimeMillis();
+		return null;
 	}
 }
