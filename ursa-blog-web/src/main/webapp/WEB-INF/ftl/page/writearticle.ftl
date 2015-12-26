@@ -6,9 +6,9 @@
 		<meta name="keywords" content="Java, Blog, IT, Lift, Book, Read" />
 		<meta name="description" content="Ursa的个人博客 记录生活" />
 		<title>Ursa's Blog</title>
+		<link rel="shortcut icon" href="<@s.url '/images/myfavicon.ico'/>" type="image/x-icon" />
 		<link type="text/css" href="<@s.url '/css/base.css'/>" rel="stylesheet"/>
 		<link type="text/css" href="<@s.url '/css/writearticle.css'/>" rel="stylesheet"/>
-		
 		<link rel="stylesheet" href="<@s.url '/css/default.css' />" />
 		<script charset="utf-8" src="<@s.url '/js/kindeditor-min.js' />"></script>
 		<script charset="utf-8" src="<@s.url '/js/zh_CN.js' />"></script>
