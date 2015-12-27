@@ -35,5 +35,5 @@
 	<mvc:resources mapping="/images/**"  location="/images/"  cache-period="2312332" />
 	<mvc:resources mapping="/css/**" location="/css/"  cache-period="2312332" />
 	<mvc:resources mapping="/js/**" location="/js/"  cache-period="2312332" />
-	<mvc:resources mapping="/ueditor/**" location="/ueditor/"  cache-period="2312332" />
+	<mvc:resources mapping="/kindeditor/**" location="/kindeditor/"  cache-period="2312332" />
 </beans>

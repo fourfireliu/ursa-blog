@@ -9,9 +9,9 @@
 		<link rel="shortcut icon" href="<@s.url '/images/myfavicon.ico'/>" type="image/x-icon" />
 		<link type="text/css" href="<@s.url '/css/base.css'/>" rel="stylesheet"/>
 		<link type="text/css" href="<@s.url '/css/writearticle.css'/>" rel="stylesheet"/>
-		<link rel="stylesheet" href="<@s.url '/css/default.css' />" />
-		<script charset="utf-8" src="<@s.url '/js/kindeditor-min.js' />"></script>
-		<script charset="utf-8" src="<@s.url '/js/zh_CN.js' />"></script>
+		<link rel="stylesheet" href="<@s.url '/kindeditor/themes/default/default.css' />" />
+		<script charset="utf-8" src="<@s.url '/kindeditor/kindeditor-min.js' />"></script>
+		<script charset="utf-8" src="<@s.url '/kindeditor/lang/zh_CN.js' />"></script>
 	</head>
 	<body>
 		<@header.header />
