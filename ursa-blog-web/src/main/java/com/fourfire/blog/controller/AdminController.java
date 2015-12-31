@@ -59,7 +59,18 @@ public class AdminController {
 				articleInfoVO.setTitle(title);
 				articleInfoVO.setType(selectTypeId);
 			} else {
-				articleInfoVO = articleInfoManager.getArticleInfoById(articleId);
+				BaseResult<ArticleInfoVO> result = articleInfoManager.getArticleInfoById(articleId);
+				if (result != null && result.isSuccess() && result.getT() != null) {
+					articleInfoVO = result.getT();
+					articleInfoVO.setTitle(title);
+					articleInfoVO.setContent(content);
+					articleInfoVO.setType(selectTypeId);
+					articleInfoVO.setModifyDate(new Date());
+				} else {
+					modelMap.put("info", "修改文章失败");
+					logger.error("submitAritcle getArticleInfoById error, articleId=" + articleId);
+					return "page/middleDirect";
+				}
 			}
 			
 			BaseResult<ArticleInfoVO> result = articleInfoManager.addOrUpdateArticle(articleInfoVO);
