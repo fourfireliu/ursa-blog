@@ -12,8 +12,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.fourfire.blog.constant.BlogConstant;
 import com.fourfire.blog.manager.ArticleInfoManager;
 import com.fourfire.blog.manager.TypeInfoManager;
@@ -36,7 +38,7 @@ public class AdminController {
 	 * 提交发文或者编辑文章
 	 */	
 	@RequestMapping(value = "/newarticle/submit", method = RequestMethod.POST)
-	public String addAritcle(HttpServletRequest request, ModelMap modelMap, String title, String content, Integer selectTypeId) {
+	public String submitAritcle(HttpServletRequest request, ModelMap modelMap, String title, String content, Integer selectTypeId, Long articleId) {
 		long begin = System.currentTimeMillis();
 		logger.info("addAritcle method begin");
 		
@@ -48,13 +50,17 @@ public class AdminController {
 		
 		try {
 			ArticleInfoVO articleInfoVO = new ArticleInfoVO();
-			articleInfoVO.setAuthor(BlogConstant.DEFAULT_AUTHOR);
-			articleInfoVO.setContent(content);
-			articleInfoVO.setCreateDate(new Date());
-			articleInfoVO.setIp(Tools.getIp(request));
-			articleInfoVO.setModifyDate(new Date());
-			articleInfoVO.setTitle(title);
-			articleInfoVO.setType(selectTypeId);
+			if (articleId == null || articleId <= 0) {
+				articleInfoVO.setAuthor(BlogConstant.DEFAULT_AUTHOR);
+				articleInfoVO.setCreateDate(new Date());
+				articleInfoVO.setContent(content);
+				articleInfoVO.setIp(Tools.getIp(request));
+				articleInfoVO.setModifyDate(new Date());
+				articleInfoVO.setTitle(title);
+				articleInfoVO.setType(selectTypeId);
+			} else {
+				articleInfoVO = articleInfoManager.getArticleInfoById(articleId);
+			}
 			
 			BaseResult<ArticleInfoVO> result = articleInfoManager.addOrUpdateArticle(articleInfoVO);
 			if (result != null && result.isSuccess() && result.getT() != null) {
@@ -107,6 +113,54 @@ public class AdminController {
 		modelMap.put("info", "欢迎你的登录, " + id);
 		return "page/middleDirect";
 	}
+	
+	@RequestMapping(value = "editarticle/{id}")
+	public String editBlog(@PathVariable long id, ModelMap modelMap, HttpSession session) {
+		long begin = System.currentTimeMillis();
+		logger.info("editBlog method begin");
+		
+		try {
+			if (session.getAttribute("userId") == null) {
+				return "login";
+			}
+			
+			if (id <= 0) {
+				logger.error("invalid parameter: id={}", id);
+				modelMap.put("info", "无此文章");
+				return "page/middleDirect";
+			}
+			
+			BaseResult<ArticleInfoVO> articleInfo = articleInfoManager.getArticleInfoById(id);
+			if (articleInfo == null || !articleInfo.isSuccess() || articleInfo.getT() == null) {
+				logger.error("search article failed, id={}", id);
+				modelMap.put("info", "系统异常");
+				return "page/middelDirect";
+			}
+			
+			modelMap.put("curArticleId", articleInfo.getT().getId());
+			modelMap.put("title", articleInfo.getT().getTitle());
+			modelMap.put("content", articleInfo.getT().getContent());
+			modelMap.put("curTypeId", articleInfo.getT().getType());
+			
+			List<TypeInfoVO> typeInfoVOs = typeInfoManager.getAllTypeInfos();
+			if (typeInfoVOs == null) {
+				logger.error("writeArticle method get type list null");
+				modelMap.put("info", "系统异常");
+				return "page/middelDirect";
+			} else {
+				//置顶文章类型列表
+				modelMap.put("typeInfos", typeInfoVOs);
+			}
+		} catch (Exception e) {
+			logger.error("unknown error", e);
+			modelMap.put("info", "系统异常");
+			return "page/middelDirect";
+		}
+		
+		long end = System.currentTimeMillis();
+		logger.info("editBlog method end, cost time=" + (end - begin) + "ms");
+		return "page/writearticle";
+	}
 
 	@RequestMapping(value = "/writearticle")
 	public String writeBlog(ModelMap modelMap, HttpSession session) {
@@ -127,6 +181,8 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			logger.error("unknown exception", e);
+			modelMap.put("info", "系统异常");
+			return "page/middelDirect";
 		}
 		
 		long end = System.currentTimeMillis();

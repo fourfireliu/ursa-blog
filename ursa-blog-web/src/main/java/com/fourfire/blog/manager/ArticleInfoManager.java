@@ -46,14 +46,10 @@ public class ArticleInfoManager {
 				return baseResult;
 			}
 			
-			
 			if (articleInfoPO.getId() <= 0) {
-				articleInfoPO.setCreateGmtDate(new Date());
-				articleInfoPO.setModifyGmtDate(new Date());
 				articleInfoPOMapper.insert(articleInfoPO);
 				articleInfoVO.setId(articleInfoPO.getId());
 			} else {
-				articleInfoPO.setModifyGmtDate(new Date());
 				int modifyCount = articleInfoPOMapper.updateByPrimaryKey(articleInfoPO);
 				if (modifyCount != 1) {
 					logger.error("addOrUpdateArticle==>update failed, modifyCount: " + modifyCount + ", articleInfoPO:\n"
