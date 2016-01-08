@@ -29,7 +29,10 @@
 						<a title="${articleInfo.title}" href="<@s.url '/article/${articleInfo.id}'/>" >${articleInfo.title}</a>
 					</h2>
 	   				<p class="dateview">
-	   					<span>发布时间：${articleInfo.modifyDate?date}</span><span>作者：${articleInfo.author}</span>
+	   					<span>发布时间：${articleInfo.modifyDate?date}</span>
+	   					<span>作者：${articleInfo.author}</span>
+	   					<span class="viewnum f_r">浏览（${articleInfo.readCount}）</span>
+		          		<span class="pingl f_r">评论（${articleInfo.commentCount}）</span>
 	 				</p>
 	    			<ul class="nlist">
 	      				<p>${articleInfo.content}</p>

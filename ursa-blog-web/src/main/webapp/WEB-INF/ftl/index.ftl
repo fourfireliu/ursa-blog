@@ -99,10 +99,6 @@
         				</ul>
       				</div>
     			</div>
-    			<!--tit01 end-->
-    			<div class="ad300x100">
-    				<img src="<@s.url '/images/ad300x100.jpg'/>">
-    			</div>
     			<div class="moreSelect" id="lp_right_select"> 
 		       		<div class="ms-top">
         				<ul class="hd" id="tab">
