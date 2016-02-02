@@ -68,18 +68,18 @@
       					</span>
       					<b>文章</b>推荐
       				</h2>
-      				<#list topArticles as topArticle>
+      				<#list newArticles as newArticle>
       					<div class="blogs">
         					<figure><img src="<@s.url '/images/01.jpg'/>"></figure>
         					<ul>
-          						<li><h3><a href="<@s.url '/article/${topArticle.id}'/>">${topArticle.title}</a></h3></li>
-				            	<li><p>${topArticle.content}</p></li>
+          						<li><h3><a href="<@s.url '/article/${newArticle.id}'/>">${newArticle.title}</a></h3></li>
+				            	<li><p>${newArticle.content}</p></li>
           						<li>
           							<p class="autor">
           								<span class="lm f_l"><a href="/">个人博客</a></span>
-		          						<span class="dtime f_l">${topArticle.modifyDate?date}</span>
-		          						<span class="viewnum f_r">浏览（${topArticle.readCount}）</span>
-		          						<span class="pingl f_r">评论（${topArticle.commentCount}）</span>
+		          						<span class="dtime f_l">${newArticle.modifyDate?date}</span>
+		          						<span class="viewnum f_r">浏览（${newArticle.readCount}）</span>
+		          						<span class="pingl f_r">评论（${newArticle.commentCount}）</span>
           							</p>
           						</li>
         					</ul>

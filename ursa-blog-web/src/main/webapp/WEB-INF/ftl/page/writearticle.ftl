@@ -25,7 +25,7 @@
     					<select class="required" id="blog_whole_type" name="blog_whole_type">
     						<option value="">-选择分类-</option>
     						<#list typeInfos as typeInfo>
-    							<option value=${typeInfo.id} <#if curTypeId?? and curTypeId==typeInfo.id>selected="selected"</#if>>${typeInfo.name}</option>
+    							<option value=${typeInfo.id} <#if curTypeId?? && curTypeId==typeInfo.id>selected="selected"</#if>>${typeInfo.name}</option>
     						</#list>
 						</select>					
     					<input class="text required min-length-3 bad-words" id="title" maxlength="80" name="title" size="45" style="width:350px;" type="text" value="${title?default('')}" />
@@ -33,7 +33,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="left">
-						<textarea id="content" name="content" style="width:800px;height:400px;visibility:hidden;">
+						<textarea id="content" name="content" style="width:800px;height:400px;">
 							${content?default("")}
 						</textarea>
 					</td>

@@ -42,10 +42,10 @@ public class IndexController{
 			} else {
 				//置顶文章类型列表
 				modelMap.put("typeInfos", typeInfoVOs);
-				PageResult<ArticleInfoVO> articleInfoPageResult = articleInfoManager.pageQueryArticles(0, BlogConstant.DEFAULT_ARTICLE_LIST_SIZE, -1, null, ArticleInfoType.SHORT_CONTENT);
+				PageResult<ArticleInfoVO> articleInfoPageResult = articleInfoManager.pageQueryArticles(0, BlogConstant.DEFAULT_ARTICLE_LIST_SIZE, -1, "modify_gmt_date desc", ArticleInfoType.SHORT_CONTENT);
 				if (articleInfoPageResult != null && articleInfoPageResult.isSuccess() && articleInfoPageResult.getPageResult() != null) {
 					//置顶文章 按评论数排序
-					modelMap.put("topArticles", articleInfoPageResult.getPageResult());
+					modelMap.put("newArticles", articleInfoPageResult.getPageResult());
 				}
 			}
 			
@@ -56,9 +56,9 @@ public class IndexController{
 			}
 			
 			//获取最新文章列表
-			PageResult<ArticleInfoVO> newArticleInfoPageResult = articleInfoManager.pageQueryArticles(0, BlogConstant.DEFAULT_ARTICLE_LIST_SIZE, -1, "modify_gmt_date desc", ArticleInfoType.NO_CONTENT);
+			PageResult<ArticleInfoVO> newArticleInfoPageResult = articleInfoManager.pageQueryArticles(0, BlogConstant.DEFAULT_ARTICLE_LIST_SIZE, -1, null, ArticleInfoType.NO_CONTENT);
 			if (newArticleInfoPageResult != null && newArticleInfoPageResult.isSuccess() && newArticleInfoPageResult.getPageResult() != null) {
-				modelMap.put("newArticles", newArticleInfoPageResult.getPageResult());
+				modelMap.put("topArticles", newArticleInfoPageResult.getPageResult());
 			}
 			
 		} catch (Exception e) {

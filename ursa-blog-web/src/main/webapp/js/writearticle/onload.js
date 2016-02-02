@@ -4,19 +4,19 @@
 		editor = K.create('textarea[name="content"]', {
 		allowFileManager : true
 		
-		uploadJson : 'tools/kindeditor-4.1.10/jsp/upload_json.jsp',
-
-        fileManagerJson : 'tools/kindeditor-4.1.10/jsp/file_manager_json.jsp',
-
-        allowFileManager : true,
-
-        allowImageUpload : true, 
-
-        autoHeightMode : true,
-
-        afterCreate : function() {this.loadPlugin('autoheight');},
-
-        afterBlur : function(){ this.sync(); }  //Kindeditor下获取文本框信息
+//		uploadJson : 'tools/kindeditor-4.1.10/jsp/upload_json.jsp',
+//
+//        fileManagerJson : 'tools/kindeditor-4.1.10/jsp/file_manager_json.jsp',
+//
+//        allowFileManager : true,
+//
+//        allowImageUpload : true, 
+//
+//        autoHeightMode : true,
+//
+//        afterCreate : function() {this.loadPlugin('autoheight');},
+//
+//        afterBlur : function(){ this.sync(); }  //Kindeditor下获取文本框信息
 	});	
 					
 	K('input[name=commit]').click(function(e) {
