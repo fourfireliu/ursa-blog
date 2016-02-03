@@ -21,9 +21,13 @@
   				<span>您当前的位置：<a href="<@s.url '/index'/>">首页</a>&nbsp;>&nbsp;<a class="type_link" href="javascript:void(0)">${typeInfo.name}</a></span>
   			</h1>
   			<div class="index_about">
+  				<form id="cur_article_form" action="<@s.url '/admin/writearticle'/>" method="POST">
+  					<input type="hidden" id="articleId" name="articleId" value="${articleInfo.id}" />
+  				</form>
     			<h2 class="c_titile">${articleInfo.title}</h2>
     			<p class="box_c">
     				<span class="d_time">发布时间：${articleInfo.createDate?date}</span><span>作者：<a href='mailto:fourfireliu@gmail.com'>${articleInfo.author}</a></span><span>阅读（${articleInfo.readCount}）</span>
+    				<span class="n3"><#if Session.userId??>&nbsp;<a class="update_link" href="javascript:void(0)">编辑</a></#if></span>
     			</p>
     			<ul class="infos">
       				<p>${articleInfo.content}</p>

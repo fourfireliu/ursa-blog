@@ -17,7 +17,7 @@
 		<@header.header />
 		<form id="article_edit_form" action="<@s.url '/admin/newarticle/submit'/>" method="POST" onsubmit="location.href='<@s.url '/index'/>';">
 			<input type="hidden" id="selectTypeId" name="selectTypeId" value="-1" />
-			<input type="hidden" id="articleId" name="articleId" value="${curArticleId?default('-1')}"/>
+			<input type="hidden" id="articleId" name="articleId" value="${(articleInfo.id)!'-1'}"/>
 			<table id="editortable">
 				<tr>
   					<td class="row1">博客标题<span style="color:red;margin-left:5px;font-weight:bold">*</span></td>
@@ -25,16 +25,16 @@
     					<select class="required" id="blog_whole_type" name="blog_whole_type">
     						<option value="">-选择分类-</option>
     						<#list typeInfos as typeInfo>
-    							<option value=${typeInfo.id} <#if curTypeId?? && curTypeId==typeInfo.id>selected="selected"</#if>>${typeInfo.name}</option>
+    							<option value=${typeInfo.id} <#if articleInfo?? && articleInfo.type==typeInfo.id>selected="selected"</#if>>${typeInfo.name}</option>
     						</#list>
 						</select>					
-    					<input class="text required min-length-3 bad-words" id="title" maxlength="80" name="title" size="45" style="width:350px;" type="text" value="${title?default('')}" />
+    					<input class="text required min-length-3 bad-words" id="title" maxlength="80" name="title" size="45" style="width:350px;" type="text" value="${(articleInfo.title)!''}" />
   					</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="left">
 						<textarea id="content" name="content" style="width:800px;height:400px;">
-							${content?default("")}
+							${(articleInfo.content)!''}
 						</textarea>
 					</td>
 				</tr>

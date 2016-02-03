@@ -174,7 +174,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/writearticle")
-	public String writeBlog(ModelMap modelMap, HttpSession session) {
+	public String writeBlog(ModelMap modelMap, HttpSession session, Long articleId) {
 		long begin = System.currentTimeMillis();
 		logger.info("wrtieBlog method begin");
 		
@@ -189,6 +189,18 @@ public class AdminController {
 			} else {
 				//置顶文章类型列表
 				modelMap.put("typeInfos", typeInfoVOs);
+			}
+			
+			if (articleId != null && articleId > 0) {
+				BaseResult<ArticleInfoVO> result = articleInfoManager.getArticleInfoById(articleId);
+				if (result != null && result.isSuccess() && result.getT() != null) {
+					logger.info("update origin article, articleId=" + result.getT().getId());
+					modelMap.put("articleInfo", result.getT());
+				} else {
+					logger.error("writeArticle method update article query article failed, articleId=" + articleId);
+				}
+			} else {
+				modelMap.put("articleInfo", null);
 			}
 		} catch (Exception e) {
 			logger.error("unknown exception", e);
