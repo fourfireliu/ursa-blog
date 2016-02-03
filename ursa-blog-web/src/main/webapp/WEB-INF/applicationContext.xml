@@ -16,4 +16,5 @@
 	<import resource="../META-INF/spring/application-manager.xml"/>
 	<import resource="../META-INF/spring/application-persistance.xml"/>
 	<import resource="../META-INF/spring/application-view.xml"/>
+	<import resource="../META-INF/spring/application-threadpool.xml"/>
 </beans>
